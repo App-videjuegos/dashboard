@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {   Routes, Route, useLocation } from 'react-router-dom';
+import NavBar from './views/NavBar/NavBar';
+
+// Importar los componentes de las rutas
+import Games from './views/dashboardAdmin/Games/Games';
+import Metrics from './views/dashboardAdmin/Metrics/Metrics';
+import Profile from './views/dashboardAdmin/Profile/Profile';
+import Users from './views/dashboardAdmin/Users/Users';
+import Register from './views/dashboardAdmin/Register/Register';
+import Login from './views/dashboardAdmin/Login/Login';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const location = useLocation();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      {location.pathname !== "/" && <NavBar />}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/games" element={<Games />} />
+        <Route path="/metrics" element={<Metrics />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
