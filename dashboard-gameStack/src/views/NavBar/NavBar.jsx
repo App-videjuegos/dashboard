@@ -12,7 +12,8 @@ function NavBar() {
 
   return (
     <div className={styles['menu-container']}> {/* Utiliza la clase del CSS Module */}
-      <h1>GameStack</h1>
+      <img className={styles['logoGameStack']} src="src/assets/LogoGameStack web.jpg" alt="Logo GameStack"/>
+      {/* <h1>GameStack</h1> */}
       <ul id="nav-list">
         {routes.map((route, index) => (
           <li key={index}>
