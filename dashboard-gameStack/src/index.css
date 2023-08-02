@@ -1,4 +1,74 @@
-:root {
+/* Gente, hermosa y apausible gente, aquí Adrián. ESTOS ESTILOS DE MEDIA QUERY SON PARA CADA DISPOSITIVO, RESPETEN ESO */
+
+/* Estilos base para dispositivos móviles */
+@media (max-width: 767px) {
+  /* Aquí defines los estilos para dispositivos móviles (pantallas menores o iguales a 767px de ancho) */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #9d9c9e;
+  }
+}
+
+/* Estilos para tabletas y dispositivos con pantallas medianas */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Aquí defines los estilos para tabletas y pantallas medianas (768px a 1023px de ancho) */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #7d60ac;
+  }
+}
+
+/* Estilos para pantallas grandes, como escritorios */
+@media (min-width: 1024px) {
+  /* Aquí defines los estilos para pantallas grandes (mayores a 1023px de ancho) */
+  body {
+    margin: 0;
+    padding: 16px 16px 16px 16px;
+    font-family: Arial, sans-serif;
+    background-color: #1B063E;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -67,4 +137,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

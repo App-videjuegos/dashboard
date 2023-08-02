@@ -13,7 +13,7 @@ function NavBar() {
   return (
     <div className={styles['menu-container']}> {/* Utiliza la clase del CSS Module */}
       <h1>GameStack</h1>
-      <ul>
+      <ul id="nav-list">
         {routes.map((route, index) => (
           <li key={index}>
             {/* Agregamos el icono correspondiente a cada elemento de la lista */}
@@ -23,7 +23,10 @@ function NavBar() {
         ))}
       </ul>
       <hr />
-      <Link to="/">Close session</Link>
+      <Link to="/" className={styles['close-session']}>
+        {getIcon('Logout')} {/* Agrega el ícono de cerrar sesión al enlace */}
+        Close session
+      </Link>
     </div>
   );
 }

@@ -1,7 +1,11 @@
-import React from 'react';
+import styles from './Metrics.module.css'; // Importa los estilos del archivo CSS
 
 function Metrics() {
-  return <div>Metrics Component</div>;
+  return (
+    <div className={styles['metrics-container']}> 
+      Metrics Component
+    </div>
+  );
 }
 
 export default Metrics;

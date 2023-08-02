@@ -1,42 +1,49 @@
 .loginContainer {
-  color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 300px; /* Puedes ajustar el valor del ancho según tus preferencias */
-  margin: 0 auto;
-  /* Añade las siguientes propiedades para centrar verticalmente y horizontalmente */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-left: 500px;
-  margin-top: -50px;
+  height: 80vh; /* Centrar verticalmente en la pantalla */
 }
-  
-  .formContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .input {
-    margin-bottom: 10px;
-    padding: 8px;
-    border-radius: 4px;
-    border: none;
-  }
-  
-  .loginButton {
-    padding: 10px;
-    background-color: #6200ee;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .loginButton:hover {
-    background-color: #3700b3;
-  }
+
+/* Estilos para el formulario */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* Estilos para el título */
+h2 {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Estilos para los campos de entrada (inputs) */
+.input {
+  width: 250px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Estilos para el botón */
+.loginButton {
+  width: 250px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.loginButton:hover {
+  background-color: #0056b3;
+}

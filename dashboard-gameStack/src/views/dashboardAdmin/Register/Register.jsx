@@ -1,7 +1,11 @@
-import React from 'react';
+import styles from './Register.module.css'; // Importa los estilos del archivo CSS
 
 function Register() {
-  return <div>Register Component</div>;
+  return (
+    <div className={styles['register-container']}> 
+      Register Component
+    </div>
+  );
 }
 
 export default Register;

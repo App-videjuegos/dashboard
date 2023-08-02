@@ -1,7 +1,11 @@
-import React from 'react';
+import styles from './Profile.module.css'; // Importa los estilos del archivo CSS
 
 function Profile() {
-  return <div>Profile Component</div>;
+  return (
+    <div className={styles['profile-container']}> 
+      Profile Component
+    </div>
+  );
 }
 
 export default Profile;
