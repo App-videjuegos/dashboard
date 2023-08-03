@@ -1,37 +1,49 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUsers, getUserByID, getUsersbyName } from '../../../redux/usersActions.js'
-import styles from './Users.module.css'; // Importa los estilos del archivo CSS
-
+import { getUsers, getUserByID, getUsersbyName } from '../../../redux/usersActions.js';
+import styles from './Users.module.css';
 
 let prevId = 1;
 
 function Users() {
-  const dispatch = useDispatch()
-  const [input, setInput] = useState("");
+  const dispatch = useDispatch();
+  const [input, setInput] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const usuariosPorPagina = 10;
 
   useEffect(() => {
-    dispatch(getUsers())
-    dispatch(getUserByID("888"))
-  }, [])
-  let allUsers = useSelector((state) => state.usersState.allUsers)
+    dispatch(getUsers());
+    dispatch(getUserByID('888'));
+  }, []);
 
-  //console.log(allUsers)
+  let allUsers = useSelector((state) => state.usersState.allUsers);
 
   function changeHandler(e) {
-    //e.preventDefault();
-    //console.log(e.target.value)    
     setInput(e.target.value);
-    //console.log(e.target.value)
-    const busqueda = (e.target.value).toLowerCase();
-    dispatch(getUsersbyName(busqueda))
-
-    // const resultados = allUsers.filter((usuario) => usuario.fullname.toLowerCase().includes(busqueda));
-    // allUsers = resultados
-    // console.log("nuevos allUsers")
-    // console.log(allUsers)
-    //allUsers = allUsers.includes(busqueda);
+    const busqueda = e.target.value.toLowerCase();
+    dispatch(getUsersbyName(busqueda));
   }
+
+  // Lógica de paginación
+  const indiceUltimoUsuario = currentPage * usuariosPorPagina;
+  const indicePrimerUsuario = indiceUltimoUsuario - usuariosPorPagina;
+  const usuariosActuales = allUsers.slice(indicePrimerUsuario, indiceUltimoUsuario);
+
+  const handlePageChange = (numeroPagina) => {
+    setCurrentPage(numeroPagina);
+  };
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < Math.ceil(allUsers.length / usuariosPorPagina)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div className={styles['users-container']}>
@@ -40,32 +52,31 @@ function Users() {
           <div className={styles.userRow}>
             <div className={styles.title}>Users</div>
             <div className={styles.SearchBar}>
-              <input type="text" className="searchInput" placeholder="Search" onChange={changeHandler} />
-              <button className="searchButton" type="submit"  >Search</button>
+              <input type="text" className={styles.searchInput} placeholder="Search" onChange={changeHandler} />
+              {/* <button className="searchButton" type="submit"  >Buscar</button> */}
             </div>
           </div>
         </div>
         <div>
-          <div className={styles.userTable}>
-            <div className={styles.userRow}>
-              <div className={styles.userHeaderColumn1}>User</div>
-              <div className={styles.userHeaderColumn2}></div>
-              <div className={styles.userHeaderColumn3}>Fullname</div>
-              <div className={styles.userHeaderColumn4}>id</div>
-              <div className={styles.userHeaderColumn5}>State</div>
-              <div className={styles.userHeaderColumn6}>Birthday</div>
+          <div className={styles.tableTable}>
+            <div className={styles.userTable}>
+              <div className={styles.userRow}>
+                <div className={styles.userHeaderColumn1}>User</div>
+                <div className={styles.userHeaderColumn2}></div>
+                <div className={styles.userHeaderColumn3}>Fullname</div>
+                <div className={styles.userHeaderColumn4}>ID</div>
+                <div className={styles.userHeaderColumn5}>State</div>
+                <div className={styles.userHeaderColumn6}>Birthday</div>
+              </div>
             </div>
-          </div>
-          {
-            Array.isArray(allUsers) && allUsers.length > 0 ? (
-              allUsers.map((e) => (
+            {Array.isArray(usuariosActuales) && usuariosActuales.length > 0 ? (
+              usuariosActuales.map((e) => (
                 <div className={styles.userTable} key={prevId++}>
                   <div className={styles.userRow}>
                     <div className={styles.userColumn1}>
-                      <img className={styles.userImage} src={e.image} alt="image user" />
+                      <img className={styles.userImage} src={e.image} alt="imagen del usuario" />
                     </div>
                     <div className={styles.userColumn2}>{e.user}</div>
-                    {/* <div className={styles.userCell}>User = {e.user}</div> */}
                     <div className={styles.userColumn3}>{e.fullname}</div>
                     <div className={styles.userColumn4}>{e.id}</div>
                     <div className={styles.userColumn5}>{e.deleted ? "Banned" : "Allow"}</div>
@@ -75,10 +86,21 @@ function Users() {
               ))
             ) : (
               <div className={styles.NoFundMessage}>No user(s) to display</div>
-            )
-          }
+            )}
+          </div>
+        </div>
+        {/* Botones de paginación y flechas */}
+        <div className={styles.pagination}>
+          <button onClick={goToPreviousPage}>&lt;</button>
+          {Array.from({ length: Math.ceil(allUsers.length / usuariosPorPagina) }).map((_, index) => (
+            <button key={index} onClick={() => handlePageChange(index + 1)} className={currentPage === index + 1 ? styles.btnPaged : ''}>
+              {index + 1}
+            </button>
+          ))}
+          <button onClick={goToNextPage}>&gt;</button>
         </div>
       </div>
+
     </div>
   );
 }

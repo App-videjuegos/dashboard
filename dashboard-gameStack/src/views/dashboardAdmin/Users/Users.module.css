@@ -17,13 +17,20 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega sombra para realzar el efecto del recuadro */
     /* Asegúrate de que la propiedad de tamaño se ajuste automáticamente al contenido */
     display: inline-block;
+    width: 896px;
   }
 
   /* Estilos de la tabla */
 .userTable {
   display: flex;
   flex-direction: column;
-  background-color:white;
+  background-color: white;
+}
+
+.tableTable{
+  background-color: white;
+  height: 450px;
+  width: 896px;
 }
 
 .title{
@@ -158,4 +165,45 @@ font-size: 25px;
 .NoFundMessage{
   margin: 40px;
   font-size: 25px;
+}
+
+.pagination{
+  padding-top: 12%;
+  /* padding-left: 36%;
+  padding-right: 36%; */
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+}
+
+.pagination button {
+  margin: 0 10px; /* Esto agrega 5px de margen horizontal entre los botones */
+  background-color: white;
+  border-color: white;
+  font-weight: bold;
+}
+
+.btnPaged{
+  font-size: 20px;
+ 
+}
+
+.searchInput{
+  width: 130px;
+  height: 40px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('/src/assets/search-icon-png.png');
+  
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  transition: width 0.4s ease-in-out;
+}
+
+.searchInput:focus {
+  width: 100%;
 }
