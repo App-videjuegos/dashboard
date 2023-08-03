@@ -1,0 +1,38 @@
+
+  .adminBar {
+    position: fixed;
+    top: 16px;
+    left: 0; /* Ajustamos a la izquierda */
+    width: 68.5%; /* Ocupa todo el ancho */
+    height: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ajustamos el espacio entre los elementos */
+    color: white;
+    background-color: #622EDA; /* Cambiamos el color de fondo */
+    font-weight: bold; /* Poner en negrita */
+    padding: 0 20px; /* Añadimos un padding para separar del borde de la pantalla */
+    box-sizing: border-box; /* Incluimos el padding dentro del tamaño total */
+    transform: translateX(41%);
+    border-radius: 4px;
+  }
+  
+  .greeting {
+    font-size: 20px; /* Aumentamos el tamaño de la fuente */
+    
+  }
+  
+  .userInfo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .userIcon {
+    font-size: 24px;
+    color: white; /* Cambiamos el color del icono a blanco */
+    margin-right: 5px;
+  }
+  
+  .userName {
+    font-size: 20px; /* Aumentamos el tamaño de la fuente */
+  }

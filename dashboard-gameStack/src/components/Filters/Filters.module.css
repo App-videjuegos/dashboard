@@ -1,0 +1,46 @@
+.filtersContainer {
+    width: 90px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #987bdc;
+    border-radius: 4px;
+    padding: 5px;
+    position: relative;
+  }
+  
+  .filterButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    margin-right: 10px; /* Ajustamos el margen derecho para alejar el ícono de la palabra */
+  }
+  
+  .filterIcon {
+    font-size: 24px;
+    margin-right: 6px;
+  }
+  
+  .menu {
+    position: absolute;
+    top: calc(100% + 10px); /* Aumentamos el espacio entre el botón y el menú */
+    right: 0;
+    background-color: #622eda;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+  }
+  
+  /* Ajustamos el tamaño del menú desplegable si es necesario */
+  .menu div {
+    margin-bottom: 10px; /* Aumentamos el espacio entre los elementos del menú */
+    margin-left: 20px;
+    margin-right: 20px;
+  }

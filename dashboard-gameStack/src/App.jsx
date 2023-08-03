@@ -8,13 +8,15 @@ import Profile from './views/dashboardAdmin/Profile/Profile';
 import Users from './views/dashboardAdmin/Users/Users';
 import Register from './views/dashboardAdmin/Register/Register';
 import Login from './views/dashboardAdmin/Login/Login';
+import AdminBar from './components/AdminBar/AdminBar';
 
 function App() {
   const location = useLocation();
 
   return (
     <div>
-      {location.pathname !== "/" && <NavBar />}
+      {location.pathname !== "/" && <NavBar />}   {/* Mostrar NavBar en todas las rutas excepto en la página de inicio */}
+      {location.pathname !== "/" && <AdminBar />} {/* Mostrar AdminBar en todas las rutas excepto en la página de inicio */}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/games" element={<Games />} />

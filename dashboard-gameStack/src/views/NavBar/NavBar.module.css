@@ -6,13 +6,9 @@
   height: 90vh;
   width: 40vh;
   padding: 16px;
-  background-color: #622EDA;
+  background-color: #987bdc;
   color: white;
   border-radius: 4px;
-}
-
-.logoGameStack{
-  width: 100%;
 }
 
 /* Estilos para el título "GameStack" */
