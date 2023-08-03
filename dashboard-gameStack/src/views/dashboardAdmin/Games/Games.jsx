@@ -11,17 +11,14 @@ function Games() {
   const dispatch = useDispatch();
   const [input, setInput] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const videoGames = useSelector((state) => state.videoGamesState.videoGames); // Usa el estado de videoGames en lugar de allUsers
-  const filteredVideoGames = useSelector((state) => state.videoGamesState.filteredVideoGames); // Agregar el selector para el estado filteredVideoGames
+  const videoGames = useSelector((state) => state.videoGamesState.videoGames);
+  const juegosPorPagina = 10;
 
-  
-  const juegosPorPagina = 10; // Actualiza el nombre para ser más coherente
 
 
   useEffect(() => {
     dispatch(getvideoGames());
   }, []);
-
 
   function changeHandler(e) {
     setInput(e.target.value);
@@ -29,10 +26,9 @@ function Games() {
     dispatch(getvGamebyName(busqueda));
   }
 
-  // Lógica de paginación utilizando los juegos filtrados
-const indiceUltimoJuego = currentPage * juegosPorPagina;
-const indicePrimerJuego = indiceUltimoJuego - juegosPorPagina;
-const juegosActuales = filteredVideoGames.slice(indicePrimerJuego, indiceUltimoJuego);
+  const indiceUltimoJuego = currentPage * juegosPorPagina;
+  const indicePrimerJuego = indiceUltimoJuego - juegosPorPagina;
+  const juegosActuales = videoGames.slice(indicePrimerJuego, indiceUltimoJuego);
 
   const handlePageChange = (numeroPagina) => {
     setCurrentPage(numeroPagina);

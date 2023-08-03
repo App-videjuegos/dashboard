@@ -23,8 +23,8 @@ export const videogamesSlice = createSlice({
             state.videoGames= action.payload;
         },
         getVideogamesbyName: (state,action)=>{
-            state.filteredVideoGames= action.payload;
-            state.notFoundGames = false           
+          state.videoGames = action.payload; // Cambia filteredVideoGames= action.payload; a state.filteredVideoGames= action.payload;
+          state.notFoundGames = false           
         },
         setPrevVideoGame: (state,action)=>{
             state.videoGames_Prev= action.payload;
@@ -163,6 +163,7 @@ export const {getAllVideogames,getVideogamebyId,addUser,setNextPage,setFirstPage
               setPrevPage,setMaxPage,getVideogamesbyName,setPrevVideoGame,updateVideogames,
               filterByPlatform,
   filterByGenre,
+  
   filterByPriceRange,
   filterByRating,
   filterByReleaseDate,
