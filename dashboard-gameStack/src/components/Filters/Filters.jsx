@@ -9,7 +9,8 @@ import {
   applyReleaseDateFilter,
   applyAlphabeticalSortAsc,
   applyAlphabeticalSortDesc,
-  clearAllFilters
+  clearAllFilters,
+  getvideoGames
 } from '../../redux/videogamesActions';
 import {
   sortByRatingAsc,
@@ -65,11 +66,37 @@ const Filter = () => {
   const [selectedReleaseDate, setSelectedReleaseDate] = useState('');
 
   const handleApplyFilters = () => {
-    dispatch(applyPlatformFilter(selectedPlatform));
-    dispatch(applyGenreFilter(selectedGenre));
-    dispatch(applyPriceRangeFilter(Number(minPrice), Number(maxPrice)));
-    dispatch(applyRatingFilter(Number(selectedRating)));
-    dispatch(applyReleaseDateFilter(selectedReleaseDate));
+    const filtersActive =
+      selectedPlatform ||
+      selectedGenre ||
+      (minPrice !== '') ||
+      (maxPrice !== '') ||
+      selectedRating ||
+      selectedReleaseDate;
+  
+    if (filtersActive) {
+      console.log("Selected Platform:", selectedPlatform);
+      console.log("Selected Genre:", selectedGenre);
+      console.log("Min Price:", minPrice);
+      console.log("Max Price:", maxPrice);
+      console.log("Selected Rating:", selectedRating);
+      console.log("Selected Release Date:", selectedReleaseDate);
+  
+      // Call actions to apply filters
+      dispatch(applyPlatformFilter(selectedPlatform));
+      dispatch(applyGenreFilter(selectedGenre));
+      dispatch(applyPriceRangeFilter(Number(minPrice), Number(maxPrice)));
+      dispatch(applyRatingFilter(Number(selectedRating)));
+      dispatch(applyReleaseDateFilter(selectedReleaseDate));
+  
+      // Fetch the updated video games with filters applied
+      dispatch(getvideoGames());
+  
+      // Optionally, you can close the filter menu after applying the filters
+      setShowFilters(false);
+    } else {
+      console.log("No filters selected.");
+    }
   };
 
   const handleSortChange = (event) => {

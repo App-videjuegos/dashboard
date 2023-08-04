@@ -4,7 +4,7 @@ import { getvGamebyName, getVGameByID, getvideoGames } from '../../../redux/vide
 import styles from './Games.module.css';
 import { convertirFecha } from '../../../components/Helpers/InvertDate';
 import Filter from '../../../components/Filters/Filters';
-
+import { clearFilters } from '../../../redux/videogamesSlice';
 
 let prevId = 1;
 
@@ -79,6 +79,11 @@ const juegosPaginaActual = juegosOrdenados.slice(indicePrimerJuego, indiceUltimo
       setCurrentPage(currentPage + 1);
     }
   };
+
+  const handleClearFilters = () => {
+    dispatch(clearFilters());
+    setCurrentPage(1); // También es necesario restablecer la página actual al limpiar los filtros
+  };
   
 
   
@@ -92,6 +97,7 @@ const juegosPaginaActual = juegosOrdenados.slice(indicePrimerJuego, indiceUltimo
           <div className={styles.userRow}>
             <div className={styles.title}>Games</div>
             <Filter />
+            <button onClick={handleClearFilters}>Clear Filters</button>
             <div className={styles.SearchBar}>
               <input type="text" className={styles.searchInput} placeholder="Search" onChange={changeHandler} />
             </div>
