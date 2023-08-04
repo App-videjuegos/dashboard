@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getvGamebyName, getVGameByID, getvideoGames } from '../../../redux/videogamesActions'; 
 import styles from './Games.module.css';
 import { convertirFecha } from '../../../components/Helpers/InvertDate';
+import Filter from '../../../components/Filters/Filters';
 
 
 let prevId = 1;
@@ -11,10 +12,16 @@ function Games() {
   const dispatch = useDispatch();
   const [input, setInput] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const videoGames = useSelector((state) => state.videoGamesState.videoGames);
+  const videoGamesState = useSelector((state) => state.videoGamesState);
+  const { videoGames, filteredVideoGames, sortBy } = videoGamesState;
   const juegosPorPagina = 10;
+  const resetComponent = useSelector((state) => state.videoGamesState.resetComponent); // Agregar este selector para escuchar cambios en el estado resetComponent
+  
 
-
+  useEffect(() => {
+    console.log("Reset component changed. Resetting the current page.");
+    setCurrentPage(1); // Reiniciamos la página actual al limpiar los filtros
+  }, [resetComponent]);
 
   useEffect(() => {
     dispatch(getvideoGames());
@@ -26,9 +33,36 @@ function Games() {
     dispatch(getvGamebyName(busqueda));
   }
 
-  const indiceUltimoJuego = currentPage * juegosPorPagina;
-  const indicePrimerJuego = indiceUltimoJuego - juegosPorPagina;
-  const juegosActuales = videoGames.slice(indicePrimerJuego, indiceUltimoJuego);
+  // Lógica para obtener los videojuegos actuales (filtrados o no) según la página actual y el estado de ordenamiento
+const juegosActuales = filteredVideoGames.length > 0 ? filteredVideoGames : videoGames;
+const juegosOrdenados = juegosActuales.slice().sort((a, b) => {
+  // Implementar la lógica de ordenamiento según el estado de ordenamiento en videoGamesState
+  switch (sortBy) {
+    case 'rating-asc':
+      return a.rating - b.rating;
+    case 'rating-desc':
+      return b.rating - a.rating;
+    case 'price-asc':
+      return a.price - b.price;
+    case 'price-desc':
+      return b.price - a.price;
+    case 'release-date-asc':
+      return new Date(a.releaseDate) - new Date(b.releaseDate);
+    case 'release-date-desc':
+      return new Date(b.releaseDate) - new Date(a.releaseDate);
+    case 'alphabetical-asc':
+      return a.name.localeCompare(b.name);
+    case 'alphabetical-desc':
+      return b.name.localeCompare(a.name);
+    default:
+      return 0;
+  }
+});
+
+const indiceUltimoJuego = currentPage * juegosPorPagina;
+const indicePrimerJuego = indiceUltimoJuego - juegosPorPagina;
+const juegosPaginaActual = juegosOrdenados.slice(indicePrimerJuego, indiceUltimoJuego);
+
 
   const handlePageChange = (numeroPagina) => {
     setCurrentPage(numeroPagina);
@@ -45,6 +79,7 @@ function Games() {
       setCurrentPage(currentPage + 1);
     }
   };
+  
 
   
   // console.log("Estado videoGames:", videoGames);
@@ -56,6 +91,7 @@ function Games() {
         <div className={styles.bar}>
           <div className={styles.userRow}>
             <div className={styles.title}>Games</div>
+            <Filter />
             <div className={styles.SearchBar}>
               <input type="text" className={styles.searchInput} placeholder="Search" onChange={changeHandler} />
             </div>
@@ -73,8 +109,8 @@ function Games() {
                 <div className={styles.userHeaderColumn6}>Upload date</div>
               </div>
             </div>
-            {Array.isArray(juegosActuales) && juegosActuales.length > 0 ? (
-              juegosActuales.map((e) => (
+            {Array.isArray(juegosPaginaActual) && juegosPaginaActual.length > 0 ? (
+    juegosPaginaActual.map((e) => (
                 <div className={styles.userTable} key={prevId++}>
                   <div className={styles.userRow}>
                     <div className={styles.userColumn1}>
