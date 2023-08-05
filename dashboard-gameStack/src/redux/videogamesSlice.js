@@ -33,23 +33,20 @@ export const videogamesSlice = createSlice({
             state.vGameId=action.payload
             state.videoGame=action.payload
         },
-        setNextPage: (state,action)=>{
+        setNextPage: (state)=>{
             state.pagina=state.pagina +1 
         },
-        setPrevPage: (state,action)=>{
+        setPrevPage: (state)=>{
             state.pagina=state.pagina -1
         },
         setMaxPage : (state,action)=>{
             state.pagina=action.payload
         },
-        setFirstPage : (state,action)=>{
+        setFirstPage : (state)=>{
             state.pagina=1
         },
         setFlaPrev: (state,action)=>{
             state.flag_prev=action.payload
-        },
-        setPrevVideoGame:(state,action)=>{
-            state.videoGames_Prev=action.payload
         },
         updateVideogames:(state,action)=>{
             state.videoGames=action.payload
@@ -62,7 +59,7 @@ export const videogamesSlice = createSlice({
             state.allGenres=action.payload
         },
 
-        notFoundGamesError: (state,action) => {
+        notFoundGamesError: (state) => {
           state.notFoundGames = true
         },
 

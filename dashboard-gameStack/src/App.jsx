@@ -9,6 +9,7 @@ import Profile from './views/dashboardAdmin/Profile/Profile';
 import Users from './views/dashboardAdmin/Users/Users';
 import AdminBar from './components/AdminBar/AdminBar';
 import LoadVideogame from './views/dashboardAdmin/LoadVideogame/LoadVideogame';
+import Sales from "./views/dashboardAdmin/Sales/Sales";
 
 function App() {
   const location = useLocation();
@@ -23,6 +24,7 @@ function App() {
         <Route path="/metrics" element={<Metrics />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/sales" element={<Sales />} />
         <Route path="/loadvideogame" element={<LoadVideogame />} />
       </Routes>
     </div>

@@ -1,6 +1,6 @@
 // Agrega la importación de los íconos de la NavBar
 import { AiOutlineHome } from 'react-icons/ai';
-import { FaGamepad } from 'react-icons/fa';
+import { FaGamepad, FaMoneyBill } from 'react-icons/fa';
 import { IoMdAnalytics } from 'react-icons/io';
 import { FaUser } from 'react-icons/fa';
 import { FaUsers } from 'react-icons/fa';
@@ -21,6 +21,7 @@ const routeIcons = {
   Logout: FiLogOut,
   Visible: AiFillEye,
   Invisible: AiFillEyeInvisible,
+  Sales: FaMoneyBill,
   LoadGame: BiSolidCloudUpload,
 
 };
