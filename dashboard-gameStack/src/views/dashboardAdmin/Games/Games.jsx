@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getvGamebyName,
-  getvideoGames,
-} from "../../../redux/videogamesActions";
+import { getvGamebyName, getvideoGames } from "../../../redux/videogamesActions";
 import styles from "./Games.module.css";
 import { convertirFecha } from "../../../components/Helpers/InvertDate";
 import Filter from "../../../components/Filters/Filters";
@@ -16,8 +13,7 @@ function Games() {
   const dispatch = useDispatch();
   const [input, setInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const videoGamesState = useSelector((state) => state.videoGamesState);
-  const { videoGames, filteredVideoGames, sortBy } = videoGamesState;
+  const videoGames = useSelector((state) => state.videoGamesState.videoGames);
   const juegosPorPagina = 10;
 
   const [selectedGame, setSelectedGame] = useState(null);
@@ -53,11 +49,6 @@ function Games() {
     }
   };
 
-  const handleEditGame = () => {
-    // Implementa aquí la lógica para editar el juego seleccionado
-    console.log("Editando el juego seleccionado:", selectedGame);
-    setShowMenu(false); // Ocultar el menú emergente después de editar
-  };
 
   const handleDeleteGame = () => {
     // Implementa aquí la lógica para eliminar el juego seleccionado
@@ -76,32 +67,13 @@ function Games() {
     dispatch(getvGamebyName(busqueda));
   }
 
-  const juegosActuales =
-    filteredVideoGames && filteredVideoGames.length > 0
-      ? filteredVideoGames
-      : videoGames;
-
-  const juegosOrdenados = juegosActuales.slice().sort((a, b) => {
-    switch (sortBy) {
-      case "price-asc":
-        return a.price - b.price;
-      case "price-desc":
-        return b.price - a.price;
-      case "alphabetical-asc":
-        return a.name.localeCompare(b.name);
-      case "alphabetical-desc":
-        return b.name.localeCompare(a.name);
-      default:
-        return 0;
-    }
-  });
+ 
 
   const indiceUltimoJuego = currentPage * juegosPorPagina;
   const indicePrimerJuego = indiceUltimoJuego - juegosPorPagina;
-  const juegosPaginaActual = juegosOrdenados.slice(
-    indicePrimerJuego,
-    indiceUltimoJuego
-  );
+  const juegosPaginaActual = Array.isArray(videoGames)
+  ? videoGames.slice((currentPage - 1) * juegosPorPagina, currentPage * juegosPorPagina)
+  : [];
 
   const handlePageChange = (numeroPagina) => {
     setCurrentPage(numeroPagina);
@@ -156,13 +128,12 @@ function Games() {
                 <div className={styles.userHeaderColumn2}></div>
                 <div className={styles.userHeaderColumn3}>Name</div>
                 <div className={styles.userHeaderColumn4}>ID</div>
-                <div className={styles.userHeaderColumn5}>Stocke</div>
+                <div className={styles.userHeaderColumn5}>Stock</div>
                 <div className={styles.userHeaderColumn6}>Upload date</div>
               </div>
             </div>
-            {Array.isArray(juegosPaginaActual) &&
-            juegosPaginaActual.length > 0 ? (
-              juegosPaginaActual.map((e) => (
+            {Array.isArray(juegosPaginaActual) && juegosPaginaActual.length > 0 ? (
+        juegosPaginaActual.map((e) => (
                 <div
                   key={e.id}
                   className={`${styles.userRow} ${
@@ -186,7 +157,7 @@ function Games() {
                       <div className={styles.userColumn4}>{e.id}</div>
                       <div className={styles.userColumn5}>{e.stock}</div>
                       <div className={styles.userColumn6}>
-                        {convertirFecha(e.updatedAt)}
+                        {convertirFecha(e.releaseDate)}
                       </div>
                     </div>
                   </div>

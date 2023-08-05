@@ -1,5 +1,5 @@
 import {getAllVideogames, addUser,setNextPage,setPrevPage,setMaxPage,setErrorMsg,
-  setFlaPrev,setFirstPage,getVideogamesbyName,setPrevVideoGame,updateVideogames,
+  setFlaPrev,setFirstPage,getVideogamesbyName,setPrevVideoGame,
 filterByPlatform,
 filterByGenre,
 filterByPriceRange,
@@ -15,7 +15,8 @@ clearFilters,
 sortByAlphabeticalAsc,
 sortByAlphabeticalDesc,
 notFoundGamesError,
-sortByStockAsc, sortByStockDesc
+sortByStockAsc, sortByStockDesc,
+updateGame
 } from "./videogamesSlice";
 
    
@@ -90,16 +91,6 @@ return function(dispatch){
   dispatch(setPrevVideoGame())
 }
 }
-
-export const updateVgames=(data)=>{
-return function(dispatch){
-  dispatch(updateVideogames(data))
-}
-}
-
-
-
-
 
 export const getVGameByID = (id) => {
 return async (dispatch) => {
@@ -199,3 +190,23 @@ export const applyStockSortDesc = createAsyncThunk(
   }
 );
 //////Filtros ------- Adrián
+
+export const updateVideoGame = (updatedGame) => async (dispatch) => {
+  try {
+    const response = await axios.put(
+      `https://pfvideojuegos-back-production.up.railway.app/games/update/${updatedGame.id}`,
+      updatedGame
+    );
+
+    // Si la actualización es exitosa, dispatch la acción para actualizar el estado
+    dispatch(updateGame(response.data));
+
+    // Lógica adicional si es necesario después de actualizar el juego
+    // ...
+
+  } catch (error) {
+    console.log("Error al actualizar el videojuego:", error);
+    // Manejo de errores si es necesario
+    // ...
+  }
+};

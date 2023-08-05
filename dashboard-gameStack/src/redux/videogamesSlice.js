@@ -165,6 +165,13 @@ export const videogamesSlice = createSlice({
             state.videoGames.sort((a, b) => b.stock - a.stock);
           },
         //////Filtros ------- Adrián
+        updateGame: (state, action) => {
+          const updatedGame = action.payload;
+          const index = state.videoGames.findIndex((game) => game.id === updatedGame.id);
+          if (index !== -1) {
+            state.videoGames[index] = updatedGame;
+          }
+        },
     }
 })
 
@@ -187,5 +194,6 @@ export const {getAllVideogames,getVideogamebyId,addUser,setNextPage,setFirstPage
   notFoundGamesError,
   sortByStockAsc,
   sortByStockDesc,
+  updateGame
             }=videogamesSlice.actions
 export default videogamesSlice.reducer
