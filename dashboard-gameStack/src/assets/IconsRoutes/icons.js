@@ -5,6 +5,8 @@ import { IoMdAnalytics } from 'react-icons/io';
 import { FaUser } from 'react-icons/fa';
 import { FaUsers } from 'react-icons/fa';
 import { FaUserPlus } from 'react-icons/fa';
+import { AiFillEye } from 'react-icons/ai'
+import { AiFillEyeInvisible } from 'react-icons/ai'
 // Agrega la importación del ícono de cerrar sesión
 import { FiLogOut } from 'react-icons/fi'; 
 
@@ -18,6 +20,8 @@ const routeIcons = {
   Users: FaUsers,
   Register: FaUserPlus,
   Logout: FiLogOut,
+  Visible: AiFillEye,
+  Invisible: AiFillEyeInvisible,
 
 };
 

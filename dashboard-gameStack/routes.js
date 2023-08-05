@@ -6,7 +6,7 @@ import Users from './src/views/dashboardAdmin/Users/Users';
 import Register from './src/views/dashboardAdmin/Register/Register';
 
 const routes = [
-    { path: '/', component: Login, name: 'Login' },
+    // { path: '/', component: Login, name: 'Login' },
     { path: '/games', component: Games, name: 'Games' },
     { path: '/metrics', component: Metrics, name: 'Metrics' },
     { path: '/profile', component: Profile, name: 'Profile' },

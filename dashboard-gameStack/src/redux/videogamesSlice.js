@@ -69,14 +69,14 @@ export const videogamesSlice = createSlice({
         //////Filtros ------- Adrián
         filterByPlatform: (state, action) => {
             const platform = action.payload;
-            state.filteredVideoGames = state.videoGames.filter(
+            state.videoGames = state.videoGames.filter(
               (game) => game.platforms.includes(platform)
             );
           },
       
           filterByGenre: (state, action) => {
             const genre = action.payload;
-            state.filteredVideoGames = state.videoGames.filter(
+            state.videoGames = state.videoGames.filter(
               (game) => game.genre.includes(genre)
             );
           },
