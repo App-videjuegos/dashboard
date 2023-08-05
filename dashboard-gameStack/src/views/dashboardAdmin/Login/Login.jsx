@@ -9,7 +9,7 @@ import {
   saveItemLocalStorage,
   loadItemLocalStorage,
   showLocalStorageData,
-} from "../../../components/helpers/functionsLocalStorage";
+} from "../../../components/Helpers/functionsLocalStorage";
 import loginService from "../../../services/login";
 import { checkLogedUser } from "../../../redux/usersActions";
 import routeIcons from "../../../assets/IconsRoutes/icons";

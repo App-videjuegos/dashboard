@@ -1,4 +1,4 @@
-import {  showLocalStorageData } from '../../../components/helpers/functionsLocalStorage';
+import {  showLocalStorageData } from '../../../components/Helpers/functionsLocalStorage';
 import styles from './Profile.module.css'; // Importa los estilos del archivo CSS
 
 function Profile() {

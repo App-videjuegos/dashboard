@@ -1,6 +1,6 @@
 import { HiUserCircle } from 'react-icons/hi'; // Importamos el icono de usuario
 import styles from './AdminBar.module.css'; // Importamos los estilos del módulo
-import { loadItemLocalStorage } from '../helpers/functionsLocalStorage';
+import { loadItemLocalStorage } from '../Helpers/functionsLocalStorage';
 import { obtenerPrimerNombre } from '../Helpers/Primernombre';
 
 function AdminBar() {

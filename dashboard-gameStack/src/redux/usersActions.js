@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getAllUsers, getUserById, usrMsgErr, getUserbyName, notFoundUsersError, setErrorMsg, setUserLoged, setUserToken } from './usersSlice.js'
-import { loadItemLocalStorage } from "../components/Helpers/functionsLocalStorage.js";
+import { loadItemLocalStorage } from "../components/Helpers/functionsLocalStorage.jsx";
 
 // export const getUsers=()=>(dispatch)=> {
 //     axios("https://pfvideojuegos-back-production.up.railway.app/user/888")
