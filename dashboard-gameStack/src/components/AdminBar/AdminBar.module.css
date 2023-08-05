@@ -36,3 +36,10 @@
   .userName {
     font-size: 20px; /* Aumentamos el tamaño de la fuente */
   }
+
+
+  .image {
+    width: 3rem;
+    border-radius: 100rem;
+    margin-left: 1rem;
+  }

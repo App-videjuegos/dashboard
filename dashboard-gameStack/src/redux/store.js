@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import userReducer from './usersSlice'
 import videogamesReducer from './videogamesSlice';
 
-
 export default configureStore({
-    reducer : {
-        usersState: userReducer,
+    reducer:{
         videoGamesState: videogamesReducer,
+        usersState: userReducer,
+        // cartState: cartReducer,
+        // salesState: salesReducer,
+        // reviews: reviewsReducer,
 
     }
 })

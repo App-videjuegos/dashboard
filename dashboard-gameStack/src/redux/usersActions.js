@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getAllUsers, getUserById, usrMsgErr, getUserbyName, notFoundUsersError, setErrorMsg } from './usersSlice.js'
-
+import { getAllUsers, getUserById, usrMsgErr, getUserbyName, notFoundUsersError, setErrorMsg, setUserLoged, setUserToken } from './usersSlice.js'
+import { loadItemLocalStorage } from "../components/Helpers/functionsLocalStorage.js";
 
 // export const getUsers=()=>(dispatch)=> {
 //     axios("https://pfvideojuegos-back-production.up.railway.app/user/888")
@@ -73,4 +73,18 @@ export const getUsersbyName =(query)=> (dispatch=>{
           })
  
 })
+
+export const checkLogedUser  = () => async (dispatch) => {
+  try {
+    const data = await loadItemLocalStorage('logedGameStack');
+    const user = data ? data : {};
+
+    dispatch(setUserLoged(user));
+    dispatch(setUserToken(user.token));
+    
+  } catch (error) {
+    console.error('Error al obtener los datos desde AsyncStorage:', error);
+  }
+};
+
 

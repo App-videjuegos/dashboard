@@ -2,8 +2,24 @@ import { Link } from 'react-router-dom';
 import routes from '../../../routes';
 import routeIcons from '../../assets/IconsRoutes/icons';
 import styles from './NavBar.module.css'; // Cambia el nombre del import a NavBar.module.css
-
+import { useDispatch } from "react-redux";
+import { removeItemLocalStorage, showLocalStorageData } from "../../components/Helpers/functionsLocalStorage";
+import { checkLogedUser } from "../../redux/usersActions";
+import { useNavigate } from "react-router";
 function NavBar() {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleUnlogin = () => {
+
+    removeItemLocalStorage("logedGameStack");
+    dispatch(checkLogedUser());
+    showLocalStorageData();
+    navigate('/')
+  };
+
+
   // Función para obtener el icono según el nombre de la ruta
   function getIcon(routeName) {
     const Icon = routeIcons[routeName];
@@ -23,10 +39,9 @@ function NavBar() {
         ))}
       </ul>
       <hr />
-      <Link to="/" className={styles['close-session']}>
-        {getIcon('Logout')} {/* Agrega el ícono de cerrar sesión al enlace */}
-        Close session
-      </Link>
+     <button onClick={()=>handleUnlogin()} className={styles['close-session']}>
+        {getIcon('Logout')}Close session
+      </button>
     </div>
   );
 }

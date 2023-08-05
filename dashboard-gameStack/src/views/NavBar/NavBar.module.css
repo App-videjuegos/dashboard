@@ -93,7 +93,8 @@ hr {
   font-weight: bold;
   margin-top: -2px; /* Ajusta el margen superior para alinear el ícono con el texto */
   font-size: 24px;
-
+  border: none;
+  background-color: transparent;
 }
 
 /* Estilos para el ícono */
