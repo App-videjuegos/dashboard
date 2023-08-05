@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import CancelSubmit from "../../../components/UtilsCreateGame/calcelSubmit";
+import CancelSubmit from "../../../components/UtilsCreateGame/CalcelSubmit";
 import Submit from "../../../components/UtilsCreateGame/Submit";
 import DatePicker from 'react-datepicker';
 import styles from "./LoadVideogame.module.css"
