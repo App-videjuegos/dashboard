@@ -4,7 +4,7 @@ import axios from "axios";
 import CancelSubmit from "../../../components/UtilsCreateGame/CalcelSubmit";
 import Submit from "../../../components/UtilsCreateGame/Submit";
 import DatePicker from 'react-datepicker';
-import styles from "./LoadVideogame.module.css"
+import styles from "./LoadVIdeogame.module.css"
 
 
 import { validate } from "../../../components/UtilsCreateGame/CreateGameValidate";
