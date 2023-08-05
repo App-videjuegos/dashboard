@@ -157,6 +157,16 @@ export const videogamesSlice = createSlice({
             state.sortBy = '';
             state.resetComponent += 1; // Incrementa resetComponent para forzar una actualización en el componente Games
           },
+
+          sortByStockAsc: (state) => {
+            state.filteredVideoGames.sort((a, b) => a.stock - b.stock);
+            state.videoGames.sort((a, b) => a.stock - b.stock);
+          },
+      
+          sortByStockDesc: (state) => {
+            state.filteredVideoGames.sort((a, b) => b.stock - a.stock);
+            state.videoGames.sort((a, b) => b.stock - a.stock);
+          },
         //////Filtros ------- Adrián
     }
 })
@@ -177,6 +187,8 @@ export const {getAllVideogames,getVideogamebyId,addUser,setNextPage,setFirstPage
   sortByReleaseDateDesc,
   clearFilters,
   sortByAlphabeticalAsc, sortByAlphabeticalDesc,
-  notFoundGamesError
+  notFoundGamesError,
+  sortByStockAsc,
+  sortByStockDesc,
             }=videogamesSlice.actions
 export default videogamesSlice.reducer

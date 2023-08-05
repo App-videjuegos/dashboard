@@ -14,7 +14,8 @@ sortByReleaseDateDesc,
 clearFilters,
 sortByAlphabeticalAsc,
 sortByAlphabeticalDesc,
-notFoundGamesError
+notFoundGamesError,
+sortByStockAsc, sortByStockDesc
 } from "./videogamesSlice";
 
    
@@ -26,13 +27,13 @@ export const  getvideoGames = () =>(dispatch)=>{
 
 
 //  dispatch(getAllVideogames(videogames))
-axios("https://pfvideojuegos-back-production.up.railway.app/games")
+axios("https://pfvideojuegos-back-production.up.railway.app/games/admin")
 .then(res => dispatch(getAllVideogames(res.data)))
 .catch(e=>console.log("error en la ruta" ,e))
 }
 
 export const getvGamebyName = (query) => (dispatch) => {
-fetch(`https://pfvideojuegos-back-production.up.railway.app/games?name=${query}`)
+fetch(`https://pfvideojuegos-back-production.up.railway.app/games/admin?name=${query}`)
 .then((response) => {
 estado = response.status;
 return response.json();
@@ -182,5 +183,19 @@ export const applyAlphabeticalSortDesc = createAsyncThunk(
 async (_, { dispatch }) => {
 dispatch(sortByAlphabeticalDesc());
 }
+);
+
+export const applyStockSortAsc = createAsyncThunk(
+  "videogames/applyStockSortAsc",
+  async (_, { dispatch }) => {
+    dispatch(sortByStockAsc());
+  }
+);
+
+export const applyStockSortDesc = createAsyncThunk(
+  "videogames/applyStockSortDesc",
+  async (_, { dispatch }) => {
+    dispatch(sortByStockDesc());
+  }
 );
 //////Filtros ------- Adrián
