@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {   Routes, Route, useLocation } from 'react-router-dom';
+import NavBar from './views/NavBar/NavBar';
+
+// Importar los componentes de las rutas
+import Games from './views/dashboardAdmin/Games/Games';
+import Metrics from './views/dashboardAdmin/Metrics/Metrics';
+import { LoginRender } from './views/dashboardAdmin/Login/LoginRender';
+import Profile from './views/dashboardAdmin/Profile/Profile';
+import Users from './views/dashboardAdmin/Users/Users';
+import Register from './views/dashboardAdmin/Register/Register';
+import AdminBar from './components/AdminBar/AdminBar';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const location = useLocation();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      {location.pathname !== "/" && <NavBar />}   {/* Mostrar NavBar en todas las rutas excepto en la página de inicio */}
+      {location.pathname !== "/" && <AdminBar />} {/* Mostrar AdminBar en todas las rutas excepto en la página de inicio */}
+      <Routes>
+        <Route path="/" element={<LoginRender />} />
+        <Route path="/games" element={<Games />} />
+        <Route path="/metrics" element={<Metrics />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
