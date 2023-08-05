@@ -64,7 +64,7 @@ function Users() {
                 <div className={styles.userHeaderColumn1}>Usssssser</div>
                 <div className={styles.userHeaderColumn2}></div>
                 <div className={styles.userHeaderColumn3}>Fullllllname</div>
-                <div className={styles.userHeaderColumn4}>ID</div>
+                <div className={styles.userHeaderColumn4}>IDddddd</div>
                 <div className={styles.userHeaderColumn5}>State</div>
                 <div className={styles.userHeaderColumn6}>Birthday</div>
               </div>
