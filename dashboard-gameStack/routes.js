@@ -1,9 +1,8 @@
 import Games from './src/views/dashboardAdmin/Games/Games';
-import Login from './src/views/dashboardAdmin/Login/Login';
+import LoadVideogame from './src/views/dashboardAdmin/LoadVideogame/LoadVideogame';
 import Metrics from './src/views/dashboardAdmin/Metrics/Metrics';
 import Profile from './src/views/dashboardAdmin/Profile/Profile';
 import Users from './src/views/dashboardAdmin/Users/Users';
-import Register from './src/views/dashboardAdmin/Register/Register';
 
 const routes = [
     // { path: '/', component: Login, name: 'Login' },
@@ -11,7 +10,7 @@ const routes = [
     { path: '/metrics', component: Metrics, name: 'Metrics' },
     { path: '/profile', component: Profile, name: 'Profile' },
     { path: '/users', component: Users, name: 'Users' },
-    { path: '/register', component: Register, name: 'Register' },
+    { path: '/LoadVideogame', component: LoadVideogame, name: 'LoadGame' },
 ];
 
 export default routes;

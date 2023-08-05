@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    right: 10rem;
+    background-color: aliceblue;
+    margin-top: -26rem;
+    margin-left: 20rem;
+    text-align: center;
+}
