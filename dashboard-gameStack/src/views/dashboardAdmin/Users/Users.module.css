@@ -178,10 +178,10 @@ font-size: 25px;
 
 .pagination button {
   margin: 0 10px; /* Esto agrega 5px de margen horizontal entre los botones */
-  background-color: white;
-  border-color: white;
+  background-color: black;
+  border-color: black;
   font-weight: bold;
-}
+  }
 
 .btnPaged{
   font-size: 20px;

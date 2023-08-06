@@ -158,20 +158,20 @@ font-size: 25px;
 }
 
 .pagination{
-padding-top: 12%;
-/* padding-left: 36%;
-padding-right: 36%; */
-display: flex;
-align-items: center; /* Centra verticalmente el contenido */
-justify-content: center; /* Centra horizontalmente el contenido */
+  padding-top: 12%;
+  /* padding-left: 36%;
+  padding-right: 36%; */
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
 }
 
 .pagination button {
-margin: 0 10px; /* Esto agrega 5px de margen horizontal entre los botones */
-background-color: white;
-border-color: white;
-font-weight: bold;
-}
+  margin: 0 1px; /* Esto agrega 5px de margen horizontal entre los botones */
+  background-color: black;
+  border-color: black;
+  font-weight: bold;
+  }
 
 .btnPaged{
 font-size: 20px;

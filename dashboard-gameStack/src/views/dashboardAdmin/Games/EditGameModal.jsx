@@ -4,6 +4,35 @@ import { updateVideoGame } from "../../../redux/videogamesActions"; // Asegúrat
 
 import styles from "./EditGameModal.module.css"; // Estilos para el modal
 
+const genres = [
+  "Action",
+  "Adventure",
+  "Arcade",
+  "Casual",
+  "Family",
+  "Fighting",
+  "Indie",
+  "Massively Multiplayer",
+  "Platformer",
+  "Puzzle",
+  "RPG",
+  "Shooter",
+  "Simulation",
+  "Sports",
+  "Strategy",
+];
+
+const platforms = [
+  "Nintendo Switch",
+  "PC",
+  "PlayStation 4",
+  "PlayStation 5",
+  "Xbox Series S/X",
+  "Linux",
+  "Android",
+  "macOS",
+];
+
 
 function EditGameModal({ selectedGame, onClose, onSave }) {
   const [editedGame, setEditedGame] = useState(selectedGame);
@@ -15,7 +44,9 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
   const [newPlatform, setNewPlatform] = useState("");
   const [newGenre, setNewGenre] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-
+  const [selectedPlatformToRemove, setSelectedPlatformToRemove] = useState("");
+  const [selectedGenreToRemove, setSelectedGenreToRemove] = useState("");
+  const [description, setDescription] = useState(selectedGame.description || "");
 
   const dispatch = useDispatch();
 
@@ -27,6 +58,8 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
     const { name, value } = e.target;
     if (name === "releaseDate") {
       setFormattedReleaseDate(value);
+    } else if (name === "description") { // Agregar esta parte para manejar la descripción
+      setDescription(value);
     }
     setEditedGame((prevGame) => ({
       ...prevGame,
@@ -46,6 +79,7 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
       released: formattedReleaseDate,
       platforms: selectedPlatforms,
       genre: selectedGenres,
+      description: description, // Añadir la descripción aquí
     };
 
     try {
@@ -76,15 +110,25 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
   const handlePlatformChange = (e) => {
     const { value } = e.target;
     if (!selectedPlatforms.includes(value)) {
-      setSelectedPlatforms((prevPlatforms) => [...prevPlatforms, value]);
+      setSelectedPlatforms((prevPlatforms) => {
+        const updatedPlatforms = [...prevPlatforms, value];
+        console.log("Selected Platforms:", updatedPlatforms);
+        return updatedPlatforms;
+      });
     }
+    setSelectedPlatformToRemove(value); // Establecer la plataforma seleccionada para eliminar
   };
-
+  
   const handleGenreChange = (e) => {
     const { value } = e.target;
     if (!selectedGenres.includes(value)) {
-      setSelectedGenres((prevGenres) => [...prevGenres, value]);
+      setSelectedGenres((prevGenres) => {
+        const updatedGenres = [...prevGenres, value];
+        console.log("Selected Genres:", updatedGenres);
+        return updatedGenres;
+      });
     }
+    setSelectedGenreToRemove(value); // Establecer el género seleccionado para eliminar
   };
 
   const handleAddPlatform = () => {
@@ -101,12 +145,16 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
     }
   };
 
-  const handleRemovePlatform = (platform) => {
-    setSelectedPlatforms((prevPlatforms) => prevPlatforms.filter((p) => p !== platform));
+  const handleRemovePlatform = () => {
+    setSelectedPlatforms((prevPlatforms) => {
+      const updatedPlatforms = prevPlatforms.filter((platform) => platform !== selectedPlatformToRemove);
+      console.log("Selected Platforms after removal:", updatedPlatforms); // Log después de eliminar una plataforma
+      return updatedPlatforms;
+    });
   };
-
-  const handleRemoveGenre = (genre) => {
-    setSelectedGenres((prevGenres) => prevGenres.filter((g) => g !== genre));
+  
+  const handleRemoveGenre = () => {
+    setSelectedGenres((prevGenres) => prevGenres.filter((genre) => genre !== selectedGenreToRemove));
   };
 
   return (
@@ -140,6 +188,16 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
               />
             </div>
           </div>
+          <div className={styles.formGroup}>
+  <label>Description:</label>
+  <textarea
+    name="description"
+    value={description}
+    onChange={(e) => setDescription(e.target.value)}
+    rows={4}
+    cols={50}
+  />
+</div>
           <div className={styles.formRow}>
             <div className={styles.formGroup}>
             <label>Platforms:</label>
@@ -150,19 +208,29 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
                   </option>
                 ))}
               </select>
-              <input
-                type="text"
+              <select
                 value={newPlatform}
                 onChange={(e) => setNewPlatform(e.target.value)}
-                placeholder="Enter new platform"
-              />
+              >
+                <option value="">Select Platform</option>
+                {platforms.map((platform) => (
+                  <option key={platform} value={platform}>
+                    {platform}
+                  </option>
+                ))}
+              </select>
               <button type="button" onClick={handleAddPlatform}>
                 Add Platform
               </button>
               {/* Modifica el botón para que llame a la función handleRemovePlatform con el elemento seleccionado */}
-              <button type="button" onClick={() => handleRemovePlatform(selectedPlatforms[selectedPlatforms.length - 1])}>
-                Remove Platform
-              </button>
+              <button
+  type="button"
+  onClick={() => {
+    handleRemovePlatform();
+  }}
+>
+  Remove Platform
+</button>
             </div>
             <div className={styles.formGroup}>
               <label>Genre:</label>
@@ -173,19 +241,26 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
                   </option>
                 ))}
               </select>
-              <input
-                type="text"
-                value={newGenre}
-                onChange={(e) => setNewGenre(e.target.value)}
-                placeholder="Enter new genre"
-              />
+              <select value={newGenre} onChange={(e) => setNewGenre(e.target.value)}>
+                <option value="">Select Genre</option>
+                {genres.map((genre) => (
+                  <option key={genre} value={genre}>
+                    {genre}
+                  </option>
+                ))}
+              </select>
               <button type="button" onClick={handleAddGenre}>
                 Add Genre
               </button>
-              {/* Modifica el botón para que llame a la función handleRemoveGenre con el elemento seleccionado */}
-              <button type="button" onClick={() => handleRemoveGenre(selectedGenres[selectedGenres.length - 1])}>
-                Remove Genre
-              </button>
+             {/* Modifica el botón para que llame a la función handleRemoveGenre con el elemento seleccionado */}
+             <button
+  type="button"
+  onClick={() => {
+    handleRemoveGenre();
+  }}
+>
+  Remove Genre
+</button>
             </div>
           </div>
         </form>
