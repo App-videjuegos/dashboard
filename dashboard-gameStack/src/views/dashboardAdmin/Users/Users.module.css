@@ -152,6 +152,24 @@ font-size: 25px;
   border-bottom: 1px solid #ccc;
 }
 
+.userColumn5 .red{
+  color: red;
+}
+
+.userColumn5 .green{
+  color: #00D37B;
+}
+
+.userColumn5  .crossIcon{
+  color: #ff193b;
+  margin-right: 5px;
+}
+
+.userColumn5  .crossIconAllow{
+  color: #00D37B;
+  margin-right: 5px;
+}
+
 .userHeaderColumn6,
 .userColumn6 {
   /* flex: 1; */
