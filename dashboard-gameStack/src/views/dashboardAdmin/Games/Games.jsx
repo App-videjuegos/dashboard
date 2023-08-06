@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getvGamebyName, getvideoGames } from "../../../redux/videogamesActions";
+import {
+  getvGamebyName,
+  getvideoGames,
+} from "../../../redux/videogamesActions";
 import styles from "./Games.module.css";
 import { convertirFecha } from "../../../components/Helpers/InvertDate";
 import Filter from "../../../components/Filters/Filters";
 import EditGameModal from "./EditGameModal";
-
+import { getVideogamesbyName } from "../../../redux/videogamesSlice";
 
 let prevId = 1;
 
@@ -15,10 +18,25 @@ function Games() {
   const [currentPage, setCurrentPage] = useState(1);
   const videoGames = useSelector((state) => state.videoGamesState.videoGames);
   const juegosPorPagina = 10;
-
   const [selectedGame, setSelectedGame] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [resetComponent, setResetComponent] = useState(false);
+  useEffect(() => {
+    if (resetComponent) {
+      // Restablecer los estados a sus valores iniciales
+      setInput("");
+      setCurrentPage(1);
+      setSelectedGame(null);
+      setShowMenu(false);
+      setShowEditModal(false);
+      // Despachar la acción para obtener los videojuegos nuevamente (si es necesario)
+      dispatch(getvideoGames());
+
+      // Establecer el estado de resetComponent nuevamente a false para evitar que el efecto se ejecute en cada renderizado
+      setResetComponent(false);
+    }
+  }, [resetComponent]);
 
   // Función para abrir el modal de edición
   const openEditModal = () => {
@@ -49,7 +67,6 @@ function Games() {
     }
   };
 
-
   const handleDeleteGame = () => {
     // Implementa aquí la lógica para eliminar el juego seleccionado
     console.log("Eliminando el juego seleccionado:", selectedGame);
@@ -64,33 +81,33 @@ function Games() {
   function changeHandler(e) {
     setInput(e.target.value);
     const busqueda = e.target.value.toLowerCase();
-    dispatch(getvGamebyName(busqueda));
+    const filteredGames = videoGames.filter((game) =>
+      game.name.toLowerCase().includes(busqueda)
+    );
+    dispatch(getVideogamesbyName(filteredGames));
   }
-
- 
 
   const indiceUltimoJuego = currentPage * juegosPorPagina;
   const indicePrimerJuego = indiceUltimoJuego - juegosPorPagina;
   const juegosPaginaActual = Array.isArray(videoGames)
-  ? videoGames.slice((currentPage - 1) * juegosPorPagina, currentPage * juegosPorPagina)
-  : [];
+    ? videoGames.slice(
+        (currentPage - 1) * juegosPorPagina,
+        currentPage * juegosPorPagina
+      )
+    : [];
 
   const handlePageChange = (numeroPagina) => {
-    setCurrentPage(numeroPagina);
-  };
+  setCurrentPage(Math.min(numeroPagina, Math.ceil(videoGames.length / juegosPorPagina)));
+};
 
-  const goToPreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+const goToPreviousPage = () => {
+  setCurrentPage(Math.max(currentPage - 1, 1));
+};
 
-  const goToNextPage = () => {
-    if (currentPage < Math.ceil(videoGames.length / juegosPorPagina)) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-  
+const goToNextPage = () => {
+  setCurrentPage(Math.min(currentPage + 1, Math.ceil(videoGames.length / juegosPorPagina)));
+};
+
   // console.log("Estado videoGames:", videoGames);
   // console.log("Estado filteredVideoGames:", filteredVideoGames);
 
@@ -109,6 +126,15 @@ function Games() {
             <div className={styles.title}>Games</div>
             <div className={styles.filters}>
               <Filter />
+              <button
+                className={`${styles.updateListButton}`}
+                onClick={() => {
+                  setResetComponent(true);
+                  setInput("");
+                }}
+              >
+                Update list
+              </button>
             </div>
             <div className={styles.SearchBar}>
               <input
@@ -132,8 +158,9 @@ function Games() {
                 <div className={styles.userHeaderColumn6}>Upload date</div>
               </div>
             </div>
-            {Array.isArray(juegosPaginaActual) && juegosPaginaActual.length > 0 ? (
-        juegosPaginaActual.map((e) => (
+            {Array.isArray(juegosPaginaActual) &&
+            juegosPaginaActual.length > 0 ? (
+              juegosPaginaActual.map((e) => (
                 <div
                   key={e.id}
                   className={`${styles.userRow} ${

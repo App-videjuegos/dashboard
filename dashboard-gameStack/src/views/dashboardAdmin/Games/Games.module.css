@@ -238,3 +238,13 @@ color: blue; /* Cambiar el color del texto a azul para la fila seleccionada */
 font-weight: bold; /* Hacer el texto en negrita */
 text-decoration: underline; /* Subrayar el texto */
 }
+.updateListButton {
+  background-color: #987bdc;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px; /* Ajustar el radio del borde */
+  margin-left: 5px;
+  margin-right: 5px;
+}

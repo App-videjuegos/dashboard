@@ -1,179 +1,94 @@
-import {getAllVideogames, addUser,setNextPage,setPrevPage,setMaxPage,setErrorMsg,
-  setFlaPrev,setFirstPage,getVideogamesbyName,setPrevVideoGame,
-filterByPlatform,
-filterByGenre,
-filterByPriceRange,
-filterByRating,
-filterByReleaseDate,
-sortByRatingAsc,
-sortByRatingDesc,
-sortByPriceAsc,
-sortByPriceDesc,
-sortByReleaseDateAsc,
-sortByReleaseDateDesc,
-clearFilters,
-sortByAlphabeticalAsc,
-sortByAlphabeticalDesc,
-notFoundGamesError,
-sortByStockAsc, sortByStockDesc,
-updateGame
+import {
+  getAllVideogames,
+  getVideogamesbyName,
+  setErrorMsg,
+  getVideogamebyId,
+  sortByPriceAsc,
+  sortByPriceDesc,
+  sortByAlphabeticalAsc,
+  sortByAlphabeticalDesc,
+  notFoundGamesError,
+  sortByStockAsc,
+  sortByStockDesc,
+  updateGame,
 } from "./videogamesSlice";
-
-   
 
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-let estado=0
-export const  getvideoGames = () =>(dispatch)=>{
-
-
-//  dispatch(getAllVideogames(videogames))
-axios("https://pfvideojuegos-back-production.up.railway.app/games/admin")
-.then(res => dispatch(getAllVideogames(res.data)))
-.catch(e=>console.log("error en la ruta" ,e))
-}
+let estado = 0;
+export const getvideoGames = () => (dispatch) => {
+  //  dispatch(getAllVideogames(videogames))
+  axios("https://pfvideojuegos-back-production.up.railway.app/games/admin")
+    .then((res) => dispatch(getAllVideogames(res.data)))
+    .catch((e) => console.log("error en la ruta", e));
+};
 
 export const getvGamebyName = (query) => (dispatch) => {
-fetch(`https://pfvideojuegos-back-production.up.railway.app/games/admin?name=${query}`)
-.then((response) => {
-estado = response.status;
-return response.json();
-})
-.then((json) => {
-//console.log("Juegos obtenidos de la API:", json); // Agregar el console.log para verificar los juegos obtenidos
-if (estado === 200) {
-  if (json.includes('No se encontraron videojuegos con el nombre')) {
-    dispatch(notFoundGamesError());
-  } else {
-    dispatch(getVideogamesbyName(json));
-  }
-}
-})
-.catch((error) => {
-console.log("Error en la búsqueda:", error); // Agregar el console.log para verificar si hay errores
-alert("error", error);
-dispatch(setErrorMsg(error));
-});
+  fetch(
+    `https://pfvideojuegos-back-production.up.railway.app/games/admin?name=${query}`
+  )
+    .then((response) => {
+      estado = response.status;
+      return response.json();
+    })
+    .then((json) => {
+      //console.log("Juegos obtenidos de la API:", json); // Agregar el console.log para verificar los juegos obtenidos
+      if (estado === 200) {
+        if (json.includes("No se encontraron videojuegos con el nombre")) {
+          dispatch(notFoundGamesError());
+        } else {
+          dispatch(getVideogamesbyName(json));
+        }
+      }
+    })
+    .catch((error) => {
+      console.log("Error en la búsqueda:", error); // Agregar el console.log para verificar si hay errores
+      alert("error", error);
+      dispatch(setErrorMsg(error));
+    });
 };
-
-
-export const setNxtPage=()=>{
-return  function(dispatch){
-     dispatch(setNextPage())
-}
-}
-
-export const setPrvPage=()=>{
-return  function(dispatch){
-     dispatch(setPrevPage())
-}
-}
-
-export const setMxPage=(maximo)=>{
-
-return  function(dispatch){
-     dispatch(setMaxPage(maximo))
-}
-}
-export const set1rsPage=()=>{
-return function(dispatch){
-  dispatch(setFirstPage())
-}
-}
-export const setflgPrev=(value)=>{
-return function(dispatch){
-  dispatch(setFlaPrev(value))
-}    
-}
-
-export const setPrvVideogame=()=>{
-return function(dispatch){
-  dispatch(setPrevVideoGame())
-}
-}
 
 export const getVGameByID = (id) => {
-return async (dispatch) => {
-try {
-  const response = await axios.get(
-    `https://pfvideojuegos-back-production.up.railway.app/games/${id}`
-  );
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `https://pfvideojuegos-back-production.up.railway.app/games/${id}`
+      );
 
-  const dataVg = response.data;
+      const dataVg = response.data;
 
-  if (dataVg) {
-    dispatch(getVideogamebyId(dataVg)); // Asegúrate de importar y definir esta acción correctamente
-  } else {
-    dispatch(setErrorMsg("No game registration")); // Asegúrate de importar y definir esta acción correctamente
-  }
-} catch (err) {
-  console.log(`Error: ${err}`);
-  dispatch(setErrorMsg(err)); // Asegúrate de importar y definir esta acción correctamente
-}
-};
-};
-
-// Acciones para filtros y ordenamientos ----> Adrián
-export const applyPlatformFilter = (platform) => (dispatch) => {
-dispatch(filterByPlatform(platform));
-};
-
-export const applyGenreFilter = (genre) => (dispatch) => {
-dispatch(filterByGenre(genre));
-};
-
-export const applyPriceRangeFilter = (minPrice, maxPrice) => (dispatch) => {
-dispatch(filterByPriceRange({ minPrice, maxPrice }));
-};
-
-export const applyRatingFilter = (rating) => (dispatch) => {
-dispatch(filterByRating(rating));
-};
-
-export const applyReleaseDateFilter = (releaseDate) => (dispatch) => {
-dispatch(filterByReleaseDate(releaseDate));
-};
-
-export const applyRatingSortAsc = () => (dispatch) => {
-dispatch(sortByRatingAsc());
-};
-
-export const applyRatingSortDesc = () => (dispatch) => {
-dispatch(sortByRatingDesc());
+      if (dataVg) {
+        dispatch(getVideogamebyId(dataVg)); // Asegúrate de importar y definir esta acción correctamente
+      } else {
+        dispatch(setErrorMsg("No game registration")); // Asegúrate de importar y definir esta acción correctamente
+      }
+    } catch (err) {
+      console.log(`Error: ${err}`);
+      dispatch(setErrorMsg(err)); // Asegúrate de importar y definir esta acción correctamente
+    }
+  };
 };
 
 export const applyPriceSortAsc = () => (dispatch) => {
-dispatch(sortByPriceAsc());
+  dispatch(sortByPriceAsc());
 };
 
 export const applyPriceSortDesc = () => (dispatch) => {
-dispatch(sortByPriceDesc());
-};
-
-export const applyReleaseDateSortAsc = () => (dispatch) => {
-dispatch(sortByReleaseDateAsc());
-};
-
-export const applyReleaseDateSortDesc = () => (dispatch) => {
-dispatch(sortByReleaseDateDesc());
-};
-
-export const clearAllFilters = () => (dispatch) => {
-dispatch(clearFilters());
+  dispatch(sortByPriceDesc());
 };
 
 export const applyAlphabeticalSortAsc = createAsyncThunk(
-"videogames/applyAlphabeticalSortAsc",
-async (_, { dispatch }) => {
-dispatch(sortByAlphabeticalAsc());
-}
+  "videogames/applyAlphabeticalSortAsc",
+  async (_, { dispatch }) => {
+    dispatch(sortByAlphabeticalAsc());
+  }
 );
 
 export const applyAlphabeticalSortDesc = createAsyncThunk(
-"videogames/applyAlphabeticalSortDesc",
-async (_, { dispatch }) => {
-dispatch(sortByAlphabeticalDesc());
-}
+  "videogames/applyAlphabeticalSortDesc",
+  async (_, { dispatch }) => {
+    dispatch(sortByAlphabeticalDesc());
+  }
 );
 
 export const applyStockSortAsc = createAsyncThunk(
@@ -189,7 +104,6 @@ export const applyStockSortDesc = createAsyncThunk(
     dispatch(sortByStockDesc());
   }
 );
-//////Filtros ------- Adrián
 
 export const updateVideoGame = (updatedGame) => async (dispatch) => {
   try {
@@ -203,7 +117,6 @@ export const updateVideoGame = (updatedGame) => async (dispatch) => {
 
     // Lógica adicional si es necesario después de actualizar el juego
     // ...
-
   } catch (error) {
     console.log("Error al actualizar el videojuego:", error);
     // Manejo de errores si es necesario
