@@ -22,6 +22,10 @@ function Games() {
   const [showMenu, setShowMenu] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [resetComponent, setResetComponent] = useState(false);
+
+  let filteredGames = videoGames;
+
+
   useEffect(() => {
     if (resetComponent) {
       // Restablecer los estados a sus valores iniciales
@@ -124,18 +128,8 @@ const goToNextPage = () => {
         <div className={styles.bar}>
           <div className={styles.userRow}>
             <div className={styles.title}>Games</div>
-            <div className={styles.filters}>
-              <Filter />
-              <button
-                className={`${styles.updateListButton}`}
-                onClick={() => {
-                  setResetComponent(true);
-                  setInput("");
-                }}
-              >
-                Update list
-              </button>
-            </div>
+            
+            
             <div className={styles.SearchBar}>
               <input
                 type="text"
@@ -198,9 +192,21 @@ const goToNextPage = () => {
         {showMenu && selectedGame && (
           <div className={styles.menuContainer}>
             <button onClick={openEditModal}>Editar</button>
-            <button onClick={handleDeleteGame}>Eliminar</button>
           </div>
         )}
+       <div className={styles.menuContainer2}>
+  <Filter />
+  <button
+    className={`${styles.updateListButton}`}
+    onClick={() => {
+      setResetComponent(true);
+      setInput("");
+    }}
+  >
+    Update list
+  </button>
+</div>
+        
         {/* Botones de paginación y flechas */}
         <div className={styles.pagination}>
           <button onClick={goToPreviousPage}>&lt;</button>

@@ -7,9 +7,7 @@
   color: rgb(128, 124, 124);
   margin-top: -580px;
   margin-left: 170px;
-
 }
-
 .tableContainer {
   background-color: white;
   border-radius: 10px;
@@ -19,60 +17,48 @@
   display: inline-block;
   width: 896px;
 }
-
 /* Estilos de la tabla */
 .userTable {
 display: flex;
 flex-direction: column;
 background-color: white;
 }
-
-.tableTable {
+.tableTable{
 background-color: white;
-height: 450px; /* Ajusta el alto a un valor fijo */
+height: 450px;
 width: 896px;
 }
-
 .title{
-padding-right: 300px;
+padding-right: 36%;
 color: black;
 font-weight: bold;
 font-size: 25px;
-
 }
-
 .bar {
 display: flex;
 flex-direction: column;
 background-color:white;
-height: 30px;
+height: 60px;
 }
-
 .SearchBar {
 display: flex;
 /* flex-direction: column; */
 background-color:white;
-height: 10px;
-margin-top: -14px;
+height: 30px;
+margin-left: -12px;
 }
-
 /* Estilos de las filas */
 .userRow {
 display: flex;
-width: 100%; /* Ajusta el ancho al 100% */
-height: 70px; /* Ajusta la altura para dar espacio entre filas */
-margin-bottom: -25px; /* Agrega un margen inferior para separar las filas */
+width: 170%;
+height: -70%;
 }
-
-
-
 /* Estilos de las celdas */
 /* .userCell {
 display: table-cell;
 padding: 8px;
 border: 1px solid #ccc;
 } */
-
 /* Estilos de los encabezados de columna */
 .userHeader {
 display: table-cell;
@@ -127,7 +113,6 @@ border-bottom: 1px solid #ccc;
 width: 350px;
 /* vertical-align: middle; */
 height: 30px;
-
 padding: 8px; 
 /* border-top: 1px solid #ccc; */
 border-bottom: 1px solid #ccc;
@@ -173,7 +158,7 @@ font-size: 25px;
 }
 
 .pagination{
-padding-top: 6%;
+padding-top: 12%;
 /* padding-left: 36%;
 padding-right: 36%; */
 display: flex;
@@ -190,6 +175,7 @@ font-weight: bold;
 
 .btnPaged{
 font-size: 20px;
+
 }
 
 .searchInput{
@@ -201,6 +187,7 @@ border-radius: 4px;
 font-size: 16px;
 background-color: white;
 background-image: url('/src/assets/search-icon-png.png');
+
 background-position: 10px 10px; 
 background-repeat: no-repeat;
 padding: 12px 20px 12px 40px;
@@ -211,26 +198,45 @@ transition: width 0.4s ease-in-out;
 width: 100%;
 }
 .menuContainer {
-position: absolute;
-top: 94px;
-right: 650px;
-background-color: transparent; /* Cambiar el fondo a transparente */
-padding: 5px;
+  position: absolute;
+  top: 94px;
+  right: 650px;
+  background-color: transparent; /* Cambiar el fondo a transparente */
+  padding: 5px;
+  margin-right: 15px;
+  margin-top: 10px;
 }
-
+.menuContainer2 {
+  position: absolute;
+  top: 94px;
+  right: 650px;
+  background-color: transparent; /* Cambiar el fondo a transparente */
+  padding: 5px;
+  margin-right: -170px;
+  margin-top: 10px;
+}
+.menuContainer2 button {
+  background-color: #987bdc; /* Agregar un fondo gris claro a los botones */
+  border: none; /* Quitar el borde de los botones */
+  border-radius: 5px; /* Ajustar el radio del borde */
+  padding: 10px; /* Ajustar el espacio interno del botón */
+  margin-right: 5px; /* Ajustar el margen derecho entre los botones */
+  color: white; /* Cambiar el color del texto a blanco */
+  font-weight: bold; /* Hacer el texto en negrita */
+}
 .menuContainer button {
-background-color: #987bdc; /* Agregar un fondo gris claro a los botones */
-border: none; /* Quitar el borde de los botones */
-border-radius: 5px; /* Ajustar el radio del borde */
-padding: 10px; /* Ajustar el espacio interno del botón */
-margin-right: 5px; /* Ajustar el margen derecho entre los botones */
-color: white; /* Cambiar el color del texto a blanco */
-font-weight: bold; /* Hacer el texto en negrita */
+  background-color: #987bdc; /* Agregar un fondo gris claro a los botones */
+  border: none; /* Quitar el borde de los botones */
+  border-radius: 5px; /* Ajustar el radio del borde */
+  padding: 10px; /* Ajustar el espacio interno del botón */
+  margin-right: 5px; /* Ajustar el margen derecho entre los botones */
+  color: white; /* Cambiar el color del texto a blanco */
+  font-weight: bold; /* Hacer el texto en negrita */
 }
 
-
-.filters{
-margin-top: -12px;
+.filters {
+  /* Agrega margen derecho a los elementos Filter y Update list */
+  margin-right: 100px;
 }
 
 .selectedRow {
