@@ -7,8 +7,9 @@ import Metrics from './views/dashboardAdmin/Metrics/Metrics';
 import { LoginRender } from './views/dashboardAdmin/Login/LoginRender';
 import Profile from './views/dashboardAdmin/Profile/Profile';
 import Users from './views/dashboardAdmin/Users/Users';
-import Register from './views/dashboardAdmin/Register/Register';
 import AdminBar from './components/AdminBar/AdminBar';
+import LoadVideogame from './views/dashboardAdmin/LoadVideogame/LoadVideogame';
+import Sales from "./views/dashboardAdmin/Sales/Sales";
 
 function App() {
   const location = useLocation();
@@ -23,7 +24,8 @@ function App() {
         <Route path="/metrics" element={<Metrics />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/users" element={<Users />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/sales" element={<Sales />} />
+        <Route path="/loadvideogame" element={<LoadVideogame />} />
       </Routes>
     </div>
   );

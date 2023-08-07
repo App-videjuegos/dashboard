@@ -5,8 +5,8 @@
     align-items: center; /* Centra verticalmente el contenido */
     justify-content: center; /* Centra horizontalmente el contenido */
     color: rgb(128, 124, 124);
-    margin-top: -450px;
-    margin-left: 150px;
+    margin-top: -580px;
+    margin-left: 170px;
   
   }
 
@@ -152,6 +152,24 @@ font-size: 25px;
   border-bottom: 1px solid #ccc;
 }
 
+.userColumn5 .red{
+  color: red;
+}
+
+.userColumn5 .green{
+  color: #00D37B;
+}
+
+.userColumn5  .crossIcon{
+  color: #ff193b;
+  margin-right: 5px;
+}
+
+.userColumn5  .crossIconAllow{
+  color: #00D37B;
+  margin-right: 5px;
+}
+
 .userHeaderColumn6,
 .userColumn6 {
   /* flex: 1; */
@@ -178,10 +196,10 @@ font-size: 25px;
 
 .pagination button {
   margin: 0 10px; /* Esto agrega 5px de margen horizontal entre los botones */
-  background-color: white;
-  border-color: white;
+  background-color: black;
+  border-color: black;
   font-weight: bold;
-}
+  }
 
 .btnPaged{
   font-size: 20px;

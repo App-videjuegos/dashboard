@@ -8,7 +8,7 @@ import styles from "./Games.module.css";
 import { convertirFecha } from "../../../components/Helpers/InvertDate";
 import Filter from "../../../components/Filters/Filters";
 import EditGameModal from "./EditGameModal";
-
+import { getVideogamesbyName } from "../../../redux/videogamesSlice";
 
 let prevId = 1;
 
@@ -16,13 +16,31 @@ function Games() {
   const dispatch = useDispatch();
   const [input, setInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const videoGamesState = useSelector((state) => state.videoGamesState);
-  const { videoGames, filteredVideoGames, sortBy } = videoGamesState;
+  const videoGames = useSelector((state) => state.videoGamesState.videoGames);
   const juegosPorPagina = 10;
-
   const [selectedGame, setSelectedGame] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [resetComponent, setResetComponent] = useState(false);
+
+  let filteredGames = videoGames;
+
+
+  useEffect(() => {
+    if (resetComponent) {
+      // Restablecer los estados a sus valores iniciales
+      setInput("");
+      setCurrentPage(1);
+      setSelectedGame(null);
+      setShowMenu(false);
+      setShowEditModal(false);
+      // Despachar la acción para obtener los videojuegos nuevamente (si es necesario)
+      dispatch(getvideoGames());
+
+      // Establecer el estado de resetComponent nuevamente a false para evitar que el efecto se ejecute en cada renderizado
+      setResetComponent(false);
+    }
+  }, [resetComponent]);
 
   // Función para abrir el modal de edición
   const openEditModal = () => {
@@ -53,12 +71,6 @@ function Games() {
     }
   };
 
-  const handleEditGame = () => {
-    // Implementa aquí la lógica para editar el juego seleccionado
-    console.log("Editando el juego seleccionado:", selectedGame);
-    setShowMenu(false); // Ocultar el menú emergente después de editar
-  };
-
   const handleDeleteGame = () => {
     // Implementa aquí la lógica para eliminar el juego seleccionado
     console.log("Eliminando el juego seleccionado:", selectedGame);
@@ -73,52 +85,33 @@ function Games() {
   function changeHandler(e) {
     setInput(e.target.value);
     const busqueda = e.target.value.toLowerCase();
-    dispatch(getvGamebyName(busqueda));
+    const filteredGames = videoGames.filter((game) =>
+      game.name.toLowerCase().includes(busqueda)
+    );
+    dispatch(getVideogamesbyName(filteredGames));
   }
-
-  const juegosActuales =
-    filteredVideoGames && filteredVideoGames.length > 0
-      ? filteredVideoGames
-      : videoGames;
-
-  const juegosOrdenados = juegosActuales.slice().sort((a, b) => {
-    switch (sortBy) {
-      case "price-asc":
-        return a.price - b.price;
-      case "price-desc":
-        return b.price - a.price;
-      case "alphabetical-asc":
-        return a.name.localeCompare(b.name);
-      case "alphabetical-desc":
-        return b.name.localeCompare(a.name);
-      default:
-        return 0;
-    }
-  });
 
   const indiceUltimoJuego = currentPage * juegosPorPagina;
   const indicePrimerJuego = indiceUltimoJuego - juegosPorPagina;
-  const juegosPaginaActual = juegosOrdenados.slice(
-    indicePrimerJuego,
-    indiceUltimoJuego
-  );
+  const juegosPaginaActual = Array.isArray(videoGames)
+    ? videoGames.slice(
+        (currentPage - 1) * juegosPorPagina,
+        currentPage * juegosPorPagina
+      )
+    : [];
 
   const handlePageChange = (numeroPagina) => {
-    setCurrentPage(numeroPagina);
-  };
+  setCurrentPage(Math.min(numeroPagina, Math.ceil(videoGames.length / juegosPorPagina)));
+};
 
-  const goToPreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+const goToPreviousPage = () => {
+  setCurrentPage(Math.max(currentPage - 1, 1));
+};
 
-  const goToNextPage = () => {
-    if (currentPage < Math.ceil(videoGames.length / juegosPorPagina)) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-  
+const goToNextPage = () => {
+  setCurrentPage(Math.min(currentPage + 1, Math.ceil(videoGames.length / juegosPorPagina)));
+};
+
   // console.log("Estado videoGames:", videoGames);
   // console.log("Estado filteredVideoGames:", filteredVideoGames);
 
@@ -135,9 +128,8 @@ function Games() {
         <div className={styles.bar}>
           <div className={styles.userRow}>
             <div className={styles.title}>Games</div>
-            <div className={styles.filters}>
-              <Filter />
-            </div>
+            
+            
             <div className={styles.SearchBar}>
               <input
                 type="text"
@@ -156,7 +148,7 @@ function Games() {
                 <div className={styles.userHeaderColumn2}></div>
                 <div className={styles.userHeaderColumn3}>Name</div>
                 <div className={styles.userHeaderColumn4}>ID</div>
-                <div className={styles.userHeaderColumn5}>Stocke</div>
+                <div className={styles.userHeaderColumn5}>Stock</div>
                 <div className={styles.userHeaderColumn6}>Upload date</div>
               </div>
             </div>
@@ -186,7 +178,7 @@ function Games() {
                       <div className={styles.userColumn4}>{e.id}</div>
                       <div className={styles.userColumn5}>{e.stock}</div>
                       <div className={styles.userColumn6}>
-                        {convertirFecha(e.updatedAt)}
+                        {convertirFecha(e.releaseDate)}
                       </div>
                     </div>
                   </div>
@@ -200,9 +192,21 @@ function Games() {
         {showMenu && selectedGame && (
           <div className={styles.menuContainer}>
             <button onClick={openEditModal}>Editar</button>
-            <button onClick={handleDeleteGame}>Eliminar</button>
           </div>
         )}
+       <div className={styles.menuContainer2}>
+  <Filter />
+  <button
+    className={`${styles.updateListButton}`}
+    onClick={() => {
+      setResetComponent(true);
+      setInput("");
+    }}
+  >
+    Update list
+  </button>
+</div>
+        
         {/* Botones de paginación y flechas */}
         <div className={styles.pagination}>
           <button onClick={goToPreviousPage}>&lt;</button>

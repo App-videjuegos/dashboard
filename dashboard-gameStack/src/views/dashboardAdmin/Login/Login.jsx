@@ -9,7 +9,7 @@ import {
   saveItemLocalStorage,
   loadItemLocalStorage,
   showLocalStorageData,
-} from "../../../components/helpers/functionsLocalStorage";
+} from "../../../components/Helpers/functionsLocalStorage";
 import loginService from "../../../services/login";
 import { checkLogedUser } from "../../../redux/usersActions";
 import routeIcons from "../../../assets/IconsRoutes/icons";
@@ -62,7 +62,7 @@ const Login = () => {
 
       console.log("ACA ESTA LO QUE DEVUELVE LA PROMESA", user);
 
-      if (user.user) {
+      if (user.userAdmin===true) {
         setLogingUser(user);
         saveItemLocalStorage("logedGameStack", user);
         showLocalStorageData();

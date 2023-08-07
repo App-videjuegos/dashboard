@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers, getUserByID, getUsersbyName } from '../../../redux/usersActions.js';
 import styles from './Users.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 let prevId = 1;
 
@@ -79,7 +81,17 @@ function Users() {
                     <div className={styles.userColumn2}>{e.user}</div>
                     <div className={styles.userColumn3}>{e.fullname}</div>
                     <div className={styles.userColumn4}>{e.id}</div>
-                    <div className={styles.userColumn5}>{e.deleted ? "Banned" : "Allow"}</div>
+                    <div className={styles.userColumn5}>{e.deleted ? (
+                      <span>
+                        <FontAwesomeIcon icon={faCircleXmark} className={styles.crossIcon} />
+                        <span className={styles.red}>Banned</span>
+                      </span>
+                    ) : (
+                      <span>
+                        <FontAwesomeIcon icon={faCircleCheck} className={styles.crossIconAllow} />
+                        <span className={styles.green}>Allow</span>
+                      </span>
+                    )}</div>
                     <div className={styles.userColumn6}>{e.date.slice(0, 10)}</div>
                   </div>
                 </div>

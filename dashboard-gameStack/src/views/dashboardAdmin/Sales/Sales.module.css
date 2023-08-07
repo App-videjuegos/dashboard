@@ -1,0 +1,87 @@
+.Container {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    min-height: 40.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+  }
+  
+  .Container h1 {
+    font-size: 20px;
+    color: black;
+  }
+  .userImage {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+  }
+  .FirstSection {
+    display: flex;
+    width: 98%;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .SecondSection {
+    width: 98%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .SecondSection section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: rgb(128, 124, 124);
+    width: 100%;
+    border-top: 2px solid rgb(128, 124, 124);
+  }
+  .SecondSection section article {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 30px;
+    color: rgb(128, 124, 124);
+    border-bottom: 1px solid rgb(128, 124, 124);
+  }
+  
+  .pagination {
+    /* padding-left: 36%;
+      padding-right: 36%; */
+    margin-top: 40px;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+  }
+  
+  .pagination button {
+    margin: 0 10px; /* Esto agrega 5px de margen horizontal entre los botones */
+    background-color: white;
+    border-color: white;
+    font-weight: bold;
+  }
+  .btnPaged {
+    font-size: 20px;
+  }
+  
+  .searchInput {
+    width: 130px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url("/src/assets/search-icon-png.png");
+  
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .searchInput:focus {
+    width: 100%;
+  }

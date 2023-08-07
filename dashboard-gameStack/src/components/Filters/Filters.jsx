@@ -39,7 +39,7 @@ const Filter = () => {
   return (
     <div className={styles['filter-container']}>
       <button className={styles['filter-btn']} onClick={() => setShowFilters(!showFilters)}>
-        Filter
+        Sort
       </button>
        {showFilters && (
         <div className={styles['filter-menu']}>
