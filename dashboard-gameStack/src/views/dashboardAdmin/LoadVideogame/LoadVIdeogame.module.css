@@ -4,17 +4,25 @@
   padding: 20px;
   justify-content: center;
   align-items: center;
-  margin-left: 20rem;
-  margin-top: -25rem;
+  align-items: center;
+  margin-top: -32rem;
+  margin-left: 20rem
 }
 
+
 /* Encabezado */
-h1 {
+.container h1 {
   text-align: center;
   color: #622eda;
-  font-size: 16px;
+  font-size: 25px;
   margin-bottom: 20px;
+}
 
+.container h2 {
+  text-align: left;
+  color:#fafafa;
+  font-size: 16px;
+  margin-bottom: 0.2rem;
 }
 
 /* Campos de formulario */
@@ -42,12 +50,12 @@ h1 {
   resize: vertical;
 }
 
-.deleteImage{
+.deleteImage {
   background-color: red;
   position: absolute;
   margin-left: 15rem;
-top:1rem;
-  z-index:999 ;
+  z-index: 999;
+  margin-bottom: 15rem;
 }
 
 /* Botón de enviar y cancelar */
@@ -58,20 +66,17 @@ top:1rem;
   border-radius: 0.2rem;
   padding: 10px 20px;
   cursor: pointer;
-  margin-left: 20rem;
-  margin-top: 3rem;
+ margin-left: 6rem;
 }
 
 .cancel {
   background-color: transparent;
 }
 
-
 /* Imagen seleccionada */
 .selected-image {
   width: 100%;
 }
-
 
 /* Mensajes de validación */
 .message {
@@ -80,7 +85,6 @@ top:1rem;
   text-align: center;
   color: #fafafa;
   text-align: center;
-  
 }
 
 .message.success {
@@ -90,7 +94,7 @@ top:1rem;
 
 .errorMessage {
   text-align: center;
-  color:#987bdc;
+  color: #987bdc;
 }
 
 .textarea {
@@ -101,15 +105,56 @@ top:1rem;
   padding: 5px;
 }
 
-.imageLoad{
+.imageLoad {
   justify-content: center;
   margin-top: 4rem;
   align-items: center;
   width: 100%;
 }
 
-.imageLoaded{
+.imageLoaded {
   margin-top: 2rem;
   align-items: center;
   width: 100%;
+}
+
+
+.image-container:hover img {
+  opacity: 0.5;
+}
+
+/* Estilo para mostrar el botón X en el hover */
+.image-container:hover .delete-button {
+  display: block;
+}
+
+/* Estilo para ocultar el botón X por defecto */
+.delete-button {
+  display: none;
+  position: absolute;
+
+
+  transform: translate(14rem,-450%);
+  background-color:transparent ;
+  color:#fafafa;
+  padding: 5px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 5rem;
+  height:5rem;
+  font-size: 8rem;
+}
+
+.uploadImage{
+  font-size: 10rem;
+  color: #987bdc;
+  align-items: center;
+}
+
+.container .buttonContainer{
+  align-items: center;
+  justify-content: center;
+  justify-content: center;
+
 }
