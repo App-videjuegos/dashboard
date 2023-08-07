@@ -62,7 +62,7 @@ const Login = () => {
 
       console.log("ACA ESTA LO QUE DEVUELVE LA PROMESA", user);
 
-      if (user.user) {
+      if (user.userAdmin===true) {
         setLogingUser(user);
         saveItemLocalStorage("logedGameStack", user);
         showLocalStorageData();

@@ -1,5 +1,5 @@
 const CancelSubmit = () => {
-    const handleCancel = () => {
+
       window.alert('You are about to cancel your publication');
   
       const userResponse = window.confirm('Are you sure you want to return to Home?');
@@ -11,16 +11,7 @@ const CancelSubmit = () => {
         console.log('No pressed');
       }
     };
-  
-    return (
-      <div>
-        <button onClick={handleCancel}>
-          Cancel Publication
-        </button>
-      </div>
-    );
-  };
-  
+    
   export default CancelSubmit;
  
   

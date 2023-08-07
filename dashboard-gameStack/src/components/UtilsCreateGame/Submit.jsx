@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import axios from 'axios';
 
-const Submit = async (newVideoGame,setNewVideoGame,date,token) => {
-  const [validateSubmit, setValidateSubmit] = useState(true);
+const SubmitGame = async (event,newVideoGame,setNewVideoGame,validateSubmit,setValidateSubmit,date,token) => {
+  
 
 
-  const handleSubmission = async () => {
+    event.preventDefault();
     const config = { Authorization: token };
 
     try {
@@ -23,6 +22,7 @@ const Submit = async (newVideoGame,setNewVideoGame,date,token) => {
         newVideoGame.requeriments_en === ""
       ) {
         setValidateSubmit(false);
+        alert("falta info")
       } else {
         await axios.post(
           "https://pfvideojuegos-back-production.up.railway.app/games",
@@ -41,8 +41,8 @@ const Submit = async (newVideoGame,setNewVideoGame,date,token) => {
           config
         );
 
-        const userResponse = window.confirm('Publication Create!\nContinue loading games?');
-        if (userResponse) {
+        const response = alert('Publication Create!Continue loading games?');
+        if (response) {
           setNewVideoGame({
             id: 1 + Math.floor(Math.random() * 999),
             name: "",
@@ -55,6 +55,8 @@ const Submit = async (newVideoGame,setNewVideoGame,date,token) => {
             price: "",
             requeriments_en: "",
           });
+
+          console.log(response)
         } else {
           // Aquí puedes realizar la navegación a la pantalla de inicio o realizar cualquier acción que desees.
           // Por ejemplo, puedes utilizar react-router-dom para la navegación si lo necesitas.
@@ -62,18 +64,10 @@ const Submit = async (newVideoGame,setNewVideoGame,date,token) => {
         }
       }
     } catch (error) {
-      window.alert("Auch...Something went wrong");
+      alert("Auch...Something went wrong");
       console.log("Error en el backend:", error);
     }
   };
 
-  return (
-    <div>
-      <button onClick={handleSubmission}>
-        Submit
-      </button>
-    </div>
-  );
-};
 
-export default Submit;
+export default SubmitGame;
