@@ -9,7 +9,7 @@
   margin-left: 170px;
 }
 .tableContainer {
-  background-color: white;
+  background-color: #f0eaea;
   border-radius: 10px;
   padding: 20px; /* Puedes ajustar el valor del padding según tus preferencias */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega sombra para realzar el efecto del recuadro */
@@ -21,10 +21,10 @@
 .userTable {
 display: flex;
 flex-direction: column;
-background-color: white;
+background-color: #f0eaea;
 }
 .tableTable{
-background-color: white;
+background-color: #f0eaea;
 height: 450px;
 width: 896px;
 }
@@ -37,13 +37,13 @@ font-size: 25px;
 .bar {
 display: flex;
 flex-direction: column;
-background-color:white;
+background-color:#f0eaea;
 height: 60px;
 }
 .SearchBar {
 display: flex;
 /* flex-direction: column; */
-background-color:white;
+background-color:#f0eaea;
 height: 30px;
 margin-left: -12px;
 }
@@ -168,8 +168,8 @@ font-size: 25px;
 
 .pagination button {
   margin: 0 1px; /* Esto agrega 5px de margen horizontal entre los botones */
-  background-color: black;
-  border-color: black;
+  background-color: #622EDA;
+  border-color: #622EDA;
   font-weight: bold;
   }
 
@@ -216,7 +216,7 @@ width: 100%;
   margin-top: 10px;
 }
 .menuContainer2 button {
-  background-color: #987bdc; /* Agregar un fondo gris claro a los botones */
+  background-color: #622EDA; /* Agregar un fondo gris claro a los botones */
   border: none; /* Quitar el borde de los botones */
   border-radius: 5px; /* Ajustar el radio del borde */
   padding: 10px; /* Ajustar el espacio interno del botón */
@@ -225,7 +225,7 @@ width: 100%;
   font-weight: bold; /* Hacer el texto en negrita */
 }
 .menuContainer button {
-  background-color: #987bdc; /* Agregar un fondo gris claro a los botones */
+  background-color: #622EDA; /* Agregar un fondo gris claro a los botones */
   border: none; /* Quitar el borde de los botones */
   border-radius: 5px; /* Ajustar el radio del borde */
   padding: 10px; /* Ajustar el espacio interno del botón */
@@ -240,7 +240,7 @@ width: 100%;
 }
 
 .selectedRow {
-color: blue; /* Cambiar el color del texto a azul para la fila seleccionada */
+color: #622EDA; /* Cambiar el color del texto a azul para la fila seleccionada */
 font-weight: bold; /* Hacer el texto en negrita */
 text-decoration: underline; /* Subrayar el texto */
 }

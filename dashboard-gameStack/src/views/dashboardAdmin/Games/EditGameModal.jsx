@@ -33,20 +33,27 @@ const platforms = [
   "macOS",
 ];
 
-
 function EditGameModal({ selectedGame, onClose, onSave }) {
   const [editedGame, setEditedGame] = useState(selectedGame);
   const [formattedReleaseDate, setFormattedReleaseDate] = useState(
-    selectedGame.releaseDate ? new Date(selectedGame.releaseDate).toISOString().split("T")[0] : ""
+    selectedGame.releaseDate
+      ? new Date(selectedGame.releaseDate).toISOString().split("T")[0]
+      : ""
   );
-  const [selectedPlatforms, setSelectedPlatforms] = useState(selectedGame.platforms || []);
-  const [selectedGenres, setSelectedGenres] = useState(selectedGame.genre || []);
+  const [selectedPlatforms, setSelectedPlatforms] = useState(
+    selectedGame.platforms || []
+  );
+  const [selectedGenres, setSelectedGenres] = useState(
+    selectedGame.genre || []
+  );
   const [newPlatform, setNewPlatform] = useState("");
   const [newGenre, setNewGenre] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [selectedPlatformToRemove, setSelectedPlatformToRemove] = useState("");
   const [selectedGenreToRemove, setSelectedGenreToRemove] = useState("");
-  const [description, setDescription] = useState(selectedGame.description || "");
+  const [description, setDescription] = useState(
+    selectedGame.description || ""
+  );
 
   const dispatch = useDispatch();
 
@@ -58,7 +65,8 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
     const { name, value } = e.target;
     if (name === "releaseDate") {
       setFormattedReleaseDate(value);
-    } else if (name === "description") { // Agregar esta parte para manejar la descripción
+    } else if (name === "description") {
+      // Agregar esta parte para manejar la descripción
       setDescription(value);
     }
     setEditedGame((prevGame) => ({
@@ -87,8 +95,7 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
       await dispatch(updateVideoGame(editedGameWithFormattedDate));
       onSave(editedGame); // Pasa el objeto del juego editado al componente padre
       setShowSuccessMessage(true); // Mostrar el mensaje de éxito
-    setTimeout(hideSuccessMessage, 3000); // Ocultar el mensaje después de 3 segundos
-  
+      setTimeout(hideSuccessMessage, 3000); // Ocultar el mensaje después de 3 segundos
     } catch (error) {
       console.log("Error al guardar los cambios:", error);
       // Manejo de errores si es necesario
@@ -118,7 +125,7 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
     }
     setSelectedPlatformToRemove(value); // Establecer la plataforma seleccionada para eliminar
   };
-  
+
   const handleGenreChange = (e) => {
     const { value } = e.target;
     if (!selectedGenres.includes(value)) {
@@ -147,14 +154,18 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
 
   const handleRemovePlatform = () => {
     setSelectedPlatforms((prevPlatforms) => {
-      const updatedPlatforms = prevPlatforms.filter((platform) => platform !== selectedPlatformToRemove);
+      const updatedPlatforms = prevPlatforms.filter(
+        (platform) => platform !== selectedPlatformToRemove
+      );
       console.log("Selected Platforms after removal:", updatedPlatforms); // Log después de eliminar una plataforma
       return updatedPlatforms;
     });
   };
-  
+
   const handleRemoveGenre = () => {
-    setSelectedGenres((prevGenres) => prevGenres.filter((genre) => genre !== selectedGenreToRemove));
+    setSelectedGenres((prevGenres) =>
+      prevGenres.filter((genre) => genre !== selectedGenreToRemove)
+    );
   };
 
   return (
@@ -165,18 +176,34 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
           <div className={styles.formRow}>
             <div className={styles.formGroup}>
               <label>Name:</label>
-              <input type="text" name="name" value={editedGame.name} onChange={handleChange} />
+              <input
+                type="text"
+                name="name"
+                value={editedGame.name}
+                onChange={handleChange}
+              />
             </div>
             <div className={styles.formGroup}>
               <label>Price:</label>
-              <input type="number" name="price" value={editedGame.price} onChange={handleChange} /> {/* Cambia "Price" a "price" aquí */}
+              <input
+                type="number"
+                name="price"
+                value={editedGame.price}
+                onChange={handleChange}
+              />{" "}
+              {/* Cambia "Price" a "price" aquí */}
+            </div>
+            <div className={styles.formGroup}>
+              <label>Stock:</label>
+              <input
+                type="number"
+                name="stock"
+                value={editedGame.stock}
+                onChange={handleChange}
+              />
             </div>
           </div>
           <div className={styles.formRow}>
-            <div className={styles.formGroup}>
-              <label>Stock:</label>
-              <input type="number" name="stock" value={editedGame.stock} onChange={handleChange} />
-            </div>
             <div className={styles.formGroup}>
               <label>Release Date:</label>
               {/* Utiliza el estado local formateado para el input de tipo date */}
@@ -187,20 +214,12 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
                 onChange={handleChange}
               />
             </div>
+            
           </div>
-          <div className={styles.formGroup}>
-  <label>Description:</label>
-  <textarea
-    name="description"
-    value={description}
-    onChange={(e) => setDescription(e.target.value)}
-    rows={4}
-    cols={50}
-  />
-</div>
+
           <div className={styles.formRow}>
-            <div className={styles.formGroup}>
-            <label>Platforms:</label>
+          <div className={styles.formGroup}>
+              <label>Platforms:</label>
               <select name="platforms" onChange={handlePlatformChange} multiple>
                 {selectedPlatforms.map((platform) => (
                   <option key={platform} value={platform}>
@@ -224,13 +243,13 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
               </button>
               {/* Modifica el botón para que llame a la función handleRemovePlatform con el elemento seleccionado */}
               <button
-  type="button"
-  onClick={() => {
-    handleRemovePlatform();
-  }}
->
-  Remove Platform
-</button>
+                type="button"
+                onClick={() => {
+                  handleRemovePlatform();
+                }}
+              >
+                Remove Platform
+              </button>
             </div>
             <div className={styles.formGroup}>
               <label>Genre:</label>
@@ -241,7 +260,10 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
                   </option>
                 ))}
               </select>
-              <select value={newGenre} onChange={(e) => setNewGenre(e.target.value)}>
+              <select
+                value={newGenre}
+                onChange={(e) => setNewGenre(e.target.value)}
+              >
                 <option value="">Select Genre</option>
                 {genres.map((genre) => (
                   <option key={genre} value={genre}>
@@ -252,28 +274,41 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
               <button type="button" onClick={handleAddGenre}>
                 Add Genre
               </button>
-             {/* Modifica el botón para que llame a la función handleRemoveGenre con el elemento seleccionado */}
-             <button
-  type="button"
-  onClick={() => {
-    handleRemoveGenre();
-  }}
->
-  Remove Genre
-</button>
+              {/* Modifica el botón para que llame a la función handleRemoveGenre con el elemento seleccionado */}
+              <button
+                type="button"
+                onClick={() => {
+                  handleRemoveGenre();
+                }}
+              >
+                Remove Genre
+              </button>
             </div>
+          </div>
+          <div className={styles.formGroup}>
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={4}
+              cols={50}
+            />
           </div>
         </form>
         {showSuccessMessage && (
-  <div className={styles.successMessage}>
-    Successful Edition
-    <button onClick={hideSuccessMessage}>Close</button>
-  </div>
-)}
+          <div className={styles.successMessage}>
+            Successful Edition
+          </div>
+        )}
         <div className={styles.modalButtons}>
           <div>
             <button
-              className={editedGame.deleted ? styles.deletedButton : styles.availableButton}
+              className={
+                editedGame.deleted
+                  ? styles.deletedButton
+                  : styles.availableButton
+              }
               onClick={handleDeleteToggle}
             >
               {editedGame.deleted ? "Available" : "Deleted"}

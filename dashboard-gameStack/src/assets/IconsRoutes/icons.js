@@ -9,6 +9,8 @@ import { AiFillEye } from 'react-icons/ai'
 import { AiFillEyeInvisible } from 'react-icons/ai'
 // Agrega la importación del ícono de cerrar sesión
 import { FiLogOut } from 'react-icons/fi'; 
+import {TiDeleteOutline} from 'react-icons/ti';
+import {BiImageAdd} from 'react-icons/bi'
 
 
 // Mapeo de nombres de ruta a iconos
@@ -23,6 +25,8 @@ const routeIcons = {
   Invisible: AiFillEyeInvisible,
   Sales: FaMoneyBill,
   LoadGame: BiSolidCloudUpload,
+  delete: TiDeleteOutline,
+  addImage: BiImageAdd
 
 };
 

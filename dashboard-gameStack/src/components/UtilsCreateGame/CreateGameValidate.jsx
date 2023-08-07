@@ -17,13 +17,13 @@ export const validate = (val) => {
 
   if (val.releaseDate === "") {
     errors.releaseDate = "Need to add a date";
-  } else if (!/^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-\d{4}$/.test(val.releaseDate)) {
+  } else if (/^(0?[1-9]|[1-2]\d|3[01])\/(0?[1-9]|1[0-2])\/\d{4}$/.test(val.releaseDate)) {
     errors.releaseDate = "Invalid date format (dd-mm-yyyy)";
   } else {
     errors.releaseDate = ""; 
   }
 
-  if (!val.image === "") {
+  if (val.image === "") {
     errors.image = "Need to add an image";
   } else {
     errors.image = "";

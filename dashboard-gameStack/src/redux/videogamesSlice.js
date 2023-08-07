@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   videoGames: [],
@@ -71,6 +71,17 @@ export const videogamesSlice = createSlice({
     },
   },
 });
+
+export const filterVideoGamesByName = createAsyncThunk(
+  "videogames/filterVideoGamesByName",
+  async (searchQuery, { getState }) => {
+    const videoGames = getState().videogames.videoGames;
+    const filteredGames = videoGames.filter(
+      (game) => game.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    return filteredGames;
+  }
+);
 
 export const {
   getAllVideogames,
