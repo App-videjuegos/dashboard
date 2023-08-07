@@ -8,13 +8,13 @@ import styles from "./Games.module.css";
 import { convertirFecha } from "../../../components/Helpers/InvertDate";
 import Filter from "../../../components/Filters/Filters";
 import EditGameModal from "./EditGameModal";
-import { getVideogamesbyName } from "../../../redux/videogamesSlice";
+import { getVideogamesbyName, filterVideoGamesByName } from "../../../redux/videogamesSlice";
 
 let prevId = 1;
 
 function Games() {
   const dispatch = useDispatch();
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const videoGames = useSelector((state) => state.videoGamesState.videoGames);
   const juegosPorPagina = 10;
@@ -24,7 +24,29 @@ function Games() {
   const [resetComponent, setResetComponent] = useState(false);
 
   let filteredGames = videoGames;
+  const numPaginasMostradas = 5;
 
+  const calcularRangoPaginas = (paginaActual, totalPaginas) => {
+    const rangoMitad = Math.floor(numPaginasMostradas / 2);
+    let startPage = paginaActual - rangoMitad;
+    let endPage = paginaActual + rangoMitad;
+  
+    if (startPage <= 0) {
+      endPage -= (startPage - 1);
+      startPage = 1;
+    }
+  
+    if (endPage > totalPaginas) {
+      endPage = totalPaginas;
+      if (endPage - numPaginasMostradas + 1 > 0) {
+        startPage = endPage - numPaginasMostradas + 1;
+      } else {
+        startPage = 1;
+      }
+    }
+  
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+  };
 
   useEffect(() => {
     if (resetComponent) {
@@ -69,13 +91,6 @@ function Games() {
       setSelectedGame(game);
       setShowMenu(true); // Mostrar el menú emergente al seleccionar
     }
-  };
-
-  const handleDeleteGame = () => {
-    // Implementa aquí la lógica para eliminar el juego seleccionado
-    console.log("Eliminando el juego seleccionado:", selectedGame);
-    setSelectedGame(null); // Reseteamos el juego seleccionado después de eliminarlo
-    setShowMenu(false); // Ocultar el menú emergente después de eliminar
   };
 
   useEffect(() => {
@@ -210,18 +225,16 @@ const goToNextPage = () => {
         {/* Botones de paginación y flechas */}
         <div className={styles.pagination}>
           <button onClick={goToPreviousPage}>&lt;</button>
-          {Array.from({
-            length: Math.ceil(videoGames.length / juegosPorPagina),
-          }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handlePageChange(index + 1)}
-              className={currentPage === index + 1 ? styles.btnPaged : ""}
-            >
-              {index + 1}
-            </button>
-          ))}
-          <button onClick={goToNextPage}>&gt;</button>
+      {calcularRangoPaginas(currentPage, Math.ceil(videoGames.length / juegosPorPagina)).map((pageIndex) => (
+        <button
+          key={pageIndex}
+          onClick={() => handlePageChange(pageIndex)}
+          className={currentPage === pageIndex ? styles.btnPaged : ""}
+        >
+          {pageIndex}
+        </button>
+      ))}
+      <button onClick={goToNextPage}>&gt;</button>
         </div>
       </div>
     </div>

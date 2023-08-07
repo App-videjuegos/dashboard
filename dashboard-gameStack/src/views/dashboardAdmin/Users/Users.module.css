@@ -11,7 +11,7 @@
   }
 
   .tableContainer {
-    background-color: white;
+    background-color: #f0eaea;
     border-radius: 10px;
     padding: 20px; /* Puedes ajustar el valor del padding según tus preferencias */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega sombra para realzar el efecto del recuadro */
@@ -24,11 +24,11 @@
 .userTable {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #f0eaea;
 }
 
 .tableTable{
-  background-color: white;
+  background-color: #f0eaea;
   height: 450px;
   width: 896px;
 }
@@ -44,14 +44,14 @@ font-size: 25px;
 .bar {
   display: flex;
   flex-direction: column;
-  background-color:white;
+  background-color:#f0eaea;
   height: 60px;
 }
 
 .SearchBar {
   display: flex;
   /* flex-direction: column; */
-  background-color:white;
+  background-color:#f0eaea;
   height: 30px;
 }
 
@@ -196,8 +196,8 @@ font-size: 25px;
 
 .pagination button {
   margin: 0 10px; /* Esto agrega 5px de margen horizontal entre los botones */
-  background-color: black;
-  border-color: black;
+  background-color: #622EDA;
+  border-color: #622EDA;
   font-weight: bold;
   }
 
