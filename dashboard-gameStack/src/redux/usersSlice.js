@@ -1,59 +1,67 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState= {
+const initialState = {
     allUsers: [],
-    dataUser : {},
+    dataUser: {},
     gamesUser: [],
     usrMsgErr: "",
-    userLoged:false,
-    userToken:"",
-    isLogged:"",
+    userLoged: false,
+    userToken: "",
+    isLogged: "",
     filteredUsers: [],
     notFoundUsers: false,
-    msgerror:"NULL",
+    msgerror: "NULL",
 }
 
 
 export const UsersSlice = createSlice({
-    name : "users",
+    name: "users",
     initialState,
-    reducers:{
-        getAllUsers: (state, action) =>{
+    reducers: {
+        getAllUsers: (state, action) => {
             state.allUsers = action.payload
         },
-        getUserById: (state, action) =>{
+        getUserById: (state, action) => {
             state.dataUser = action.payload
         },
-        getUserbyName: (state,action)=>{
-            state.allUsers= action.payload;
-            state.notFoundGames = false           
+        getUserbyName: (state, action) => {
+            state.allUsers = action.payload;
+            state.notFoundGames = false
         },
-        usrMsgErr: (state,action) =>{
-            state.dataUser = action.payload 
+        usrMsgErr: (state, action) => {
+            state.dataUser = action.payload
         },
         notFoundUsersError: (state) => {
             state.notFoundUsers = true
-          },
-          setErrorMsg:(state,action)=>{
-            state.msgerror= action.payload
         },
-        updateUsr: (state, action) =>{
+        setErrorMsg: (state, action) => {
+            state.msgerror = action.payload
+        },
+        updateUsr: (state, action) => {
+            const updatedUsr = action.payload;
+            console.log(updatedUsr)
+            const index = state.allUsers.findIndex(
+                (user) => user.id === updatedUsr.id
+            );
+            if (index !== -1) {
+                state.allUsers[index] = updatedUsr;
+            }
+            //state.allUsers = action.payload
+        },
+        gamesUsr: (state, action) => {
             state.dataUser = action.payload
         },
-        gamesUsr: (state,action) =>{
-            state.dataUser = action.payload 
-        },
-        setUserLoged:(state,action)=>{
+        setUserLoged: (state, action) => {
             console.log("user-------->", action.payload)
             state.isLogged = action.payload
-          },
-          setUserToken:(state,action)=>{
+        },
+        setUserToken: (state, action) => {
             console.log("token------->", action.payload)
             state.userToken = `Bearer ${action.payload}`
-          },
+        },
     }
 })
 
-export const { getAllUsers, getUserById, usrMsgErr, getUserbyName, notFoundUsersError, setErrorMsg, setUserLoged, setUserToken} = UsersSlice.actions
+export const { getAllUsers, getUserById, usrMsgErr, getUserbyName, notFoundUsersError, setErrorMsg, setUserLoged, setUserToken, updateUsr } = UsersSlice.actions
 
 export default UsersSlice.reducer

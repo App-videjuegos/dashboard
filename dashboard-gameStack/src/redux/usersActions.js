@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllUsers, getUserById, usrMsgErr, getUserbyName, notFoundUsersError, setErrorMsg, setUserLoged, setUserToken } from './usersSlice.js'
+import { getAllUsers, getUserById, usrMsgErr, getUserbyName, notFoundUsersError, setErrorMsg, setUserLoged, setUserToken, updateUsr } from './usersSlice.js'
 import { loadItemLocalStorage } from "../components/Helpers/functionsLocalStorage.js";
 
 // export const getUsers=()=>(dispatch)=> {
@@ -74,6 +74,22 @@ export const getUsersbyName =(query)=> (dispatch=>{
  
 })
 
+export const updateUser = (newData) => async (dispatch) => {
+  console.log("esto es lo que se va a enviar al back")
+  console.log(newData)
+  try {
+    const response = await axios.put(
+      'https://pfvideojuegos-back-production.up.railway.app/user/update',
+      newData
+    );
+    console.log(response.data)
+    dispatch(updateUsr(response.data)); // Actualizamos el estado con los datos relevantes de la respuesta
+    //return response.data; // Devolvemos los datos para un posible uso futuro
+  } catch (error) {
+    throw new Error('Error al actualizar el usuario.'); // Podrías personalizar el mensaje de error según tus necesidades.
+  }
+};
+
 export const checkLogedUser  = () => async (dispatch) => {
   try {
     const data = await loadItemLocalStorage('logedGameStack');
@@ -86,5 +102,3 @@ export const checkLogedUser  = () => async (dispatch) => {
     console.error('Error al obtener los datos desde AsyncStorage:', error);
   }
 };
-
-

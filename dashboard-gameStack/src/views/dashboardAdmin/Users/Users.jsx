@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUsers, getUserByID, getUsersbyName } from '../../../redux/usersActions.js';
+import { getUsers, getUserByID, getUsersbyName, updateUser } from '../../../redux/usersActions.js';
 import styles from './Users.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-
-let prevId = 1;
+import { faCircleCheck, faCircleXmark, faPen } from '@fortawesome/free-solid-svg-icons';
 
 function Users() {
   const dispatch = useDispatch();
@@ -15,7 +13,7 @@ function Users() {
 
   useEffect(() => {
     dispatch(getUsers());
-    dispatch(getUserByID('888'));
+    dispatch(getUserByID('477'));
   }, []);
 
   let allUsers = useSelector((state) => state.usersState.allUsers);
@@ -47,6 +45,11 @@ function Users() {
     }
   };
 
+  const handleEditClick = (user) => {
+    const updatedUser = {deleted: !user.deleted, id:user.id };
+    dispatch(updateUser(updatedUser));
+  };
+
   return (
     <div className={styles['users-container']}>
       <div className={styles.tableContainer}>
@@ -55,7 +58,6 @@ function Users() {
             <div className={styles.title}>Users</div>
             <div className={styles.SearchBar}>
               <input type="text" className={styles.searchInput} placeholder="Search" onChange={changeHandler} />
-              {/* <button className="searchButton" type="submit"  >Buscar</button> */}
             </div>
           </div>
         </div>
@@ -73,7 +75,7 @@ function Users() {
             </div>
             {Array.isArray(usuariosActuales) && usuariosActuales.length > 0 ? (
               usuariosActuales.map((e) => (
-                <div className={styles.userTable} key={prevId++}>
+                <div className={styles.userTable} key={e.id}>
                   <div className={styles.userRow}>
                     <div className={styles.userColumn1}>
                       <img className={styles.userImage} src={e.image} alt="imagen del usuario" />
@@ -81,17 +83,21 @@ function Users() {
                     <div className={styles.userColumn2}>{e.user}</div>
                     <div className={styles.userColumn3}>{e.fullname}</div>
                     <div className={styles.userColumn4}>{e.id}</div>
-                    <div className={styles.userColumn5}>{e.deleted ? (
-                      <span>
-                        <FontAwesomeIcon icon={faCircleXmark} className={styles.crossIcon} />
-                        <span className={styles.red}>Banned</span>
-                      </span>
-                    ) : (
-                      <span>
-                        <FontAwesomeIcon icon={faCircleCheck} className={styles.crossIconAllow} />
-                        <span className={styles.green}>Allow</span>
-                      </span>
-                    )}</div>
+                    <div className={styles.userColumn5}>
+                      {e.deleted ? (
+                        <span>
+                          <FontAwesomeIcon icon={faCircleXmark} className={styles.crossIcon} />
+                          <span className={styles.red}>Banned</span>
+                          <FontAwesomeIcon icon={faPen} className={styles.editIcon} onClick={() => handleEditClick(e)} />
+                        </span>
+                      ) : (
+                        <span>
+                          <FontAwesomeIcon icon={faCircleCheck} className={styles.crossIconAllow} />
+                          <span className={styles.green}>Allow</span>
+                          <FontAwesomeIcon icon={faPen} className={styles.editIcon} onClick={() => handleEditClick(e)} />
+                        </span>
+                      )}
+                    </div>
                     <div className={styles.userColumn6}>{e.date.slice(0, 10)}</div>
                   </div>
                 </div>
@@ -112,7 +118,6 @@ function Users() {
           <button onClick={goToNextPage}>&gt;</button>
         </div>
       </div>
-
     </div>
   );
 }

@@ -122,7 +122,7 @@ font-size: 25px;
 .userHeaderColumn3,
 .userColumn3 {
   /* flex: 1; */
-  width: 350px;
+  width: 300px;
   /* vertical-align: middle; */
   
   padding: 8px; 
@@ -144,7 +144,7 @@ font-size: 25px;
 .userHeaderColumn5,
 .userColumn5 {
   /* flex: 1; */
-  width: 80px;
+  width: 120px;
   /* vertical-align: middle; */
   
   padding: 8px; 
@@ -168,6 +168,11 @@ font-size: 25px;
 .userColumn5  .crossIconAllow{
   color: #00D37B;
   margin-right: 5px;
+}
+
+.userColumn5 .editIcon{
+  color: #1B063E;
+  margin-left: 6px;
 }
 
 .userHeaderColumn6,
