@@ -9,4 +9,7 @@
   margin-left: 50%; /* Ajusta la cantidad de margen izquierdo para desplazar el componente hacia la derecha */
   transform: translateX(-32%); /* Centra el componente horizontalmente después de aplicar el margen izquierdo */
   border: solid 1px white;
+  border-radius: 8px;
+  background: white;
+  margin-top: -540px;
 }
