@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
+/* eslint-disable no-undef */
 import styles from "./Sales.module.css";
 import { convertirFecha } from "../../../components/Helpers/InvertDate";
+import { useSelector, useDispatch } from "react-redux";
 import { getUserbyName } from "../../../redux/usersSlice";
 import { getAllSales } from "../../../redux/salesActions";
-
-let prevId = 1;
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleCheck,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Sales() {
   const dispatch = useDispatch();
-  const [input, setInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const usuariosPorPagina = 10;
+  const [selectedSale, setSelectedSale] = useState(null);
+  const salesperpage = 10;
 
   useEffect(() => {
     dispatch(getAllSales());
@@ -26,21 +29,18 @@ function Sales() {
     };
   }, []);
 
-  let allUsers = useSelector((state) => state.salesState.getAllSls);
-
-  function changeHandler(e) {
-    setInput(e.target.value);
-    const busqueda = e.target.value.toLowerCase();
-    dispatch(getUserbyName(busqueda));
+  const sales = useSelector((state) => state.salesState.getAllSls);
+  const lastsaleindex = currentPage * salesperpage;
+  const indicePrimerUsuario = lastsaleindex - salesperpage;
+  const usuariosActuales = sales.slice(indicePrimerUsuario, lastsaleindex);
+  if (!sales || sales.length === 0) {
+    return <div>No hay ventas disponibles.</div>;
   }
 
-  // Lógica de paginación
-  const indiceUltimoUsuario = currentPage * usuariosPorPagina;
-  const indicePrimerUsuario = indiceUltimoUsuario - usuariosPorPagina;
-  const usuariosActuales = allUsers.slice(
-    indicePrimerUsuario,
-    indiceUltimoUsuario
-  );
+  const changeHandler = (e) => {
+    const busqueda = e.target.value.toLowerCase();
+    dispatch(getUserbyName(busqueda));
+  };
 
   const handlePageChange = (numeroPagina) => {
     setCurrentPage(numeroPagina);
@@ -53,21 +53,24 @@ function Sales() {
   };
 
   const goToNextPage = () => {
-    if (currentPage < Math.ceil(allUsers.length / usuariosPorPagina)) {
+    if (currentPage < Math.ceil(sales.length / salesperpage)) {
       setCurrentPage(currentPage + 1);
     }
   };
-  const names = allUsers && usuariosActuales && usuariosActuales.map((i) => i);
-  const fecha =
-    allUsers && usuariosActuales && usuariosActuales.map((i) => i.date);
-  const items =
-    allUsers && usuariosActuales && usuariosActuales.map((i) => i.items.length);
-  const totalprice =
-    allUsers && usuariosActuales && usuariosActuales.map((i) => i.amount);
-  const status =
-    allUsers && usuariosActuales && usuariosActuales.map((i) => i.salesStatus);
-  const order =
-    allUsers && usuariosActuales && usuariosActuales.map((i) => i.id);
+
+  // // eslint-disable-next-line react-hooks/rules-of-hooks, no-unused-vars
+  // const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = (sale) => {
+    setSelectedSale(sale);
+    setModalOpen(true); // Agregar esta línea para abrir el modal
+  };
+
+  // Función para cerrar el modal
+  const handleCloseModal = () => {
+    setSelectedSale(null);
+  };
+
   return (
     <div className={styles.Container}>
       <section className={styles.FirstSection}>
@@ -79,84 +82,152 @@ function Sales() {
             placeholder="Search"
             onChange={changeHandler}
           />
-
-          {/* <button className="searchButton" type="submit"  >Buscar</button> */}
         </div>
       </section>
 
       <div className={styles.SecondSection}>
         <section>
-          <h1>Users </h1>
-          {names.map((i, key) => (
+          <h1>Users</h1>
+          {usuariosActuales.map((sale, key) => (
             <article key={key} style={{ flexDirection: "row" }}>
               <img
                 className={styles.userImage}
-                src={i.user?.image}
+                src={sale.user?.image}
                 alt="imagen del usuario"
               />
-              <span>{i.user?.user} </span>
+              <span>{sale.user?.user} </span>
             </article>
           ))}
         </section>
+        {/* Resto de las secciones */}
         <section>
-          <h1>Order number </h1>
-          {order.map((i, key) => (
+          <h1>Order number</h1>
+          {usuariosActuales.map((sale, key) => (
             <article key={key}>
-              <span>{i} </span>
+              <span>{sale.id.substring(1, 10)} </span>
             </article>
           ))}
         </section>
-
         <section>
           <h1>Date</h1>
-          {fecha.map((i, key) => (
+          {usuariosActuales.map((sale, key) => (
             <article key={key}>
-              <span>{convertirFecha(i)} </span>
+              <span>{convertirFecha(sale.date)} </span>
             </article>
           ))}
         </section>
-
         <section>
           <h1>Total items</h1>
-          {items.map((i, key) => (
+          {usuariosActuales.map((sale, key) => (
             <article key={key}>
-              <span>{i} </span>
+              <span>{sale.items.length} </span>
             </article>
           ))}
         </section>
         <section>
           <h1>Total price</h1>
-          {totalprice.map((i, key) => (
+          {usuariosActuales.map((sale, key) => (
             <article key={key}>
-              <span>${i} </span>
+              <span>${sale.amount} </span>
             </article>
           ))}
         </section>
 
         <section>
           <h1>Status</h1>
-          {status.map((i, key) => (
-            <article key={key}>
-              <span>{i} </span>
+          {usuariosActuales.map((sale, key) => (
+            <article
+              key={key}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <span
+                style={{
+                  display: "flex",
+                  color: "#00D37B",
+                  alignItems: "center",
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  className={styles.crossIconAllow}
+                />
+
+                {sale.salesStatus}
+                <span
+                  onClick={() => handleOpenModal(sale)}
+                  style={{
+                    marginLeft: "15px",
+                    padding: "4px",
+                    backgroundColor: "#007bff",
+                    color: "white",
+                    cursor: "pointer",
+                  }}
+                >
+                  Purchase
+                </span>
+              </span>
+              {/* Agregar el botón para abrir el modal */}
             </article>
           ))}
         </section>
       </div>
 
-      <div className={styles.pagination}>
-        <button onClick={goToPreviousPage}>&lt;</button>
-        {Array.from({
-          length: Math.ceil(allUsers.length / usuariosPorPagina),
-        }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? styles.btnPaged : ""}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button onClick={goToNextPage}>&gt;</button>
+      <div className={styles.ThirdSection}>
+        {/* Muestra el modal si selectedSale no es null */}
+        {selectedSale && (
+          <div className={styles.modalContainer}>
+            {/* contenido del modal */}
+            <div className={styles.modalContent}>
+              <h2 className={styles.modalTitle}>Purchase Details</h2>
+              <div className={styles.gameItemContainer}>
+                <div className={styles.gameItemName}>
+                  Order number: {selectedSale.id.substring(1, 10)}
+                </div>
+
+                <img
+                  className={styles.gameItemImage}
+                  src={selectedSale.user?.image}
+                  alt="User"
+                />
+                <div className={styles.gameItemName}>
+                  User: {selectedSale.user?.user}
+                </div>
+                <div className={styles.gameItemQuantity}>
+                  Total Items: {selectedSale.items.length}
+                </div>
+                <div className={styles.gameItemPrice}>
+                  Total Price: ${selectedSale.amount}
+                </div>
+                <div className={styles.saleValue}>
+                  Status: {selectedSale.salesStatus}
+                </div>
+
+                <div className={styles.saleValue}>
+                  Date: {convertirFecha(selectedSale.date)}
+                </div>
+              </div>
+              <button className={styles.closeButton} onClick={handleCloseModal}>
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className={styles.pagination}>
+          <button onClick={goToPreviousPage}>&lt;</button>
+          {Array.from({
+            length: Math.ceil(sales.length / salesperpage),
+          }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={currentPage === index + 1 ? styles.btnPaged : ""}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button onClick={goToNextPage}>&gt;</button>
+        </div>
       </div>
     </div>
   );
