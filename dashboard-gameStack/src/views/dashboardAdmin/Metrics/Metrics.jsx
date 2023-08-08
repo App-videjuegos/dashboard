@@ -13,7 +13,7 @@ function Metrics() {
   let ArrayVentas = useSelector((state) => state.salesState.getAllSls);
   const tabs = [
     { title: "Ventas/ Fecha", content: <p>Sales Chart by Date</p> },
-    { title: "Mas Vendido", content: <p>Grafico de Video Juego mas Vendido</p> },
+    { title: "Mas Vendido", content: <p>Top Selling Video Game Graph</p> },
     { title: "Ventas/ Fecha", content: <p>Grafico de Venta por Fecha</p> },
   ];
   return (
