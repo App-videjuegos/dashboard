@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllSales } from "../../../redux/salesActions";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleCheck,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 function Sales() {
   const dispatch = useDispatch();
@@ -43,14 +41,26 @@ function Sales() {
     };
   }, []);
 
+  // Ordenar las ventas por fecha descendente
+  const ventasOrdenadas = [...filteredSales].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+  // Calcular índices para la paginación
   const lastsaleindex = currentPage * salesperpage;
   const indicePrimerUsuario = lastsaleindex - salesperpage;
-  const usuariosActuales = filteredSales.slice(
+
+  const ventasPaginadas = ventasOrdenadas.slice(
     indicePrimerUsuario,
     lastsaleindex
   );
-  if (!sales || sales.length === 0) {
-    return <div>No hay ventas disponibles.</div>;
+
+  // Mostrar mensaje si no hay ventas disponibles
+  if (
+    !ventasOrdenadas ||
+    ventasOrdenadas.length === 0 ||
+    ventasPaginadas.length === 0
+  ) {
+    return alert("No valid Purchase!!, please try again.");
   }
 
   const handlePageChange = (numeroPagina) => {
@@ -69,9 +79,7 @@ function Sales() {
     }
   };
 
-  // // eslint-disable-next-line react-hooks/rules-of-hooks, no-unused-vars
-  // const [modalOpen, setModalOpen] = useState(false);
-
+  // Función para abrir el modal
   const handleOpenModal = (sale) => {
     setSelectedSale(sale);
     setModalOpen(true); // Agregar esta línea para abrir el modal
@@ -99,7 +107,7 @@ function Sales() {
       <div className={styles.SecondSection}>
         <section>
           <h1>Users</h1>
-          {usuariosActuales.map((sale, key) => (
+          {ventasPaginadas.map((sale, key) => (
             <article key={key} style={{ flexDirection: "row" }}>
               <img
                 className={styles.userImage}
@@ -110,10 +118,10 @@ function Sales() {
             </article>
           ))}
         </section>
-        {/* Resto de las secciones */}
+
         <section>
           <h1>Order number</h1>
-          {usuariosActuales.map((sale, key) => (
+          {ventasPaginadas.map((sale, key) => (
             <article key={key}>
               <span>{sale.id.substring(1, 8)} </span>
             </article>
@@ -121,7 +129,7 @@ function Sales() {
         </section>
         <section>
           <h1>Date</h1>
-          {usuariosActuales.map((sale, key) => (
+          {ventasPaginadas.map((sale, key) => (
             <article key={key}>
               <span>{convertirFecha(sale.date)} </span>
             </article>
@@ -129,7 +137,7 @@ function Sales() {
         </section>
         <section>
           <h1>Total items</h1>
-          {usuariosActuales.map((sale, key) => (
+          {ventasPaginadas.map((sale, key) => (
             <article key={key}>
               <span>{sale.items.length} </span>
             </article>
@@ -137,7 +145,7 @@ function Sales() {
         </section>
         <section>
           <h1>Total price</h1>
-          {usuariosActuales.map((sale, key) => (
+          {ventasPaginadas.map((sale, key) => (
             <article key={key}>
               <span>${sale.amount} </span>
             </article>
@@ -146,7 +154,7 @@ function Sales() {
 
         <section>
           <h1>Status</h1>
-          {usuariosActuales.map((sale, key) => (
+          {ventasPaginadas.map((sale, key) => (
             <article
               key={key}
               style={{ display: "flex", alignItems: "center" }}
@@ -177,14 +185,12 @@ function Sales() {
                   Purchase
                 </span>
               </span>
-              {/* Agregar el botón para abrir el modal */}
             </article>
           ))}
         </section>
       </div>
 
       <div className={styles.ThirdSection}>
-        {/* Muestra el modal si selectedSale no es null */}
         {selectedSale && (
           <div className={styles.modalContainer}>
             {/* contenido del modal */}
@@ -227,7 +233,7 @@ function Sales() {
         <div className={styles.pagination}>
           <button onClick={goToPreviousPage}>&lt;</button>
           {Array.from({
-            length: Math.ceil(filteredSales.length / salesperpage),
+            length: Math.ceil(ventasOrdenadas.length / salesperpage),
           }).map((_, index) => (
             <button
               key={index}
