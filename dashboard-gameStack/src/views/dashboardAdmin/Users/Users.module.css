@@ -5,9 +5,8 @@
     align-items: center; /* Centra verticalmente el contenido */
     justify-content: center; /* Centra horizontalmente el contenido */
     color: rgb(128, 124, 124);
-    margin-top: -580px;
-    margin-left: 170px;
-  
+    margin-top: -41%;
+    margin-left: 12.8%;
   }
 
   .tableContainer {
@@ -17,7 +16,7 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega sombra para realzar el efecto del recuadro */
     /* Asegúrate de que la propiedad de tamaño se ajuste automáticamente al contenido */
     display: inline-block;
-    width: 896px;
+    width: 927px;
   }
 
   /* Estilos de la tabla */
@@ -51,6 +50,7 @@ font-size: 25px;
 .SearchBar {
   display: flex;
   /* flex-direction: column; */
+  margin-top: -20px;
   background-color:#f0eaea;
   height: 30px;
 }
@@ -85,6 +85,7 @@ font-size: 25px;
   border-radius: 100px;
 }
 
+.userHeaderColumn0,
 .userHeaderColumn1,
 .userHeaderColumn2,
 .userHeaderColumn3,
@@ -96,19 +97,51 @@ font-size: 25px;
   color: black;
 }
 
-.userHeaderColumn1,
+.userHeaderColumn0,
+.userColumn0 {
+  /* flex: 1; */
+  width: 20px;
+  /* vertical-align: middle; */
+  height: 30px;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.userColumn0 .iconViewDataUser{
+  color: #1B063E;
+  margin-left: 2px;
+}
+
+.userHeaderColumn1{
+  /* flex: 1; */
+  width: 29px;
+  /* vertical-align: middle; */
+  height: 30px;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
 .userColumn1 {
   /* flex: 1; */
   width: 30px;
   /* vertical-align: middle; */
   height: 30px;
-  padding: 8px; 
+  padding: 8px;
+
 
   /* border-top: 1px solid #ccc; */
   border-bottom: 1px solid #ccc;
 }
 
-.userHeaderColumn2,
+.userHeaderColumn2{
+  width: 151px;
+  /* vertical-align: middle; */
+  height: 30px;
+  padding: 8px; 
+  /* border-top: 1px solid #ccc; */
+  border-bottom: 1px solid #ccc;
+}
+
 .userColumn2 {
   /* flex: 1; */
   width: 150px;
@@ -125,7 +158,7 @@ font-size: 25px;
   width: 300px;
   /* vertical-align: middle; */
   
-  padding: 8px; 
+  padding: 10px; 
   /* border-top: 1px solid #ccc; */
   border-bottom: 1px solid #ccc;
 }

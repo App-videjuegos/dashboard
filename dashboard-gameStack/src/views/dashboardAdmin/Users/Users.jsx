@@ -3,17 +3,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUsers, getUserByID, getUsersbyName, updateUser } from '../../../redux/usersActions.js';
 import styles from './Users.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck, faCircleXmark, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faCircleXmark, faPen, faStreetView } from '@fortawesome/free-solid-svg-icons';
+import EditGameModal from './ViewDataUserModal'
 
 function Users() {
   const dispatch = useDispatch();
   const [input, setInput] = useState('');
+  const [showDataModal, setShowDataModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const usuariosPorPagina = 10;
 
   useEffect(() => {
     dispatch(getUsers());
     dispatch(getUserByID('477'));
+    setShowDataModal(false);
   }, []);
 
   let allUsers = useSelector((state) => state.usersState.allUsers);
@@ -23,6 +27,16 @@ function Users() {
     const busqueda = e.target.value.toLowerCase();
     dispatch(getUsersbyName(busqueda));
   }
+
+  const openViewDataModal = (user) => {
+    setSelectedUser(user);
+    setShowDataModal(true);
+  };
+
+  const closeViewDataModal = () => {
+    setShowDataModal(false);
+  };
+
 
   // Lógica de paginación
   const indiceUltimoUsuario = currentPage * usuariosPorPagina;
@@ -46,12 +60,19 @@ function Users() {
   };
 
   const handleEditClick = (user) => {
-    const updatedUser = {deleted: !user.deleted, id:user.id };
+    const updatedUser = { deleted: !user.deleted, id: user.id };
     dispatch(updateUser(updatedUser));
   };
 
   return (
     <div className={styles['users-container']}>
+     {showDataModal && (
+        <EditGameModal
+          onClose={closeViewDataModal}
+          user={selectedUser}
+          //onSave={handleSaveEdit}
+        />
+      )}
       <div className={styles.tableContainer}>
         <div className={styles.bar}>
           <div className={styles.userRow}>
@@ -65,8 +86,9 @@ function Users() {
           <div className={styles.tableTable}>
             <div className={styles.userTable}>
               <div className={styles.userRow}>
-                <div className={styles.userHeaderColumn1}>User</div>
-                <div className={styles.userHeaderColumn2}></div>
+                <div className={styles.userHeaderColumn0}></div>
+                <div className={styles.userHeaderColumn1}></div>
+                <div className={styles.userHeaderColumn2}>User</div>
                 <div className={styles.userHeaderColumn3}>Fullname</div>
                 <div className={styles.userHeaderColumn4}>ID</div>
                 <div className={styles.userHeaderColumn5}>State</div>
@@ -77,6 +99,9 @@ function Users() {
               usuariosActuales.map((e) => (
                 <div className={styles.userTable} key={e.id}>
                   <div className={styles.userRow}>
+                  <div className={styles.userColumn0}>
+                  <FontAwesomeIcon icon={faStreetView} className={styles.iconViewDataUser} onClick={() => openViewDataModal(e)} />
+                  </div>
                     <div className={styles.userColumn1}>
                       <img className={styles.userImage} src={e.image} alt="imagen del usuario" />
                     </div>
