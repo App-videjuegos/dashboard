@@ -11,7 +11,7 @@ function ViewDataUserModal({ user, onClose }) {
   let userDataUpdate = useSelector((state) => state.usersState.allUsers);
   //console.log(userDataUpdate)
   let usuarioFindState = userDataUpdate.find(usr => usr.id === user.id);
-  //console.log(usuarioFindState)
+  console.log(usuarioFindState)
 
   useEffect(() => {
     dispatch(getUsers());
@@ -22,9 +22,15 @@ function ViewDataUserModal({ user, onClose }) {
   };
 
   const handleEditClick = (user) => {
-    const updatedUser = { deleted: !user.deleted, id: user.id };
+    const updatedUser = { deleted: !user.deleted, id: user.id};
     dispatch(updateUser(updatedUser));
   };
+
+  const handleEditAdminClick = (user) => {
+    const updatedUser = { userAdmin: !user.userAdmin, id: user.id};
+    dispatch(updateUser(updatedUser));
+  };
+  
 
   return (
 
@@ -70,7 +76,21 @@ function ViewDataUserModal({ user, onClose }) {
           <div className={styles.projects_data}>
             <div className={styles.data}>
               <h4>Is admin</h4>
-              <p><strong></strong> {usuarioFindState.userAdmin ? "Yes" : "No"}</p>
+              {/* <p><strong></strong> {usuarioFindState.userAdmin ? "Yes" : "No"}</p> */}
+              {usuarioFindState.userAdmin ? (
+                <span>
+                  <FontAwesomeIcon icon={faCircleCheck} className={styles.crossIconAllow} />
+                  <span className={styles.green}>Yes</span>
+                  <FontAwesomeIcon icon={faPen} className={styles.editIcon} onClick={() => handleEditAdminClick(usuarioFindState)} />
+                </span>
+              ) : (
+           
+                <span>
+                  <FontAwesomeIcon icon={faCircleXmark} className={styles.crossIcon} />
+                  <span className={styles.red}>No</span>
+                  <FontAwesomeIcon icon={faPen} className={styles.editIcon} onClick={() => handleEditAdminClick(usuarioFindState)} />
+                </span>
+              )}
             </div>
             <div className={styles.data}>
               <h4>Is banned</h4>
