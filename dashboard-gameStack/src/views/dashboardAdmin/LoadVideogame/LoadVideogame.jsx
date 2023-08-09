@@ -245,6 +245,7 @@ const LoadVideogame = () => {
         <div>
           <h2>Title</h2>
           <input
+            className={styles.input}
             type="text"
             placeholder="Enter Game name"
             value={newVideoGame.name}
@@ -257,8 +258,9 @@ const LoadVideogame = () => {
         </div>
 
         <div>
-          <h2>Price</h2>
+          <h2 className={styles.title}>Price</h2>
           <input
+            className={styles.input}
             type="text"
             placeholder="$999.99"
             onBlur={() => setInputFocusedPrice(false)}
@@ -306,7 +308,7 @@ const LoadVideogame = () => {
           <div>
             <input
               type="date"
-              className="date-picker-input"
+              className={styles.datepickerinput}
               onBlur={() => setInputFocusedDate(false)}
               value={date}
               onChange={(e) => handleDateChange(e.target.value)}
@@ -330,7 +332,7 @@ const LoadVideogame = () => {
             id="imagePicker"
             icon={routeIcons.addImage}
           />
-          {validateNvg.image !== "" && !inputFocusedImage && (
+          {validateNvg.image && !inputFocusedImage && (
             <div className={styles.errorMessage}>{validateNvg.image}</div>
           )}
           <label htmlFor="imagePicker">
@@ -358,64 +360,70 @@ const LoadVideogame = () => {
         <div className={styles.imageLoad}>
           <h2>Screeshots</h2>
           <input
+            className={styles.updateImage}
             type="file"
             accept="image/*"
             onBlur={() => setInputFocusedScreenShots(false)}
             onChange={handleScreenImageChange}
-            style={{ display: "flex" }}
             id="imagePicker"
-            multiple // Habilitar la selección de múltiples imágenes
+            style={{ display: "flex" }}
+            multiple
           />
-          {validateNvg.screenShots !== "" && !inputFocusedScreenShots && (
-            <div className={styles.errorMessage}>{validateNvg.screenShots}</div>
-          )}
-                  {/* <text className={styles.uploadImage}>
+          {/* <text className={styles.uploadImage}>
                     {<routeIcons.addImage />}
                   </text> */}
-          <div>
-            
-            {newVideoGame.screenShots.length > 0 ? (
-              newVideoGame.screenShots.map((imageUrl, index) => (
-                <div
-                  key={index}
-                  className={styles["image-container"]} // Aplica la clase CSS que oscurece la imagen en el hover
-                  onMouseEnter={() => setHoveredImage(imageUrl)}
-                  onMouseLeave={() => setHoveredImage(null)}
-                >
-                  <img
-                    src={imageUrl}
-                    alt={`Selected ${index}`}
-                    className={styles.imageLoad}
-                  />                
-                
+          <label htmlFor="imagePicker">
+            <div>
+              {newVideoGame.screenShots.length > 0 ? (
+                newVideoGame.screenShots.map((imageUrl, index) => (
+                  <div
+                    key={index}
+                    className={styles["image-container"]} // Aplica la clase CSS que oscurece la imagen en el hover
+                    onMouseEnter={() => setHoveredImage(imageUrl)}
+                    onMouseLeave={() => setHoveredImage(null)}
+                  >
+                    <img
+                      src={imageUrl}
+                      alt={`Selected ${index}`}
+                      className={styles.imageLoad}
+                    />
 
-                  {hoveredImage === imageUrl && (
-                    <div>
-                      <button
-                        className={styles["delete-button"]}
-                        type="button"
-                        onClick={() => deleteScreen(imageUrl)}
-                      >
-                        {<routeIcons.delete />}
-                      </button>
-                    </div>
-                  )}
+                    {hoveredImage === imageUrl && (
+                      <div>
+                        <button
+                          className={styles["delete-button"]}
+                          type="button"
+                          onClick={() => deleteScreen(imageUrl)}
+                        >
+                          {<routeIcons.delete />}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div>
+                  <text className={styles.uploadImage}>
+                    {<routeIcons.addImage />}
+                  </text>
                 </div>
-              ))
-            ) : (
-              <div>
-                <text className={styles.message}>
-                  Hold ctrl to select multiple images
-                </text>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          </label>
         </div>
+      </div>
+      <div className={styles.message}>
+        <text className={styles.message}>
+          Hold ctrl to select multiple images
+                    {validateNvg.screenShots !== "" && !inputFocusedScreenShots && (
+                      <div className={styles.errorMessage}>{validateNvg.screenShots}</div>
+                    )}
+        </text>
       </div>
       <div>
         <h2>Select genre</h2>
         <div>
-          <select onChange={(e) => pushItemgenre(e.target.value)}>
+          <select className={styles.select} onChange={(e) => pushItemgenre(e.target.value)}>
             <option value="" disabled selected>
               Add genre
             </option>
@@ -427,8 +435,8 @@ const LoadVideogame = () => {
           </select>
         </div>
       </div>
-      <div>
-        <select onChange={(e) => removeItemgenre(e.target.value)}>
+      <div className={styles.containerSelect}>
+        <select className={styles.select} onChange={(e) => removeItemgenre(e.target.value)}>
           <option value="" disabled selected>
             Remove genre
           </option>
@@ -445,8 +453,8 @@ const LoadVideogame = () => {
 
       <div>
         <h2>Select platform</h2>
-        <div>
-          <select onChange={(e) => pushItemplatforms(e.target.value)}>
+        <div> 
+          <select className={styles.select} onChange={(e) => pushItemplatforms(e.target.value)}>
             <option value="" disabled selected>
               Add platforms
             </option>
@@ -457,8 +465,8 @@ const LoadVideogame = () => {
             ))}
           </select>
         </div>
-        <div>
-          <select onChange={(e) => removeItemplatforms(e.target.value)}>
+        <div className={styles.containerSelect}>
+          <select className={styles.select} onChange={(e) => removeItemplatforms(e.target.value)}>
             <option value="" disabled selected>
               Remove platforms
             </option>

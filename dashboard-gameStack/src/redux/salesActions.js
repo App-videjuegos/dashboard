@@ -9,7 +9,7 @@ export const getAllSales = () => {
       );
       const dataSales = response.data;
       dataSales
-        ? dispatch(getAllSls(dataSales.slice(1,70)))
+        ? dispatch(getAllSls(dataSales.slice(1,180)))
         : dispatch(setErrorMsg("No se encontraron registros de ventas"));
     } catch (err) {
       console.log(`Error: ${err}`);

@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
-  faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Sales() {
@@ -86,7 +85,7 @@ function Sales() {
   return (
     <div className={styles.Container}>
       <section className={styles.FirstSection}>
-        <h1>Sales</h1>
+        <h1 className={styles.title1}>Sales</h1>
         <div className={styles.SearchBar}>
           <input
             type="text"

@@ -22,7 +22,7 @@ const SubmitGame = async (event,newVideoGame,setNewVideoGame,validateSubmit,setV
         newVideoGame.requeriments_en === ""
       ) {
         setValidateSubmit(false);
-        alert("falta info")
+        alert("You must fill in all the fields.")
       } else {
         await axios.post(
           "https://pfvideojuegos-back-production.up.railway.app/games",
@@ -55,8 +55,11 @@ const SubmitGame = async (event,newVideoGame,setNewVideoGame,validateSubmit,setV
             price: "",
             requeriments_en: "",
           });
-
           console.log(response)
+
+          setTimeout(() => {
+            window.location.reload()
+          }, 2000);
         } else {
           // Aquí puedes realizar la navegación a la pantalla de inicio o realizar cualquier acción que desees.
           // Por ejemplo, puedes utilizar react-router-dom para la navegación si lo necesitas.

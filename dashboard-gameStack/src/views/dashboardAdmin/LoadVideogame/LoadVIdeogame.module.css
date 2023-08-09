@@ -2,11 +2,12 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  justify-content: center;
+  justify-content: center ;
   align-items: center;
-  align-items: center;
-  margin-top: -32rem;
-  margin-left: 20rem
+  margin-top: -40rem;
+  margin-left: 40rem;
+  background-color: #fafafa;
+  border-radius: 10px;
 }
 
 
@@ -25,26 +26,22 @@
   margin-bottom: 0.2rem;
 }
 
-/* Campos de formulario */
-.form-group {
-  margin-bottom: 20px;
-}
 
-.form-group h1 {
-  color: #987bdc;
-  margin-bottom: 5px;
-}
-
-.form-group input[type="text"],
-.form-group textarea,
-.form-group select {
+.datepickerinput  {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #3f13a4;
-  border-radius: 5px;
-  background-color: #1b063e;
-  color: #cdcdcd;
+  height: 40px;
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #fafafa;
+  background-image: url('/path/to/calendar-icon.png'); /* Agrega la ruta correcta de la imagen del calendario */
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
 }
+/* Campos de formulario */
+
 
 .form-group textarea {
   resize: vertical;
@@ -71,6 +68,7 @@
 
 .cancel {
   background-color: transparent;
+  color:#622eda;
 }
 
 /* Imagen seleccionada */
@@ -83,13 +81,16 @@
   padding: 10px;
   border-radius: 5px;
   text-align: center;
-  color: #fafafa;
+  color:#622eda;
   text-align: center;
+  font-weight: bold !important;
 }
 
 .message.success {
   background-color: #570606;
-  color: #fafafa;
+  color:#987bdc;
+  font-weight: bold ;
+  ;
 }
 
 .errorMessage {
@@ -150,6 +151,8 @@
   font-size: 10rem;
   color: #987bdc;
   align-items: center;
+  width: 20%;
+
 }
 
 .container .buttonContainer{
@@ -157,4 +160,55 @@
   justify-content: center;
   justify-content: center;
 
+}
+
+.title{
+  font-size: 10px;
+}
+
+.input{
+margin-top: 1rem;
+width: 100% !important;
+
+}
+
+.textarea{
+border-radius: 10px;
+width: 100%;
+}
+
+
+.selectImage{
+  width: 50%;
+  color: #fafafa;
+}
+
+.selectImage button{
+  width: 100%;
+  color: red;
+  align-items: center;
+  justify-content: center;
+  display:none;
+  border-radius: 10px;
+}
+
+._imageLoad_brvfo_205{
+ padding: 10px;
+ height: 100px;
+}
+
+.containerSelect{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.select{
+  width: 100%;
+  height: 2rem;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.imageLoad{
+  margin-top: 5rem;
 }
