@@ -67,7 +67,7 @@ function Users() {
   return (
     <div className={styles['users-container']}>
      {showDataModal && (
-        <EditGameModal
+        <EditGameModal className={styles.userModal}
           onClose={closeViewDataModal}
           user={selectedUser}
           //onSave={handleSaveEdit}
