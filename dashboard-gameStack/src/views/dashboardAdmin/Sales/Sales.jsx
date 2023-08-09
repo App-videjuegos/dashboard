@@ -2,7 +2,6 @@
 import styles from "./Sales.module.css";
 import { convertirFecha } from "../../../components/Helpers/InvertDate";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserbyName } from "../../../redux/usersSlice";
 import { getAllSales } from "../../../redux/salesActions";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,11 +14,27 @@ function Sales() {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSale, setSelectedSale] = useState(null);
+  const [filteredSales, setFilteredSales] = useState([]); // Agregar estado para los resultados filtrados
   const salesperpage = 10;
+  const sales = useSelector((state) => state.salesState.getAllSls);
 
   useEffect(() => {
     dispatch(getAllSales());
   }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredSales(sales);
+  }, [sales]);
+
+  function changeHandler(e) {
+    const busqueda = e.target.value.toLowerCase();
+    const filteredResults = sales.filter(
+      (sale) =>
+        sale.id.toLowerCase().includes(busqueda) ||
+        sale.user?.user.toLowerCase().includes(busqueda)
+    );
+    setFilteredSales(filteredResults); // Actualizar los resultados filtrados
+  }
 
   useEffect(() => {
     const app = document.getElementById("App");
@@ -29,18 +44,15 @@ function Sales() {
     };
   }, []);
 
-  const sales = useSelector((state) => state.salesState.getAllSls);
   const lastsaleindex = currentPage * salesperpage;
   const indicePrimerUsuario = lastsaleindex - salesperpage;
-  const usuariosActuales = sales.slice(indicePrimerUsuario, lastsaleindex);
+  const usuariosActuales = filteredSales.slice(
+    indicePrimerUsuario,
+    lastsaleindex
+  );
   if (!sales || sales.length === 0) {
     return <div>No hay ventas disponibles.</div>;
   }
-
-  const changeHandler = (e) => {
-    const busqueda = e.target.value.toLowerCase();
-    dispatch(getUserbyName(busqueda));
-  };
 
   const handlePageChange = (numeroPagina) => {
     setCurrentPage(numeroPagina);
@@ -104,7 +116,7 @@ function Sales() {
           <h1>Order number</h1>
           {usuariosActuales.map((sale, key) => (
             <article key={key}>
-              <span>{sale.id.substring(1, 10)} </span>
+              <span>{sale.id.substring(1, 8)} </span>
             </article>
           ))}
         </section>
@@ -181,7 +193,7 @@ function Sales() {
               <h2 className={styles.modalTitle}>Purchase Details</h2>
               <div className={styles.gameItemContainer}>
                 <div className={styles.gameItemName}>
-                  Order number: {selectedSale.id.substring(1, 10)}
+                  Order number: {selectedSale.id.substring(1, 8)}
                 </div>
 
                 <img
@@ -216,7 +228,7 @@ function Sales() {
         <div className={styles.pagination}>
           <button onClick={goToPreviousPage}>&lt;</button>
           {Array.from({
-            length: Math.ceil(sales.length / salesperpage),
+            length: Math.ceil(filteredSales.length / salesperpage),
           }).map((_, index) => (
             <button
               key={index}
