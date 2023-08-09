@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Metricstab.module.css";
-import GraphSales from "./GraphSales";
-import GBestSeller from "./GraphBestSeller";
+import GraphSales from "./GraphSales/GraphSales";
+import GBestSeller from "./BestSeller/GraphBestSeller";
 import GraphSales2 from "./GraphSales2"
 function Tabs({ tabs, ArrayVentas }) {
   const [activeTab, setActiveTab] = useState(0);

@@ -12,8 +12,8 @@ function Metrics() {
 
   let ArrayVentas = useSelector((state) => state.salesState.getAllSls);
   const tabs = [
-    { title: "Ventas/ Fecha", content: <p>Sales Chart by Date</p> },
-    { title: "Mas Vendido", content: <p>Top Selling Video Game Graph</p> },
+    { title: "Sales by date", content: <p>Sales Chart by Date</p> },
+    { title: "Best Seller", content: <p>Top Selling Video Game Graph</p> },
     { title: "Ventas/ Fecha", content: <p>Grafico de Venta por Fecha</p> },
   ];
   return (
