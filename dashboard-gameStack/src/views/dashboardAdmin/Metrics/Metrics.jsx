@@ -3,22 +3,25 @@ import Tabs from "./Metricstab";
 import { getAllSales } from "../../../redux/salesActions";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { getvideoGames } from "../../../redux/videogamesActions";
 
 function Metrics() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllSales());
+    dispatch(getvideoGames());
   }, []);
 
-  let ArrayVentas = useSelector((state) => state.salesState.getAllSls);
+  const ArrayVentas = useSelector((state) => state.salesState.getAllSls);
+  const ArrayVgames = useSelector((state) => state.videoGamesState.videoGames);
   const tabs = [
     { title: "Sales by date", content: <p>Sales Chart by Date</p> },
     { title: "Best Seller", content: <p>Top Selling Video Game Graph</p> },
-    { title: "Ventas/ Fecha", content: <p>Grafico de Venta por Fecha</p> },
+    { title: "Top Selling Genre", content: <p>Best Selling Genre Chart</p> },
   ];
   return (
     <div className={styles["metrics-container"]}>
-      <Tabs tabs={tabs} ArrayVentas={ArrayVentas}/>
+      <Tabs tabs={tabs} ArrayVentas={ArrayVentas} vGames={ArrayVgames}/>
     </div>
   );
 }

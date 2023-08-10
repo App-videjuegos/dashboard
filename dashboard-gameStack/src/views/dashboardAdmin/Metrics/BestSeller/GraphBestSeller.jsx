@@ -9,6 +9,7 @@ import {
   Legend,
 } from "recharts";
 import styles from "./GraphBestSeller.module.css";
+import loadingImage from "../../../../assets/countDownd.gif";
 
 const TopGamesChart = ({ data }) => {
   const [initialFilteredData, setInitialFilteredData] = useState([]);
@@ -18,7 +19,14 @@ const TopGamesChart = ({ data }) => {
   const [qtyend, setQtyend] = useState(""); // Inicializa con una cadena vacía
 
   const [gameSalesCounts, setGameSalesCounts] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    // Simula la carga de datos
+    setTimeout(() => {
+      setIsLoading(false); // Cambia el estado a falso después de un tiempo
+    }, 2000); // Tiempo en milisegundos
+  }, []);
   useEffect(() => {
     // Crear un objeto para contar las ventas de cada juego
     const counts = {};
@@ -44,7 +52,11 @@ const TopGamesChart = ({ data }) => {
     }));
 
     setInitialFilteredData(formattedData); // Almacenar los datos iniciales
-    setFilteredData(formattedData); // Actualizar la data filtrada al iniciar
+
+    // Filtrar los juegos con más de 6 ventas iniciales
+    const filteredInitialData = formattedData.filter((game) => game.sales >= 6);
+
+    setFilteredData(filteredInitialData); // Actualizar la data filtrada al iniciar
   }, [data]);
 
   const handleFilterClick = () => {
@@ -118,64 +130,76 @@ const TopGamesChart = ({ data }) => {
           <span className={styles.errorMessage}>{errorInput}</span>
         )}
       </div>
-      <BarChart width={800} height={400} data={filteredData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          dataKey="name"
-          
-          angle={-90}
-          textAnchor="end" // Alinea el contenido hacia la derecha
-          interval={0}
-          fontSize={9}
-          tick={{ fill: "#280657" }}
-          height={175}
-          tickFormatter={(value) => value.substring(0, 25)} // Mostrar los primeros 12 caracteres
-          dx={-5} // Ajusta la posición horizontal del contenido
-          label={{
-            value: "Title",
-            angle: 0,
-            position: "insideBottom", // Cambia la posición a "insideBottom"
-            offset: 20, // Aplica un offset negativo para mover las etiquetas hacia arriba
-            style: {
-              fill: "white",
-              fontWeight: "bold",
-              whiteSpace: "pre",
-            },
-          }}
-        />
-        <YAxis
-          domain={["auto", "auto"]} // Ajusta el rango del eje Y automáticamente
-          label={{
-            value: "Amount sold ",
-            angle: -90,
-            position: "outside",
-            dy: 0,
-            dx: -30,
-            style: {
-              fill: "white",
-              fontWeight: "bold",
-              whiteSpace: "pre",
-            },
-          }}
-          tick={{ fill: "#280657" }}
-        />
-        <Tooltip
-          contentStyle={{
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
-            color: "#fff",
-          }} // Estilos del tooltip
-          labelStyle={{ fontWeight: "bold" }} // Estilos de la etiqueta del tooltip
-          formatter={(value, name) => `#${value} `} // Formato del contenido del tooltip
-          cursor={{ fill: "rgba(0, 0, 0, 0.2)" }} // Cursor personalizado
-        />
-        {/* <Legend /> */}
+      {isLoading ? (
+        <div className={styles.loadingContainer}>
+          <img src={loadingImage} alt="Loading..." />
+        </div>
+      ) : (
+        <div className={styles.chartContainer}>
+          <BarChart width={700} height={400} data={filteredData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="name"
+              angle={-90}
+              textAnchor="end" // Alinea el contenido hacia la derecha
+              interval={0}
+              fontSize={9}
+              tick={{ fill: "#280657" }}
+              height={175}
+              tickFormatter={(value) => value.substring(0, 25)} // Mostrar los primeros 12 caracteres
+              dx={-5} // Ajusta la posición horizontal del contenido
+              label={{
+                value: "Title",
+                angle: 0,
+                position: "insideBottom", // Cambia la posición a "insideBottom"
+                offset: 20, // Aplica un offset negativo para mover las etiquetas hacia arriba
+                style: {
+                  fill: "#3F13A4",
+                  fontWeight: "bold",
+                  whiteSpace: "pre",
+                },
+              }}
+            />
+            <YAxis
+              domain={["auto", "auto"]} // Ajusta el rango del eje Y automáticamente
+              label={{
+                value: "Amount sold ",
+                angle: -90,
+                position: "outside",
+                dy: 0,
+                dx: -30,
+                style: {
+                  fill: "#3F13A4",
+                  fontWeight: "bold",
+                  whiteSpace: "pre",
+                },
+              }}
+              tick={{ fill: "#280657" }}
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
+                color: "#fff",
+              }} // Estilos del tooltip
+              labelStyle={{ fontWeight: "bold" }} // Estilos de la etiqueta del tooltip
+              formatter={(value, name) => `#${value} `} // Formato del contenido del tooltip
+              cursor={{ fill: "rgba(0, 0, 0, 0.2)" }} // Cursor personalizado
+            />
+            {/* <Legend /> */}
 
-        <Bar
-          dataKey="sales"
-          fill="green"
-          label={{ position: "top", fill: "white", fontSize: "10" }}
-        />
-      </BarChart>
+            <Bar
+              dataKey="sales"
+              fill="#987BDC"
+              label={{
+                position: "top",
+                fill: "#280657",
+                fontSize: "11",
+                fontWeight: "bold",
+              }}
+            />
+          </BarChart>
+        </div>
+      )}
     </div>
   );
 };

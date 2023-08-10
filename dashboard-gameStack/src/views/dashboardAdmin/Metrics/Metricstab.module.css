@@ -5,20 +5,20 @@
     align-items: center;
     flex-direction: row;
 
-    
+
   }
-  
+
   .tabs_container {
     width: 100%;
     /* max-width: 500px; */
     margin: 20px;
     padding: 20px;
-    border: 1px solid #987bdc;
+    border: 2px solid #987bdc;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Efecto de sombra tridimensional */
     border-radius: 8px; /* Bordes más redondeados */
     /* background-color: aqua; */
   }
-  
+
   .tabs {
     display: flex;
     border-bottom: 2px solid #987bdc; /* Línea más gruesa en la parte inferior */
@@ -29,15 +29,16 @@
     font-size: 20px;
     font-weight: bold;
   }
-  
+
   .tab {
     padding: 12px 24px; /* Mayor espaciado interno */
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin: 5px;
-    border-radius: 8px; /* Bordes más redondeados */
+    border-radius: 8px; 
+ 
   }
-  
+
   .tab:hover {
     background-color: #987bdc;
     color: white;
@@ -45,7 +46,7 @@
     font-weight: bold;
     border-radius: 8px; /* Bordes más redondeados */
   }
-  
+
   .tab_active {
     padding: 12px 24px;
     background-color: #280657;
@@ -57,7 +58,7 @@
     border-radius: 8px; /* Bordes más redondeados */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Efecto de sombra tridimensional */
   }
-  
+
   .tab_content {
     margin-top: 5px;
     padding: 20px;
@@ -67,6 +68,5 @@
     align-items: center; /* Centra horizontalmente los elementos */
     justify-content: center; /* Centra verticalmente los elementos */
   }
-  
 
-  
+

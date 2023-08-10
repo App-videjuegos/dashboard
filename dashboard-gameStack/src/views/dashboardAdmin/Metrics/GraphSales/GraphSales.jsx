@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import styles from "./GraphSales.module.css";
+import loadingImage from "../../../../assets/countDownd.gif";
 
 const SalesByDateChart = ({ data }) => {
   const [initialFilteredData, setInitialFilteredData] = useState([]);
@@ -10,6 +11,14 @@ const SalesByDateChart = ({ data }) => {
     new Date().toISOString().substring(0, 10)
   );
   const [filteredData, setFilteredData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simula la carga de datos
+    setTimeout(() => {
+      setIsLoading(false); // Cambia el estado a falso después de un tiempo
+    }, 2000); // Tiempo en milisegundos
+  }, []);
 
   useEffect(() => {
     // Agrupar las ventas por fecha y sumar las ventas en la misma fecha
@@ -124,11 +133,17 @@ const SalesByDateChart = ({ data }) => {
           <span className={styles.errorMessage}>{errorInput}</span>
         )}
       </div>
+      {isLoading ? (
+        <div className={styles.loadingContainer}>
+          <img src={loadingImage} alt="Loading..." />
+        </div>
+      ) : (
+        <div className={styles.chartContainer}>
       {filteredData.length === 0 ? (
         <span className={styles.errorMessage}>No results found.</span>
       ) : (
         <BarChart
-          width={800}
+          width={700}
           height={400}
           data={filteredData}
           layout="horizontal"
@@ -146,7 +161,7 @@ const SalesByDateChart = ({ data }) => {
               position: "insideBottom",
               offset: -0,
               style: {
-                fill: "white",
+                fill: "#3F13A4",
                 fontWeight: "bold",
                 whiteSpace: "pre",
               },
@@ -162,7 +177,7 @@ const SalesByDateChart = ({ data }) => {
               dy: 0,
               dx: -30,
               style: {
-                fill: "white",
+                fill: "#3F13A4",
                 fontWeight: "bold",
                 whiteSpace: "pre",
               },
@@ -183,15 +198,17 @@ const SalesByDateChart = ({ data }) => {
 
           <Bar
             dataKey="sales"
-            fill="green"
+            fill="#987BDC"
             label={{
               position: "top",
-              fill: "white",
+              fill: "#280657",
               formatter: (value) => `$${value}`,
               fontSize: 11,
             }}
           />
         </BarChart>
+      )}
+      </div>
       )}
     </div>
   );

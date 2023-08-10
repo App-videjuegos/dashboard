@@ -3,7 +3,9 @@ import styles from "./Metricstab.module.css";
 import GraphSales from "./GraphSales/GraphSales";
 import GBestSeller from "./BestSeller/GraphBestSeller";
 import GraphSales2 from "./GraphSales2"
-function Tabs({ tabs, ArrayVentas }) {
+import GraphSalesByGenre from "./BestGenre/GraphSalesByGenre"
+
+function Tabs({ tabs, ArrayVentas,vGames }) {
   const [activeTab, setActiveTab] = useState(0);
   // console.log("array ventas", ArrayVentas)
   return (
@@ -24,7 +26,7 @@ function Tabs({ tabs, ArrayVentas }) {
           {tabs[activeTab].content}
           {activeTab === 0 && <GraphSales data={ArrayVentas} />}
           {activeTab === 1 && <GBestSeller data={ArrayVentas} />}
-          {activeTab === 2 && <GraphSales2 data={ArrayVentas} />}
+          {activeTab === 2 && <GraphSalesByGenre dataSales={ArrayVentas} dataVGames={vGames}/>}
         </div>
       </div>
     </div>
