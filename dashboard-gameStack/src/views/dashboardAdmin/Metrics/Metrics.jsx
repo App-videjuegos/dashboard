@@ -1,6 +1,6 @@
 import styles from "./Metrics.module.css"; // Importa los estilos del archivo CSS
 import Tabs from "./Metricstab";
-import { getAllSales } from "../../../redux/salesActions";
+import { getAllSales2 } from "../../../redux/salesActions";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getvideoGames } from "../../../redux/videogamesActions";
@@ -8,11 +8,11 @@ import { getvideoGames } from "../../../redux/videogamesActions";
 function Metrics() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllSales());
+    dispatch(getAllSales2());
     dispatch(getvideoGames());
   }, []);
 
-  const ArrayVentas = useSelector((state) => state.salesState.getAllSls);
+  const ArrayVentas = useSelector((state) => state.salesState.getAllSls2);
   const ArrayVgames = useSelector((state) => state.videoGamesState.videoGames);
   const tabs = [
     { title: "Sales by date", content: <p>Sales Chart by Date</p> },

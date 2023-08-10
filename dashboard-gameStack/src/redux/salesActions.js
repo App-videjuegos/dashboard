@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllSls, getAllSlsUser, setErrorMsg } from "./salesSlice";
+import { getAllSls,getAllSls2, getAllSlsUser, setErrorMsg } from "./salesSlice";
 
 export const getAllSales = () => {
   return async (dispatch) => {
@@ -38,6 +38,24 @@ export const getAllSalesUser = (id) => {
     } catch (err) {
       dispatch(setErrorMsg(err));
       console.log(`Error: ${err}`);
+    }
+  };
+};
+
+
+export const getAllSales2 = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        "https://pfvideojuegos-back-production.up.railway.app/sales"
+      );
+      const dataSales = response.data;
+      dataSales
+        ? dispatch(getAllSls2(dataSales))
+        : dispatch(setErrorMsg("No se encontraron registros de ventas"));
+    } catch (err) {
+      console.log(`Error: ${err}`);
+      dispatch(setErrorMsg("Error al obtener los datos de ventas"));
     }
   };
 };
