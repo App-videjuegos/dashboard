@@ -2,7 +2,7 @@
 import styles from "./Sales.module.css";
 import { convertirFecha } from "../../../components/Helpers/InvertDate";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllSales } from "../../../redux/salesActions";
+import { getAllSales, searchSales } from "../../../redux/salesActions";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
@@ -11,27 +11,13 @@ function Sales() {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSale, setSelectedSale] = useState(null);
-  const [filteredSales, setFilteredSales] = useState([]); // Agregar estado para los resultados filtrados
   const salesperpage = 10;
+  // const [filteredSales, setFilteredSales] = useState([]); // Agregar estado para los resultados filtrados
   const sales = useSelector((state) => state.salesState.getAllSls);
 
   useEffect(() => {
     dispatch(getAllSales());
   }, [dispatch]);
-
-  useEffect(() => {
-    setFilteredSales(sales);
-  }, [sales]);
-
-  function changeHandler(e) {
-    const busqueda = e.target.value.toLowerCase();
-    const filteredResults = sales.filter(
-      (sale) =>
-        sale.id.toLowerCase().includes(busqueda) ||
-        sale.user?.user.toLowerCase().includes(busqueda)
-    );
-    setFilteredSales(filteredResults); // Actualizar los resultados filtrados
-  }
 
   useEffect(() => {
     const app = document.getElementById("App");
@@ -42,26 +28,14 @@ function Sales() {
   }, []);
 
   // Ordenar las ventas por fecha descendente
-  const ventasOrdenadas = [...filteredSales].sort(
+  const ventasOrdenadas = [...sales].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
   // Calcular índices para la paginación
   const lastsaleindex = currentPage * salesperpage;
   const indicePrimerUsuario = lastsaleindex - salesperpage;
 
-  const ventasPaginadas = ventasOrdenadas.slice(
-    indicePrimerUsuario,
-    lastsaleindex
-  );
-
-  // Mostrar mensaje si no hay ventas disponibles
-  if (
-    !ventasOrdenadas ||
-    ventasOrdenadas.length === 0 ||
-    ventasPaginadas.length === 0
-  ) {
-    return alert("No valid Purchase!!, please try again.");
-  }
+  const ventasPaginadas = sales.slice(indicePrimerUsuario, lastsaleindex);
 
   const handlePageChange = (numeroPagina) => {
     setCurrentPage(numeroPagina);
@@ -89,7 +63,35 @@ function Sales() {
   const handleCloseModal = () => {
     setSelectedSale(null);
   };
+  const numPaginasMostradas = 5;
+  const calcularRangoPaginas = (paginaActual, totalPaginas) => {
+    const rangoMitad = Math.floor(numPaginasMostradas / 2);
+    let startPage = paginaActual - rangoMitad;
+    let endPage = paginaActual + rangoMitad;
 
+    if (startPage <= 0) {
+      endPage -= startPage - 1;
+      startPage = 1;
+    }
+
+    if (endPage > totalPaginas) {
+      endPage = totalPaginas;
+      if (endPage - numPaginasMostradas + 1 > 0) {
+        startPage = endPage - numPaginasMostradas + 1;
+      } else {
+        startPage = 1;
+      }
+    }
+
+    return Array.from(
+      { length: endPage - startPage + 1 },
+      (_, i) => startPage + i
+    );
+  };
+  const searchSalesByUserName = (e) => {
+    e.preventDefault();
+    dispatch(searchSales(e.target.value));
+  };
   return (
     <div className={styles.Container}>
       <section className={styles.FirstSection}>
@@ -99,7 +101,7 @@ function Sales() {
             type="text"
             className={styles.searchInput}
             placeholder="Search"
-            onChange={changeHandler}
+            onChange={searchSalesByUserName}
           />
         </div>
       </section>
@@ -107,6 +109,7 @@ function Sales() {
       <div className={styles.SecondSection}>
         <section>
           <h1>Users</h1>
+
           {ventasPaginadas.map((sale, key) => (
             <article key={key} style={{ flexDirection: "row" }}>
               <img
@@ -193,7 +196,6 @@ function Sales() {
       <div className={styles.ThirdSection}>
         {selectedSale && (
           <div className={styles.modalContainer}>
-            {/* contenido del modal */}
             <div className={styles.modalContent}>
               <h2 className={styles.modalTitle}>Purchase Details</h2>
               <div className={styles.gameItemContainer}>
@@ -230,17 +232,22 @@ function Sales() {
           </div>
         )}
 
+        {!sales.length && (
+          <div className={styles.NoFundMessage}>No sale(s) to display</div>
+        )}
+
         <div className={styles.pagination}>
           <button onClick={goToPreviousPage}>&lt;</button>
-          {Array.from({
-            length: Math.ceil(ventasOrdenadas.length / salesperpage),
-          }).map((_, index) => (
+          {calcularRangoPaginas(
+            currentPage,
+            Math.ceil(ventasOrdenadas.length / salesperpage)
+          ).map((pageIndex) => (
             <button
-              key={index}
-              onClick={() => handlePageChange(index + 1)}
-              className={currentPage === index + 1 ? styles.btnPaged : ""}
+              key={pageIndex}
+              onClick={() => handlePageChange(pageIndex)}
+              className={currentPage === pageIndex ? styles.btnPaged : ""}
             >
-              {index + 1}
+              {pageIndex}
             </button>
           ))}
           <button onClick={goToNextPage}>&gt;</button>

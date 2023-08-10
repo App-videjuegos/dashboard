@@ -1,5 +1,11 @@
 import axios from "axios";
-import { getAllSls,getAllSls2, getAllSlsUser, setErrorMsg } from "./salesSlice";
+import {
+  getAllSls,
+  getAllSls2,
+  getAllSlsUser,
+  setErrorMsg,
+  searchSale,
+} from "./salesSlice";
 
 export const getAllSales = () => {
   return async (dispatch) => {
@@ -9,7 +15,7 @@ export const getAllSales = () => {
       );
       const dataSales = response.data;
       dataSales
-        ? dispatch(getAllSls(dataSales.slice(1,180)))
+        ? dispatch(getAllSls(dataSales.slice(1, 180)))
         : dispatch(setErrorMsg("No se encontraron registros de ventas"));
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -42,7 +48,6 @@ export const getAllSalesUser = (id) => {
   };
 };
 
-
 export const getAllSales2 = () => {
   return async (dispatch) => {
     try {
@@ -58,4 +63,9 @@ export const getAllSales2 = () => {
       dispatch(setErrorMsg("Error al obtener los datos de ventas"));
     }
   };
+};
+
+export const searchSales = (name) => {
+  console.log(name, "actions");
+  return async (dispatch) => await dispatch(searchSale(name));
 };
