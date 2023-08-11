@@ -12,6 +12,7 @@ import {TiDeleteOutline} from 'react-icons/ti';
 import {BiImageAdd} from 'react-icons/bi'
 import {ImCancelCircle} from 'react-icons/im'
 import {BiCheck} from 'react-icons/bi'
+import { MdInsertComment } from "react-icons/md";
 
 
 // Mapeo de nombres de ruta a iconos
@@ -30,7 +31,8 @@ const routeIcons = {
   addImage: BiImageAdd,
   confirm: BiCheck,
   cancel: ImCancelCircle,
-  addImage: BiImageAdd
+  addImage: BiImageAdd,
+  Comments: MdInsertComment
 
 };
 

@@ -4,6 +4,7 @@ import Metrics from './src/views/dashboardAdmin/Metrics/Metrics';
 import Profile from './src/views/dashboardAdmin/Profile/Profile';
 import Users from './src/views/dashboardAdmin/Users/Users';
 import Sales from './src/views/dashboardAdmin/Sales/Sales';
+import Comments from './src/views/dashboardAdmin/Comments/Comments'
 
 const routes = [
     // { path: '/', component: Login, name: 'Login' },
@@ -13,6 +14,7 @@ const routes = [
     { path: '/users', component: Users, name: 'Users' },
     { path: '/sales', component: Sales, name: 'Sales'},
     { path: '/LoadVideogame', component: LoadVideogame, name: 'LoadGame' },
+    { path: '/comments', component: Comments, name: 'Comments' }
 ];
 
 export default routes;

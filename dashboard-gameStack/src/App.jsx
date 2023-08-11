@@ -10,6 +10,7 @@ import Users from './views/dashboardAdmin/Users/Users';
 import AdminBar from './components/AdminBar/AdminBar';
 import LoadVideogame from './views/dashboardAdmin/LoadVideogame/LoadVideogame';
 import Sales from "./views/dashboardAdmin/Sales/Sales";
+import Comments from './views/dashboardAdmin/Comments/Comments';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loadItemLocalStorage } from './components/Helpers/functionsLocalStorage';
@@ -40,6 +41,7 @@ function App() {
         <Route path="/users" element={<Users />} />
         <Route path="/sales" element={<Sales />} />
         <Route path="/loadvideogame" element={<LoadVideogame />} />
+        <Route path="/comments" element={<Comments />} />
       </Routes>
     </div>
   );
