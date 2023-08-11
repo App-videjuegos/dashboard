@@ -1,8 +1,8 @@
 .container {
   display: flex;
   flex-direction: row;
-  width: 70%;
-  height: 35rem;
+  width: 72%;
+  height: 37rem;
   align-items: center; /* Centra verticalmente el contenido */
   justify-content: center; /* Centra horizontalmente el contenido */
   color: white;
@@ -28,6 +28,7 @@
   color:#987bdc;
   font-size: 16px;
   margin-bottom: 0.2rem;
+  margin-left: 1rem;
 }
 
 .title {
@@ -37,9 +38,9 @@
 .inputs {
   display: flex;
   justify-content: center;
-  width: 60%;
+  width: 62%;
   background-color: #fafafa;
-  height: 35rem;
+  height: 37rem;
   border-radius: 10px;
   color: #1b063e;
 }
@@ -68,6 +69,8 @@
   width: 10rem;
   height: 2rem;
   text-align:center;
+  margin-right: 3rem;
+  margin-left: -40px;
 }
 
 
@@ -126,7 +129,7 @@
 .cancel {
   background-color: transparent;
   color: #622eda;
-  margin-left: 4rem;
+  margin-left: 2rem;
 }
 
 /* Imagen seleccionada */
@@ -158,6 +161,7 @@
   text-align: center;
   color: #987bdc;
   font-size: 0.7rem;
+  margin-left: -3rem;
 }
 
 .containerTextArea {

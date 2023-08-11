@@ -47,7 +47,6 @@
     width: 200px;
     height: 200px;
     object-fit: cover;
-    margin-left: 4rem;
   }
 
   /* Estilos para el formulario */
@@ -75,7 +74,7 @@
   position: relative;
   width: 25rem;
   height: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 .inputWithIcon {
   display: flex;
