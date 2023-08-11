@@ -1,29 +1,51 @@
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  justify-content: center ;
-  align-items: center;
-  margin-top: -40rem;
-  margin-left: 40rem;
-  background-color: #fafafa;
-  border-radius: 10px;
-}
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 100%;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  color: white;
+  margin-top: -570px;
+  margin-left: 50%; /* Ajusta la cantidad de margen izquierdo para desplazar el componente hacia la derecha */
+  transform: translateX(-32%);
+   /* Centra el componente horizontalmente después de aplicar el margen izquierdo */
+  /* border: solid 1px white; */
+  }
 
+  .formContainer {
+    background-color: #f0eaea;
+    border-radius: 10px;
+    padding: 20px; /* Puedes ajustar el valor del padding según tus preferencias */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega sombra para realzar el efecto del recuadro */
+    /* Asegúrate de que la propiedad de tamaño se ajuste automáticamente al contenido */
+    display: inline-block;
+    width: 96%;
+  }
 
 /* Encabezado */
 .container h1 {
   text-align: center;
+<<<<<<< Updated upstream
   color: #1b063e;
+=======
+  color: black;
+>>>>>>> Stashed changes
   font-size: 25px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
 .container h2 {
+<<<<<<< Updated upstream
   text-align: left;
   color:#1b063e;
+=======
+  text-align: center;
+  color: black;
+>>>>>>> Stashed changes
   font-size: 16px;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
 }
 
 
@@ -56,13 +78,14 @@
 }
 
 /* Botón de enviar y cancelar */
-.buttonLoadGame {
+/* .buttonLoadGame {
   background-color: #622eda;
   color: #fafafa;
   border: none;
   border-radius: 0.2rem;
   padding: 10px 20px;
   cursor: pointer;
+<<<<<<< Updated upstream
  margin-left: 10rem;
  
 }
@@ -76,13 +99,50 @@
   cursor: pointer;
  margin-left: 10rem;
  
+=======
+ margin-left: 6rem;
+} */
+
+.buttonLoadGame{
+  padding: 10px;
+  margin: 32;
+  height: 42;
+  width: 25%;
+  background-color: #6B35E8;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+>>>>>>> Stashed changes
 }
 
-.cancel {
+.buttonLoadGame:hover {
+  background-color: #0056b3;
+}
+
+/* .cancel {
   background-color: transparent;
   color:#622eda;
+<<<<<<< Updated upstream
   margin-left:4rem;
   text-decoration:underline;
+=======
+} */
+
+/* Estilos para el botón "Cancelar" */
+.cancel {
+  background-color: #ff0000;
+  color: #ffffff; 
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 25%;
+}
+
+
+.cancel:hover {
+  background-color: #ff3333;
+>>>>>>> Stashed changes
 }
 
 /* Imagen seleccionada */
@@ -112,13 +172,6 @@
   color: #987bdc;
 }
 
-.textarea {
-  /* Estilos para la caja de texto (textarea) */
-  width: 100%;
-  min-height: 100px;
-  resize: vertical;
-  padding: 5px;
-}
 
 .imageLoad {
   justify-content: center;
@@ -147,18 +200,16 @@
 .delete-button {
   display: none;
   position: absolute;
-
-
-  transform: translate(14rem,-450%);
+  transform: translate(20rem,-450%);
   background-color:transparent ;
-  color:#fafafa;
+  color:grey;
   padding: 5px;
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  width: 5rem;
-  height:5rem;
-  font-size: 8rem;
+  width: 10rem;
+  height:4.5rem;
+  font-size: 4rem;
 }
 
 .uploadImage{
@@ -169,26 +220,48 @@
 
 }
 
-.container .buttonContainer{
+.container{
+  display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.buttonContainer{
+  display: flex;
+  align-items: center;
   justify-content: center;
-
+}
+.buttonContainer button {
+  margin-right: 5px; /* Margen derecho para el primer botón */
+}
+/* Estilos para los elementos <h2> */
+h2 {
+  font-size: 24px; /* Tamaño de fuente */
+  font-weight: bold; /* Grosor de la fuente */
+  color: #333333; /* Color del texto */
+  margin-bottom: 5px; /* Margen inferior */
 }
 
-.title{
-  font-size: 10px;
+h1 {
+  font-size: 24px; /* Tamaño de fuente */
+  font-weight: bold; /* Grosor de la fuente */
+  color: #333333; /* Color del texto */
+  margin-bottom: 10px; /* Margen inferior */  
+  border-bottom: 4px solid #ccc;
 }
-
-.input{
+/* .input{
 margin-top: 1rem;
 width: 100% !important;
 
-}
+} */
+
 
 .textarea{
 border-radius: 10px;
 width: 100%;
+margin-bottom: 5px;
+resize: vertical;
+height: 50px;
 }
 
 
@@ -217,12 +290,81 @@ width: 100%;
 }
 
 .select{
-  width: 100%;
+  width: 50%;
   height: 2rem;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin: 0;
 }
 
 .imageLoad{
-  margin-top: 5rem;
+  margin-top: -1rem;
+}
+
+.subFormContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 900px; /* Ajusta el ancho máximo según tus necesidades */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  border-bottom: 3px solid #ccc;
+  margin-bottom: 10PX;
+}
+
+.subFormContainer > div {
+  flex: 0 0 calc(20% - 20px); /* Divide el espacio en tres columnas y deja un espacio entre ellas */
+  margin-bottom: 10px;
+}
+
+.subFormContainer > div > h2 {
+  margin-bottom: -25px; /* Reduzca el margen inferior del título */
+}
+.input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 115px; /* Reduzca el margen inferior del campo de entrada */
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  text-align: center;
+  padding-left: 10px;
+}
+
+.inputGenrePlatform {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: -10px; /* Reduzca el margen inferior del campo de entrada */
+  /* border: 1px solid #ccc; */
+  /* border-radius: 2px; */
+  text-align: center;
+  padding-left: 10px;
+}
+.inputGenrePlatform > div {
+  margin-bottom: 5px; /* Reduzca el margen inferior del título */
+}
+
+.imagesLoad {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 900px; /* Ajusta el ancho máximo según tus necesidades */
+  margin: 0 auto;
+  border-bottom: 3px solid #ccc;
+}
+
+.imagesLoad > div {
+  flex: 0 0 calc(50% - 20px); /* Divide el espacio en tres columnas y deja un espacio entre ellas */
+  margin-bottom: 20px;
+}
+
+.descrReq{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 900px; /* Ajusta el ancho máximo según tus necesidades */
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-bottom: 3px solid #ccc;
+}
+
+.descrReq > div {
+  flex: 0 0 calc(50% - 20px); /* Divide el espacio en tres columnas y deja un espacio entre ellas */
+  margin-bottom: 20px;
 }

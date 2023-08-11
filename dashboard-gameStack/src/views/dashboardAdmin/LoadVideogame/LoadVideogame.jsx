@@ -240,8 +240,10 @@ const LoadVideogame = () => {
 
   return (
     <form className={styles.container}>
-      <div>
+      <div className={styles.formContainer}>
+        
         <h1 className={styles.header}>Load Videogame</h1>
+        <div className={styles.subFormContainer}>
         <div>
           <h2>Title</h2>
           <input
@@ -258,7 +260,7 @@ const LoadVideogame = () => {
         </div>
 
         <div>
-          <h2 className={styles.title}>Price</h2>
+          <h2>Price</h2>
           <input
             className={styles.input}
             type="text"
@@ -273,6 +275,89 @@ const LoadVideogame = () => {
         </div>
 
         <div>
+          <h2>Release date</h2>
+          <div>
+            <input
+              type="date"
+              className={styles.datepickerinput}
+              onBlur={() => setInputFocusedDate(false)}
+              value={date}
+              onChange={(e) => handleDateChange(e.target.value)}
+              placeholder="Select a date"
+              max={today}
+            />
+          </div>
+          {validateNvg.releaseDate !== "" && !inputFocusedDate && (
+            <div className={styles.errorMessage}>{validateNvg.releaseDate}</div>
+          )}
+        </div>
+
+        <div className={styles.input}>
+        <h2>Select genre</h2>
+        <div>
+          <select className={styles.inputGenrePlatform} onChange={(e) => pushItemgenre(e.target.value)}>
+            <option value="" disabled selected>
+              Add genre
+            </option>
+            {stackData.genre.map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </select>
+        </div>
+
+      <div>
+        <select className={styles.inputGenrePlatform} onChange={(e) => removeItemgenre(e.target.value)}>
+          <option value="" disabled selected>
+            Remove genre
+          </option>
+          {newVideoGame.genre.map((genre) => (
+            <option key={genre} value={genre}>
+              {genre}
+            </option>
+          ))}
+        </select>
+      </div>
+      {validateNvg.genre !== "" && !validateSubmit && (
+        <div className={styles.errorMessage}>{validateNvg.genre}</div>
+      )}
+</div>
+<br></br>
+      <div className={styles.input}>
+        <h2>Select platform</h2>
+        <div> 
+          <select className={styles.inputGenrePlatform} onChange={(e) => pushItemplatforms(e.target.value)}>
+            <option value="" disabled selected>
+              Add platforms
+            </option>
+            {stackData.platforms.map((platform) => (
+              <option key={platform} value={platform}>
+                {platform}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <select className={styles.inputGenrePlatform} onChange={(e) => removeItemplatforms(e.target.value)}>
+            <option value="" disabled selected>
+              Remove platforms
+            </option>
+            {newVideoGame.platforms.map((platform) => (
+              <option key={platform} value={platform}>
+                {platform}
+              </option>
+            ))}
+          </select>
+        </div>
+        {validateNvg.platforms !== "" && !validateSubmit && (
+          <div className={styles.errorMessage}>{validateNvg.platforms}</div>
+        )}
+      </div>
+        </div>
+
+        <div className={styles.descrReq}>
+          <div>
           <h2>Description</h2>
           <textarea
             className={styles.textarea}
@@ -302,25 +387,9 @@ const LoadVideogame = () => {
               </div>
             )}
         </div>
-
-        <div>
-          <h2>Release date</h2>
-          <div>
-            <input
-              type="date"
-              className={styles.datepickerinput}
-              onBlur={() => setInputFocusedDate(false)}
-              value={date}
-              onChange={(e) => handleDateChange(e.target.value)}
-              placeholder="Select a date"
-              max={today}
-            />
-          </div>
-          {validateNvg.releaseDate !== "" && !inputFocusedDate && (
-            <div className={styles.errorMessage}>{validateNvg.releaseDate}</div>
-          )}
         </div>
 
+        <div className={styles.imagesLoad}>
         <div className={styles.imageLoad}>
           <h2>Front page</h2>
           <input
@@ -366,7 +435,7 @@ const LoadVideogame = () => {
             onBlur={() => setInputFocusedScreenShots(false)}
             onChange={handleScreenImageChange}
             id="imagePicker"
-            style={{ display: "flex" }}
+            style={{ display: "flex", marginLeft:"20%" }}
             multiple
           />
           {/* <text className={styles.uploadImage}>
@@ -409,78 +478,19 @@ const LoadVideogame = () => {
                 </div>
               )}
             </div>
-          </label>
-        </div>
-      </div>
-      <div className={styles.message}>
+
         <text className={styles.message}>
           Hold ctrl to select multiple images
                     {validateNvg.screenShots !== "" && !inputFocusedScreenShots && (
                       <div className={styles.errorMessage}>{validateNvg.screenShots}</div>
                     )}
         </text>
-      </div>
-      <div>
-        <h2>Select genre</h2>
-        <div>
-          <select className={styles.select} onChange={(e) => pushItemgenre(e.target.value)}>
-            <option value="" disabled selected>
-              Add genre
-            </option>
-            {stackData.genre.map((genre) => (
-              <option key={genre} value={genre}>
-                {genre}
-              </option>
-            ))}
-          </select>
+          </label>
         </div>
+      
       </div>
-      <div className={styles.containerSelect}>
-        <select className={styles.select} onChange={(e) => removeItemgenre(e.target.value)}>
-          <option value="" disabled selected>
-            Remove genre
-          </option>
-          {newVideoGame.genre.map((genre) => (
-            <option key={genre} value={genre}>
-              {genre}
-            </option>
-          ))}
-        </select>
-      </div>
-      {validateNvg.genre !== "" && !validateSubmit && (
-        <div className={styles.errorMessage}>{validateNvg.genre}</div>
-      )}
 
-      <div>
-        <h2>Select platform</h2>
-        <div> 
-          <select className={styles.select} onChange={(e) => pushItemplatforms(e.target.value)}>
-            <option value="" disabled selected>
-              Add platforms
-            </option>
-            {stackData.platforms.map((platform) => (
-              <option key={platform} value={platform}>
-                {platform}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className={styles.containerSelect}>
-          <select className={styles.select} onChange={(e) => removeItemplatforms(e.target.value)}>
-            <option value="" disabled selected>
-              Remove platforms
-            </option>
-            {newVideoGame.platforms.map((platform) => (
-              <option key={platform} value={platform}>
-                {platform}
-              </option>
-            ))}
-          </select>
-        </div>
-        {validateNvg.platforms !== "" && !validateSubmit && (
-          <div className={styles.errorMessage}>{validateNvg.platforms}</div>
-        )}
-      </div>
+
 
       <div className={styles.buttonContainer}>
         <button
@@ -502,6 +512,7 @@ const LoadVideogame = () => {
         <button className={styles.cancel} onClick={CancelSubmit}>
           Cancel
         </button>
+      </div>
       </div>
     </form>
   );
