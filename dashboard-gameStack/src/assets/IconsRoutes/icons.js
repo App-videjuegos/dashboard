@@ -7,7 +7,6 @@ import { FaUsers } from 'react-icons/fa';
 import { BiSolidCloudUpload } from 'react-icons/bi';
 import { AiFillEye } from 'react-icons/ai'
 import { AiFillEyeInvisible } from 'react-icons/ai'
-// Agrega la importación del ícono de cerrar sesión
 import { FiLogOut } from 'react-icons/fi'; 
 import {TiDeleteOutline} from 'react-icons/ti';
 import {BiImageAdd} from 'react-icons/bi'
@@ -31,6 +30,7 @@ const routeIcons = {
   addImage: BiImageAdd,
   confirm: BiCheck,
   cancel: ImCancelCircle,
+  addImage: BiImageAdd
 
 };
 
