@@ -14,14 +14,14 @@
 /* Encabezado */
 .container h1 {
   text-align: center;
-  color: #622eda;
+  color: #1b063e;
   font-size: 25px;
   margin-bottom: 20px;
 }
 
 .container h2 {
   text-align: left;
-  color:#fafafa;
+  color:#1b063e;
   font-size: 16px;
   margin-bottom: 0.2rem;
 }
@@ -63,12 +63,26 @@
   border-radius: 0.2rem;
   padding: 10px 20px;
   cursor: pointer;
- margin-left: 6rem;
+ margin-left: 10rem;
+ 
+}
+
+.buttonLoadGame hover {
+  background-color: red;
+  color: #fafafa;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 10px 20px;
+  cursor: pointer;
+ margin-left: 10rem;
+ 
 }
 
 .cancel {
   background-color: transparent;
   color:#622eda;
+  margin-left:4rem;
+  text-decoration:underline;
 }
 
 /* Imagen seleccionada */

@@ -38,3 +38,56 @@ export const showLocalStorageData = () => {
     console.error('Error al obtener datos de localStorage:', error);
   }
 };
+
+
+export const updateLocalStorage = async (key, newData) => {
+  try {
+    // Obtén los datos existentes del AsyncStorage
+    const storedData = await localStorage.getItem(key);
+    if (storedData !== null) {
+      const parsedData = JSON.parse(storedData);
+      const updatedData = { ...parsedData };
+
+      const changedFields = [];
+      for (const field in newData) {
+        if (newData[field] !== updatedData[field]) {
+          updatedData[field] = newData[field];
+          changedFields.push(field);
+        }
+      }
+
+      // Actualiza solo los valores que han cambiado
+      if (changedFields.length > 0) {
+        await localStorage.setItem(key, JSON.stringify(updatedData));
+      }
+
+      const result = {
+        createdAt: updatedData.createdAt,
+        date: updatedData.date,
+        deleted: updatedData.deleted,
+        email: updatedData.email,
+        fullname: updatedData.fullname,
+        id: updatedData.id,
+        image: updatedData.image,
+        newsLetter: updatedData.newsLetter,
+        password: updatedData.password,
+        phone: updatedData.phone,
+        tac: updatedData.tac,
+        token: updatedData.token,
+        updatedAt: updatedData.updatedAt,
+        user: updatedData.user,
+        userAdmin: updatedData.userAdmin
+      };
+
+      return result;
+    }
+  } catch (error) {
+    console.error("Error updating AsyncStorage:", error);
+
+    const result = {
+      error: error.message || "Unknown error"
+    };
+
+    return result;
+  }
+};

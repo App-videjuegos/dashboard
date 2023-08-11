@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     allUsers: [],
     dataUser: {},
+    dataUsr: {},
     gamesUser: [],
     usrMsgErr: "",
     userLoged: false,
@@ -27,6 +28,9 @@ export const UsersSlice = createSlice({
         getUserbyName: (state, action) => {
             state.allUsers = action.payload;
             state.notFoundGames = false
+        },
+        getUsrByName: (state, action) => {
+            state.dataUsr = action.payload;
         },
         usrMsgErr: (state, action) => {
             state.dataUser = action.payload
@@ -62,6 +66,6 @@ export const UsersSlice = createSlice({
     }
 })
 
-export const { getAllUsers, getUserById, usrMsgErr, getUserbyName, notFoundUsersError, setErrorMsg, setUserLoged, setUserToken, updateUsr } = UsersSlice.actions
+export const { getAllUsers, getUserById, usrMsgErr, getUserbyName, notFoundUsersError, setErrorMsg, setUserLoged, setUserToken, updateUsr,getUsrByName } = UsersSlice.actions
 
 export default UsersSlice.reducer

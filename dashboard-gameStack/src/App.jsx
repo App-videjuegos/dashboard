@@ -10,9 +10,23 @@ import Users from './views/dashboardAdmin/Users/Users';
 import AdminBar from './components/AdminBar/AdminBar';
 import LoadVideogame from './views/dashboardAdmin/LoadVideogame/LoadVideogame';
 import Sales from "./views/dashboardAdmin/Sales/Sales";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadItemLocalStorage } from './components/Helpers/functionsLocalStorage';
+import { checkLogedUser } from './redux/usersActions';
 
 function App() {
   const location = useLocation();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function fetchData() {
+      const logedData = await loadItemLocalStorage("logedGameStack");
+      console.log(logedData)
+      if (logedData.user && logedData.deleted=== false) dispatch(checkLogedUser());
+    }
+    fetchData();
+  }, []);
 
   return (
     <div>

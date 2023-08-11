@@ -11,6 +11,8 @@ import { AiFillEyeInvisible } from 'react-icons/ai'
 import { FiLogOut } from 'react-icons/fi'; 
 import {TiDeleteOutline} from 'react-icons/ti';
 import {BiImageAdd} from 'react-icons/bi'
+import {ImCancelCircle} from 'react-icons/im'
+import {BiCheck} from 'react-icons/bi'
 
 
 // Mapeo de nombres de ruta a iconos
@@ -26,7 +28,9 @@ const routeIcons = {
   Sales: FaMoneyBill,
   LoadGame: BiSolidCloudUpload,
   delete: TiDeleteOutline,
-  addImage: BiImageAdd
+  addImage: BiImageAdd,
+  confirm: BiCheck,
+  cancel: ImCancelCircle,
 
 };
 
