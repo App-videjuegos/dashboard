@@ -19,6 +19,15 @@ export const CommentsSlice = createSlice({
         getCommentsByName: (state, action) => {
             state.allComments = action.payload;
         },
+        updateCommentInState: (state, action) => {
+            const updatedComment = action.payload;
+
+            state.allComments = state.allComments.map(comment =>
+              comment.id === updatedComment.id ? updatedComment : comment
+            );
+
+           
+          },
         // getUserById: (state, action) =>{
         //     state.dataUser = action.payload
         // },
@@ -38,6 +47,6 @@ export const CommentsSlice = createSlice({
     }
 })
 
-export const {getAllComments,getCommentsByName} = CommentsSlice.actions
+export const {getAllComments,getCommentsByName,updateCommentInState} = CommentsSlice.actions
 
 export default CommentsSlice.reducer

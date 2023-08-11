@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllComments,getCommentsByName} from './commentsSlice.js'
+import { getAllComments,getCommentsByName,updateCommentInState} from './commentsSlice.js'
 
 let estado=0
 
@@ -30,13 +30,13 @@ export const getComments = () => {
     };
   };
 
-  export const updateComment = (commentId, boolean) => {
-    console.log("DESDE ACTION",commentId,boolean)
+  export const updateComment = (commentId) => {
+    console.log("DESDE ACTION",commentId)
     return async (dispatch) => {
       try {
         const response = await axios.put(
-          `https://pfvideojuegos-back-production.up.railway.app/reviews/${commentId}`,
-          { deleted: boolean }
+          `https://pfvideojuegos-back-production.up.railway.app/reviews/${commentId.id}`,
+          { deleted: commentId.deleted }
         );
   
         const updatedComment = response.data;
@@ -47,10 +47,9 @@ export const getComments = () => {
             "https://pfvideojuegos-back-production.up.railway.app/reviews"
           );
     
-          const allComments = response.data;
           
-          if(allComments){
-              dispatch(getAllComments(allComments))
+          if(response.data){
+            dispatch(updateCommentInState(updatedComment))
           }else{
               console.log("Error, no comments")
           }

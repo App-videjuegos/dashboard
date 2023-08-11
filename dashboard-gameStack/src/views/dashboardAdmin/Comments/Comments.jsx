@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck, faCircleXmark, faPen, faStreetView } from '@fortawesome/free-solid-svg-icons';
 
-let prevId = 1;
 
 function Comments() {
   const dispatch = useDispatch();
@@ -29,35 +28,20 @@ function Comments() {
   let allComments = useSelector((state) => state.commentsState.allComments);
   console.log("comments",allComments)
 
+  function compararHorasDescendente(a, b) {
+    const horaA = new Date(a.reviewDate).getTime(); // Obtener el tiempo en milisegundos
+    const horaB = new Date(b.reviewDate).getTime();
+    return horaB - horaA; // Cambio en la comparación para orden descendente por hora
+  }
+  
+  // Ordenar los comentarios por hora de manera descendente antes de realizar la paginación
+  allComments = [...allComments].sort(compararHorasDescendente);
+
   function changeHandler(e) {
     setInput(e.target.value);
     const busqueda = e.target.value.toLowerCase();
     dispatch(getCommentsbyName(busqueda));
   }
-
-  //DELETE COMMENT
-  const handleSelectComment = (comment) => {
-    if (selectedComment && selectedComment.id === comment.id && showMenu) {
-      // Deseleccionar el juego si ya estaba seleccionado y el menú está visible
-      setSelectedComment(null);
-      setShowMenu(false); // Ocultar el menú emergente al deseleccionar
-    } else {
-      // Seleccionar el juego si no estaba seleccionado previamente
-      setSelectedComment(comment);
-      setShowMenu(true); // Mostrar el menú emergente al seleccionar
-    }
-  };
-
-  const handleDeleteComment = () => {
-    // Implementa aquí la lógica para eliminar el juego seleccionado
-    console.log("Eliminando el comentario seleccionado:", selectedComment);
-    setSelectedComment(null); // Reseteamos el juego seleccionado después de eliminarlo
-    setShowMenu(false); // Ocultar el menú emergente después de eliminar
-  };
-
-  const openEditModal = () => {
-    setShowEditModal(true);
-  };
 
   // Función para cerrar el modal de edición
   const closeEditModal = () => {
@@ -74,13 +58,12 @@ function Comments() {
 
 
   const handleEditClick = (user) => {
-    if(!user.deleted){
-    dispatch(updateComment(user.id,true));
-  }else{
-    dispatch(updateComment(user.id,false))
-  }
+    const updatedUser = { deleted: !user.deleted, id: user.id };
 
-  }
+    dispatch(updateComment(updatedUser)); // Actualiza el estado global
+
+  };
+  
 
   // Lógica de paginación
   const indiceUltimoUsuario = currentPage * usuariosPorPagina;
@@ -141,7 +124,8 @@ function Comments() {
                 </div>
               </div>
               {Array.isArray(usuariosActuales) && usuariosActuales.length > 0 ? (
-                usuariosActuales.map((e) => (
+                usuariosActuales.slice()
+                .sort(compararHorasDescendente).map((e) => (
              
                 //     <div
                 //   key={e.id}
@@ -150,7 +134,7 @@ function Comments() {
                 //   onClick={() => handleSelectComment(e)}
                 // >  
                   
-                  <div className={styles.userTable} key={prevId++}>
+                  <div className={styles.userTable} key={e.id}>
                     <div className={styles.userRow}>
                       <div className={styles.userColumn2}>{e.user ? e.user: "Guest"}</div>
                       <div className={styles.userColumn3}>{e.comment}</div>
@@ -168,7 +152,7 @@ function Comments() {
                         </span>
                       )}</div>
                       <div className={styles.userColumn5}>{e.videogameId}</div>
-                      <div className={styles.userColumn6}>{convertirFecha(e.createdAt)}</div>
+                      <div className={styles.userColumn6}>{convertirFecha(e.reviewDate)}</div>
                       {/* <button className= {styles.buttonDelete} onClick={ openEditModal}>
         <FontAwesomeIcon className={styles.icon} icon={faTrash} />
       </button> */}
