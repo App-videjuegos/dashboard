@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import {
   checkLogedUser,
   getUserByName2,
-  updateUser,
+  updateUser1,
 } from "../../../redux/usersActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
@@ -88,7 +88,7 @@ const Profile = () => {
     console.log(objupdatedUser);
 
     try {
-      const response = await updateUser(objupdatedUser);
+      const response = await updateUser1(objupdatedUser);
       console.log(response);
       showAlert(
         "Data Update!",
@@ -247,11 +247,11 @@ const Profile = () => {
                         icon={faPencil}
                         className={styles.crossIcon}
                       />
+                    </div>
+                  </div>
                       {errors.pass && touched.pass && (
                         <span className={styles.error}>{errors.pass}</span>
                       )}
-                    </div>
-                  </div>
 
                   <div className={styles.inputContainer}>
                     <div className={styles.inputWithIcon}>
@@ -267,11 +267,11 @@ const Profile = () => {
                         icon={faPencil}
                         className={styles.crossIcon}
                       />
+                    </div>
+                  </div>
                       {errors.fullname && touched.fullname && (
                         <span className={styles.error}>{errors.fullname}</span>
                       )}
-                    </div>
-                  </div>
 
                   <div className={styles.inputContainer}>
                     <div className={styles.inputWithIcon}>
@@ -287,11 +287,11 @@ const Profile = () => {
                         icon={faPencil}
                         className={styles.crossIcon}
                       />
+                    </div>
+                  </div>
                       {errors.email && touched.email && (
                         <span className={styles.error}>{errors.email}</span>
                       )}
-                    </div>
-                  </div>
 
                   <div className={styles.inputContainer}>
                     <div className={styles.inputWithIcon}>
@@ -323,11 +323,11 @@ const Profile = () => {
                         icon={faPencil}
                         className={styles.crossIcon}
                       />
+                    </div>
+                  </div>
                       {errors.phone && touched.phone && (
                         <span className={styles.error}>{errors.phone}</span>
                       )}
-                    </div>
-                  </div>
                   <button
                     className={styles.miniButton}
                     type="submit"

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CancelSubmit from "../../../components/UtilsCreateGame/CalcelSubmit";
 import SubmitGame from "../../../components/UtilsCreateGame/Submit";
-import styles from "./LoadVIdeogame.module.css";
+import styles from "./LoadVideogame.module.css";
 import axios from "axios";
 
 import { validate } from "../../../components/UtilsCreateGame/CreateGameValidate";

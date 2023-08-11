@@ -133,10 +133,10 @@ const Login = () => {
                   onBlur={handleBlur("user")}
                   className={styles.input}
                 />
+              </div>
                 {errors.user && touched.user && (
                   <p className={styles.error}>{errors.user}</p>
                 )}
-              </div>
 
               <div className={styles.containerinput}>
                 <input
@@ -147,9 +147,7 @@ const Login = () => {
                   onBlur={handleBlur("password")}
                   className={styles.input}
                 />
-                {errors.password && touched.password && (
-                  <p className={styles.error}>{errors.password}</p>
-                )}
+
                 <button
                   className={styles.showPasswordButton}
                   onClick={() => setShowPassword(!showPassword)}
@@ -157,6 +155,9 @@ const Login = () => {
                   {showPassword ? <routeIcons.Visible/> : <routeIcons.Invisible/>}
                 </button>
               </div>
+              {errors.password && touched.password && (
+                  <p className={styles.error}>{errors.password}</p>
+                )}
 
               <button className={styles.loginButton} onClick={handleSubmit}>
                 Login

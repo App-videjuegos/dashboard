@@ -26,24 +26,15 @@
 /* Encabezado */
 .container h1 {
   text-align: center;
-<<<<<<< Updated upstream
-  color: #1b063e;
-=======
   color: black;
->>>>>>> Stashed changes
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
 .container h2 {
-<<<<<<< Updated upstream
-  text-align: left;
-  color:#1b063e;
-=======
   text-align: center;
   color: black;
->>>>>>> Stashed changes
   font-size: 16px;
   margin-bottom: 0.5rem;
 }
@@ -85,21 +76,6 @@
   border-radius: 0.2rem;
   padding: 10px 20px;
   cursor: pointer;
-<<<<<<< Updated upstream
- margin-left: 10rem;
- 
-}
-
-.buttonLoadGame hover {
-  background-color: red;
-  color: #fafafa;
-  border: none;
-  border-radius: 0.2rem;
-  padding: 10px 20px;
-  cursor: pointer;
- margin-left: 10rem;
- 
-=======
  margin-left: 6rem;
 } */
 
@@ -112,7 +88,6 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
->>>>>>> Stashed changes
 }
 
 .buttonLoadGame:hover {
@@ -122,10 +97,6 @@
 /* .cancel {
   background-color: transparent;
   color:#622eda;
-<<<<<<< Updated upstream
-  margin-left:4rem;
-  text-decoration:underline;
-=======
 } */
 
 /* Estilos para el botón "Cancelar" */
@@ -142,7 +113,6 @@
 
 .cancel:hover {
   background-color: #ff3333;
->>>>>>> Stashed changes
 }
 
 /* Imagen seleccionada */
