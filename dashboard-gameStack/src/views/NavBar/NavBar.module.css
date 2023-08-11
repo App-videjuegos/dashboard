@@ -9,6 +9,7 @@
   background-color: #987bdc;
   color: white;
   border-radius: 4px;
+
 }
 
 /* Estilos para el título "GameStack" */
@@ -91,10 +92,13 @@ hr {
 .menu-container .close-session {
   color: #1b063e;
   font-weight: bold;
-  margin-top: -2px; /* Ajusta el margen superior para alinear el ícono con el texto */
+  margin-top: -11px; /* Ajusta el margen superior para alinear el ícono con el texto */
   font-size: 24px;
   border: none;
-  background-color: transparent;
+  background-color: #987bdc;
+  padding-bottom: 3.5rem;
+  padding-left: 6.9rem;
+  padding-right: 6.9rem;
 }
 
 /* Estilos para el ícono */
