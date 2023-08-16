@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { removeItemLocalStorage, showLocalStorageData } from "../../components/Helpers/functionsLocalStorage";
 import { checkLogedUser } from "../../redux/usersActions";
 import { useNavigate } from "react-router";
+import image from "../../assets/logoDark.png"
 function NavBar() {
 
   const dispatch = useDispatch()
@@ -28,7 +29,7 @@ function NavBar() {
 
   return (
     <div className={styles['menu-container']}> {/* Utiliza la clase del CSS Module */}
-      <h1>GameStack</h1>
+      <img src={image} style={{marginTop:"1.3rem",marginBottom:"1rem"}}/>
       <ul id="nav-list">
         {routes.map((route, index) => (
           <li key={index}>
