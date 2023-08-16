@@ -13,13 +13,14 @@
   }
 
   .tableContainer {
+    align-items: center;
     background-color: #f0eaea;
     border-radius: 10px;
     padding: 20px; /* Puedes ajustar el valor del padding según tus preferencias */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega sombra para realzar el efecto del recuadro */
     /* Asegúrate de que la propiedad de tamaño se ajuste automáticamente al contenido */
     display: inline-block;
-    width: 927px;
+    width: 58rem;
     border: 1px solid #622eda;
   }
 

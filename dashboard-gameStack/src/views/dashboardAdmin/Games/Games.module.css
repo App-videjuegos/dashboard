@@ -6,20 +6,21 @@
     align-items: center; /* Centra verticalmente el contenido */
     justify-content: center; /* Centra horizontalmente el contenido */
     color:black;
-    margin-top: -600px;
+    margin-top: -615px;
     margin-left: 50%; /* Ajusta la cantidad de margen izquierdo para desplazar el componente hacia la derecha */
     transform: translateX(-32%);
     border-radius: 10px;
   
 }
 .tableContainer {
+  align-items: center;
   background-color: #f0eaea;
   border-radius: 10px;
   padding: 20px; /* Puedes ajustar el valor del padding según tus preferencias */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega sombra para realzar el efecto del recuadro */
   /* Asegúrate de que la propiedad de tamaño se ajuste automáticamente al contenido */
   display: inline-block;
-  width: 55rem;
+  width: 58rem;
   border: 1px solid #622eda;
 }
 /* Estilos de la tabla */
