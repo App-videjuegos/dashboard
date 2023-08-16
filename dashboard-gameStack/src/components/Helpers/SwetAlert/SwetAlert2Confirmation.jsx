@@ -16,9 +16,10 @@ const showAlert = (title, text, icon , confirmButtonText,action1,action2) => {
     },
   }).then((result)=>{
     if(result.isConfirmed){
-    action1}
+    action1()
+  }
     if(result.isDenied){
-      action2
+      action2()
     }
   });
 };

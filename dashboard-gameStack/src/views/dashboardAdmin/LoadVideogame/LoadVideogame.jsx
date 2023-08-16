@@ -531,7 +531,7 @@ const LoadVideogame = () => {
               >
                 Load videogame
               </button>
-              <button className={styles.cancel} onClick={CancelSubmit}>
+              <button className={styles.cancel} onClick={CancelSubmit} type="button">
                 Cancel
               </button>
             </div>
