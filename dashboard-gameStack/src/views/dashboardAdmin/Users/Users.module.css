@@ -1,12 +1,15 @@
 .users-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center; /* Centra verticalmente el contenido */
-    justify-content: center; /* Centra horizontalmente el contenido */
-    color: rgb(128, 124, 124);
-    margin-top: -44%;
-    margin-left: 14%;
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  height: 35rem;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  color:black;
+  margin-top: -620px;
+  margin-left: 50%; /* Ajusta la cantidad de margen izquierdo para desplazar el componente hacia la derecha */
+  transform: translateX(-32%);
+  border-radius: 10px;
   }
 
   .tableContainer {
@@ -17,6 +20,7 @@
     /* Asegúrate de que la propiedad de tamaño se ajuste automáticamente al contenido */
     display: inline-block;
     width: 927px;
+    border: 1px solid #622eda;
   }
 
   /* Estilos de la tabla */

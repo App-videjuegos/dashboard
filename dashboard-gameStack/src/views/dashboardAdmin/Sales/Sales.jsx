@@ -6,6 +6,7 @@ import { getAllSales, searchSales } from "../../../redux/salesActions";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import Loading2 from "../../../components/Helpers/Loading2";
 
 function Sales() {
   const dispatch = useDispatch();
@@ -92,6 +93,8 @@ function Sales() {
     e.preventDefault();
     dispatch(searchSales(e.target.value));
   };
+
+
   return (
     <div className={styles.Container}>
       <section className={styles.FirstSection}>
@@ -105,7 +108,7 @@ function Sales() {
           />
         </div>
       </section>
-
+      
       <div className={styles.SecondSection}>
         <section>
           <h1>Users</h1>
@@ -232,9 +235,7 @@ function Sales() {
           </div>
         )}
 
-        {!sales.length && (
-          <div className={styles.NoFundMessage}>No sale(s) to display</div>
-        )}
+        {!sales.length && (<Loading2/>)}
 
         <div className={styles.pagination}>
           <button onClick={goToPreviousPage}>&lt;</button>

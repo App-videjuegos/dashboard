@@ -1,12 +1,16 @@
 .users-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center; /* Centra verticalmente el contenido */
-  justify-content: center; /* Centra horizontalmente el contenido */
-  color: rgb(128, 124, 124);
-  margin-top: -580px;
-  margin-left: 170px;
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    height: 35rem;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    color:black;
+    margin-top: -600px;
+    margin-left: 50%; /* Ajusta la cantidad de margen izquierdo para desplazar el componente hacia la derecha */
+    transform: translateX(-32%);
+    border-radius: 10px;
+  
 }
 .tableContainer {
   background-color: #f0eaea;
@@ -15,7 +19,8 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega sombra para realzar el efecto del recuadro */
   /* Asegúrate de que la propiedad de tamaño se ajuste automáticamente al contenido */
   display: inline-block;
-  width: 896px;
+  width: 55rem;
+  border: 1px solid #622eda;
 }
 /* Estilos de la tabla */
 .userTable {
@@ -50,7 +55,7 @@ margin-left: -12px;
 /* Estilos de las filas */
 .userRow {
 display: flex;
-width: 170%;
+width: 100%;
 height: -70%;
 }
 /* Estilos de las celdas */
@@ -198,20 +203,20 @@ transition: width 0.4s ease-in-out;
 width: 100%;
 }
 .menuContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(35rem)translateY(-33.5rem);
   position: absolute;
-  top: 94px;
-  right: 650px;
-  background-color: transparent; /* Cambiar el fondo a transparente */
-  padding: 5px;
-  margin-right: 15px;
+  margin-right: -170px;
   margin-top: 10px;
 }
 .menuContainer2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(42rem)translateY(-33.5rem);
   position: absolute;
-  top: 94px;
-  right: 650px;
-  background-color: transparent; /* Cambiar el fondo a transparente */
-  padding: 5px;
   margin-right: -170px;
   margin-top: 10px;
 }
@@ -225,7 +230,7 @@ width: 100%;
   font-weight: bold; /* Hacer el texto en negrita */
 }
 .menuContainer button {
-  background-color: #622EDA; /* Agregar un fondo gris claro a los botones */
+  background-color:#00D37B; /* Agregar un fondo gris claro a los botones */
   border: none; /* Quitar el borde de los botones */
   border-radius: 5px; /* Ajustar el radio del borde */
   padding: 10px; /* Ajustar el espacio interno del botón */

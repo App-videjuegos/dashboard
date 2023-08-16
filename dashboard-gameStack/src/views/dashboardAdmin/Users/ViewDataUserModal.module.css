@@ -1,7 +1,7 @@
 .modalBackdrop {
   position: absolute;
-  top: 406px;
-  left: 63%;
+  top: 300px;
+  left: 45%;
   transform: translate(-50%, -50%);
   width: 650px;
   display: flex;

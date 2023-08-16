@@ -174,15 +174,15 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
       <div className={styles.modalContent}>
         <h3>Edit Game</h3>
         <form>
-        <div className={styles.formGroup}>
-  {editedGame.image && (
-    <img
-      src={editedGame.image}
-      alt={`Image for ${editedGame.name}`}
-      className={styles.gameImage}
-    />
-  )}
-</div>
+          <div className={styles.formGroup}>
+            {editedGame.image && (
+              <img
+                src={editedGame.image}
+                alt={`Image for ${editedGame.name}`}
+                className={styles.gameImage}
+              />
+            )}
+          </div>
           <div>
             <div className={styles.inputleft}>
               <label>Name:</label>
@@ -222,110 +222,113 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
                 onChange={handleChange}
               />
             </div>
-
-          </div>
-       
-            
-            
-       
+          
 
           <div className={styles.right}>
-          <div className={`${styles.row} ${styles.platform}`}>
-    <div>
-      <label className={styles.titulop}>Platforms:</label>
-      <select className={`${styles.selectField}`} name="platforms" onChange={handlePlatformChange} multiple>
-        {selectedPlatforms.map((platform) => (
-          <option key={platform} value={platform}>
-            {platform}
-          </option>
-        ))}
-      </select>
-      <select className={styles.option}
-        value={newPlatform}
-        onChange={(e) => setNewPlatform(e.target.value)}
-      >
-        <option value="">Select Platform</option>
-        {platforms.map((platform) => (
-          <option key={platform} value={platform}>
-            {platform}
-          </option>
-        ))}
-      </select>
-      <div className={styles.patgenbot}>
-
-      
-      <button type="button" onClick={handleAddPlatform}>
-        Add Platform
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          handleRemovePlatform();
-        }}
-      >
-        Remove Platform
-      </button>
-      </div>
-    </div>
-    <div>
-      <label className={styles.titulog}>Genre:</label>
-      <select className={`${styles.selectField}`} name="genre" onChange={handleGenreChange} multiple>
-        {selectedGenres.map((genre) => (
-          <option key={genre} value={genre}>
-            {genre}
-          </option>
-        ))}
-      </select>
-      <select className={styles.option}
-        value={newGenre}
-        onChange={(e) => setNewGenre(e.target.value)}
-      >
-        <option  value="">Select Genre</option>
-        {genres.map((genre) => (
-          <option key={genre} value={genre}>
-            {genre}
-          </option>
-        ))}
-      </select>
-      <div className={styles.patgenbot}>
-      <button type="button" onClick={handleAddGenre}>
-        Add Genre
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          handleRemoveGenre();
-        }}
-      >
-        Remove Genre
-      </button>
-    </div>
-    </div>
-    
-  </div>
+            <div className={`${styles.row} ${styles.platform}`}>
+              <div>
+                <label className={styles.titulop}>Platforms:</label>
+                <select
+                  className={`${styles.selectField}`}
+                  name="platforms"
+                  onChange={handlePlatformChange}
+                  multiple
+                >
+                  {selectedPlatforms.map((platform) => (
+                    <option key={platform} value={platform}>
+                      {platform}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  className={styles.option}
+                  value={newPlatform}
+                  onChange={(e) => setNewPlatform(e.target.value)}
+                >
+                  <option value="">Select Platform</option>
+                  {platforms.map((platform) => (
+                    <option key={platform} value={platform}>
+                      {platform}
+                    </option>
+                  ))}
+                </select>
+                <div className={styles.patgenbot}>
+                  <button type="button" onClick={handleAddPlatform}>
+                    Add Platform
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleRemovePlatform();
+                    }}
+                  >
+                    Remove Platform
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label className={styles.titulog}>Genre:</label>
+                <select
+                  className={`${styles.selectField}`}
+                  name="genre"
+                  onChange={handleGenreChange}
+                  multiple
+                >
+                  {selectedGenres.map((genre) => (
+                    <option key={genre} value={genre}>
+                      {genre}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  className={styles.option}
+                  value={newGenre}
+                  onChange={(e) => setNewGenre(e.target.value)}
+                >
+                  <option value="">Select Genre</option>
+                  {genres.map((genre) => (
+                    <option key={genre} value={genre}>
+                      {genre}
+                    </option>
+                  ))}
+                </select>
+                <div className={styles.patgenbot}>
+                  <button type="button" onClick={handleAddGenre}>
+                    Add Genre
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleRemoveGenre();
+                    }}
+                  >
+                    Remove Genre
+                  </button>
+                </div>
+              </div>
+            </div>
             <div className={styles.descrip}>
-            <label className={styles.titulod}>Description:</label>
-            <textarea
-              name="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={4}
-              cols={50}
-            />
+              <label className={styles.titulod}>Description:</label>
+              <textarea
+                name="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows={4}
+                cols={50}
+              />
+            </div>
           </div>
           </div>
-          
         </form>
-        {showSuccessMessage && (
+        {showSuccessMessage &&
           showAlert(
             "Data Update!",
             "Your information has been updated",
-            'routeIcons.confirm',
-            "Ok",
-            )
-        )}
-        <div >
-        <div className={styles.modalButtons}>
+            "routeIcons.confirm",
+            "Ok"
+          )}
+        <div>
+          <div className={styles.modalButtons}>
             <button
               className={
                 editedGame.deleted
@@ -336,18 +339,14 @@ function EditGameModal({ selectedGame, onClose, onSave }) {
             >
               {editedGame.deleted ? "Deleted" : "Available"}
             </button>
-        
-          
 
-          <div className={styles.modalButtonsr}>
-            <button onClick={handleSave}>Save</button>
+            <div className={styles.modalButtonsr}>
+              <button onClick={handleSave}>Save</button>
+            </div>
+            <div className={styles.modalButtonsl}>
+              <button onClick={handleCancel}>Cancel</button>
+            </div>
           </div>
-          <div className={styles.modalButtonsl}>
-            <button onClick={handleCancel}>Cancel</button>
-          </div>
-
-          </div>
-
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 .container {
   display: flex;
   flex-direction: row;
-  width: 72%;
-  height: 37rem;
+  width: 70%;
+  height: 43rem;
   align-items: center; /* Centra verticalmente el contenido */
   justify-content: center; /* Centra horizontalmente el contenido */
   color: white;
-  margin-top: -590px;
+  margin-top: -690px;
   margin-left: 50%; /* Ajusta la cantidad de margen izquierdo para desplazar el componente hacia la derecha */
   transform: translateX(-32%);
   background: linear-gradient(to right, #1b063e, #622eda);
@@ -20,7 +20,8 @@
   text-align: center;
   color:#622eda;
   font-size: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
 }
 
 .container h2 {
@@ -29,6 +30,7 @@
   font-size: 16px;
   margin-bottom: 0.2rem;
   margin-left: 1rem;
+  margin-top: 1rem;
 }
 
 .title {
@@ -40,7 +42,7 @@
   justify-content: center;
   width: 62%;
   background-color: #fafafa;
-  height: 37rem;
+  height: 43rem;
   border-radius: 10px;
   color: #1b063e;
 }
@@ -70,7 +72,7 @@
   height: 2rem;
   text-align:center;
   margin-right: 3rem;
-  margin-left: -40px;
+  margin-left: -15px;
 }
 
 
@@ -172,7 +174,7 @@
 
 .textarea {
   /* Estilos para la caja de texto (textarea) */
-  width: 15rem;
+  width: 16rem;
   min-height: 8rem;
   border: 1px solid #ccc;
   overflow-y: auto;
@@ -298,7 +300,7 @@
 }
 
 .buttonContainer {
-  margin-top: 1rem;
+  margin-top: 4rem;
   align-items: center;
   justify-content: center;
   justify-content: center;

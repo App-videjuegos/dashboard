@@ -18,15 +18,15 @@ import { MdInsertComment } from "react-icons/md";
 // Mapeo de nombres de ruta a iconos
 const routeIcons = {
   Login: AiOutlineHome,
-  Games: FaGamepad,
-  Metrics: IoMdAnalytics,
   Profile: FaUser,
+  Metrics: IoMdAnalytics,
   Users: FaUsers,
+  Games: FaGamepad,
+  LoadGame: BiSolidCloudUpload,
   Logout: FiLogOut,
   Visible: AiFillEye,
   Invisible: AiFillEyeInvisible,
   Sales: FaMoneyBill,
-  LoadGame: BiSolidCloudUpload,
   delete: TiDeleteOutline,
   addImage: BiImageAdd,
   confirm: BiCheck,

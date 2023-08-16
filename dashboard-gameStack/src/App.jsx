@@ -35,11 +35,11 @@ function App() {
       {location.pathname !== "/" && <AdminBar />} {/* Mostrar AdminBar en todas las rutas excepto en la página de inicio */}
       <Routes>
         <Route path="/" element={<LoginRender />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/metrics" element={<Metrics />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/metrics" element={<Metrics />} />
         <Route path="/users" element={<Users />} />
         <Route path="/sales" element={<Sales />} />
+        <Route path="/games" element={<Games />} />
         <Route path="/loadvideogame" element={<LoadVideogame />} />
         <Route path="/comments" element={<Comments />} />
       </Routes>

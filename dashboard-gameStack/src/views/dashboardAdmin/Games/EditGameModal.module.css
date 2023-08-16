@@ -1,7 +1,10 @@
 .modalBackdrop {
     position: absolute;
-    top: 350px;
-    left: 58%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 280px;
+    left: 25%;
     transform: translate(-50%, -50%);
     width: 650px;
     display: flex;
@@ -26,6 +29,8 @@
   }
   .right {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -36,7 +41,7 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     margin-left: 15.8rem;
-    margin-top: -33.5rem;
+    margin-top: -28rem;
     padding-right: 18rem;
   }
   

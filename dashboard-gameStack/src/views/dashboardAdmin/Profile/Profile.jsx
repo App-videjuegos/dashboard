@@ -153,7 +153,7 @@ const Profile = () => {
           />
           <label htmlFor="imagePicker">
             <div className={styles.imageandpencil}>
-              <img src={image} alt="Selected" className={styles.imageLoaded} />
+              {!image ? <Loading2/> : <img src={image} alt="Selected" className={styles.imageLoaded} /> }
               <FontAwesomeIcon icon={faPencil} className={styles.crossIconimage} />
             </div>
           </label>

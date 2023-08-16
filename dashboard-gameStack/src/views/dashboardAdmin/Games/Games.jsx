@@ -206,7 +206,7 @@ const goToNextPage = () => {
         </div>
         {showMenu && selectedGame && (
           <div className={styles.menuContainer}>
-            <button onClick={openEditModal}>Editar</button>
+            <button onClick={openEditModal}>Edit</button>
           </div>
         )}
        <div className={styles.menuContainer2}>
